@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">The Library</string>
+    <string name="search_play_books_lbl">Search Play Books</string>
+    <string name="home_lbl">Home</string>
+    <string name="library_lbl">Library</string>
+    <string name="wishlist_lbl">Wishlist</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="more_like_don_t_make_me_think_revisit_lbl">More like Don\'t Make Me Think, Revisit...</string>
+    <string name="ebooks_for_you_lbl">Ebooks for you</string>
+    <string name="on_your_wishlist_lbl">On your wishlist</string>
+    <string name="audiobooks_for_you_lbl">Audiobooks for you</string>
 </resources>

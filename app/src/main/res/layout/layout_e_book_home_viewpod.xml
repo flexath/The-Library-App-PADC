@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.flexath.thelibrary.views.viewpods.EBookViewPod xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEBookHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:nestedScrollingEnabled="true"
+        android:focusableInTouchMode="true"
+        android:layout_margin="@dimen/margin_10dp"
+        tools:listitem="@layout/view_holder_ebook_home" />
+
+</com.flexath.thelibrary.views.viewpods.EBookViewPod>

@@ -11,4 +11,11 @@
     <color name="colorPrimaryLight">#888888</color>
     <color name="colorAccent">#3b7dc6</color>
     <color name="colorSecondaryText">#535968</color>
+    <color name="colorSecondary">#111111</color>
+    <color name="colorSecondaryDark">#000000</color>
+
+    <color name="colorProfileImageFirst">#d6412b</color>
+    <color name="colorProfileImageSecond">#4372e8</color>
+    <color name="colorProfileImageThird">#4c974c</color>
+    <color name="colorProfileImageFourth">#ebb03d</color>
 </resources>

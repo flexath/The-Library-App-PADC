@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nvgHome"
+        android:title="@string/home_lbl"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_home_accent_24dp"/>
+
+    <item
+        android:id="@+id/nvgLibrary"
+        android:title="@string/library_lbl"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_library_books_secondary_24dp"/>
+
+    <item
+        android:id="@+id/nvgWishlist"
+        android:title="@string/wishlist_lbl"
+        app:showAsAction="always"
+        android:icon="@drawable/bookmark"/>
+</menu>

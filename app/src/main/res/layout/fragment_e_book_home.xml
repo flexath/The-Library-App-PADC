@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingTop="@dimen/margin_medium_3"
+    tools:context=".fragments.home.EBookHomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMoreLikeHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_medium_3"
+            android:text="@string/more_like_don_t_make_me_think_revisit_lbl"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_regular_2x_n"
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnForwardMoreLikeHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/margin_medium_3"
+            app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_accent_24dp" />
+
+        <include
+            android:id="@+id/vpEBookMoreLike"
+            layout="@layout/layout_e_book_home_viewpod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvMoreLikeHome" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEBookForYouHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vpEBookMoreLike"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_medium_3"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/ebooks_for_you_lbl"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_regular_2x_n"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnForwardEBookForYouHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vpEBookMoreLike"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/margin_medium_3"
+            app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_accent_24dp" />
+
+        <include
+            android:id="@+id/vpEBookForYou"
+            layout="@layout/layout_e_book_home_viewpod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvEBookForYouHome" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEBookOnYourWishlistHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vpEBookForYou"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_medium_3"
+            android:layout_marginTop="@dimen/margin_10dp"
+            android:text="@string/on_your_wishlist_lbl"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_regular_2x_n"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnForwardOnYourWishlistHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vpEBookForYou"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/margin_medium_3"
+            app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_accent_24dp" />
+
+        <include
+            android:id="@+id/vpEBookOnYourWishlist"
+            layout="@layout/layout_e_book_home_viewpod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvEBookOnYourWishlistHome" />
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

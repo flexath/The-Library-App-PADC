@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".fragments.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerEBookBannerHome"
+            android:layout_width="@dimen/width_ebook_banner"
+            android:layout_height="@dimen/height_ebook_banner"
+            android:layout_marginTop="@dimen/margin_xxlarge"
+            android:layout_centerHorizontal="true"
+            android:elevation="@dimen/margin_medium" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutHome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/viewPagerEBookBannerHome"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_large"
+            app:tabGravity="center"
+            app:tabMode="fixed"
+            android:touchscreenBlocksFocus="true"
+            android:scrollbarAlwaysDrawHorizontalTrack="false"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorGravity="bottom"
+            app:tabPaddingEnd="@dimen/margin_40dp"
+            app:tabPaddingStart="@dimen/margin_40dp"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabTextColor="@color/colorSecondary" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPagerEbookHome"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tabLayoutHome" />
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>
