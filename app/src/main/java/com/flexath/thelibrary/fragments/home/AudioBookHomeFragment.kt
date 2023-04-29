@@ -6,8 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.flexath.thelibrary.R
+import com.flexath.thelibrary.mvp.presenters.HomePresenter
+import com.flexath.thelibrary.views.viewpods.BookViewPod
+import kotlinx.android.synthetic.main.fragment_audio_book_home.*
+import kotlinx.android.synthetic.main.fragment_e_book_home.*
 
-class AudioBookHomeFragment : Fragment() {
+class AudioBookHomeFragment(private val mPresenter: HomePresenter) : Fragment() {
+
+    private lateinit var mAudioBookViewPod: BookViewPod
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,7 +25,18 @@ class AudioBookHomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setUpViewPodInstances()
+        setUpListeners()
+    }
 
+    private fun setUpViewPodInstances() {
+        mAudioBookViewPod = vpAudioBook as BookViewPod
+        mAudioBookViewPod.setUpBookViewPod(mPresenter)
+    }
 
+    private fun setUpListeners() {
+        btnForwardAudioBookHome.setOnClickListener {
+            mPresenter.onTapGoToBookListScreen()
+        }
     }
 }

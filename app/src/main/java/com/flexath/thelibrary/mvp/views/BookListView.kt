@@ -1,7 +1,7 @@
 package com.flexath.thelibrary.mvp.views
 
-interface HomeView : IBaseView {
+interface BookListView : IBaseView {
     fun navigateToBookDetailScreen(bookId:Int)
-    fun navigateToBookListScreen()
     fun onTapOptionButtonOnBook()
+    fun navigateBack()
 }

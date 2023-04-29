@@ -42,6 +42,8 @@
     <dimen name="height_28dp">28dp</dimen>
     <dimen name="margin_40dp">40dp</dimen>
     <dimen name="margin_10dp">10dp</dimen>
+    <dimen name="height_20dp">20dp</dimen>
+    <dimen name="width_20dp">20dp</dimen>
 
 
 </resources>

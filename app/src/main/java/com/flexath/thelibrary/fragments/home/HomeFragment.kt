@@ -1,4 +1,4 @@
-package com.flexath.thelibrary.fragments
+package com.flexath.thelibrary.fragments.home
 
 import android.content.res.Resources
 import android.os.Bundle
@@ -13,18 +13,20 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.flexath.thelibrary.R
 import com.flexath.thelibrary.activities.BookDetailActivity
+import com.flexath.thelibrary.activities.BookListActivity
 import com.flexath.thelibrary.adapters.home.BookBannerHomeViewPagerAdapter
 import com.flexath.thelibrary.adapters.home.TabLayoutViewPagerAdapter
 import com.flexath.thelibrary.mvp.presenters.HomePresenter
 import com.flexath.thelibrary.mvp.presenters.HomePresenterImpl
 import com.flexath.thelibrary.mvp.views.HomeView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(),HomeView {
 
-    private lateinit var mBannerAdapter: BookBannerHomeViewPagerAdapter
+    private var mBannerAdapter: BookBannerHomeViewPagerAdapter? = null
     private lateinit var mTabLayoutViewPagerAdapter: TabLayoutViewPagerAdapter
 
     private lateinit var mPresenter:HomePresenter
@@ -79,7 +81,7 @@ class HomeFragment : Fragment(),HomeView {
     }
 
     private fun setUpTabLayoutWithViewPager() {
-        mTabLayoutViewPagerAdapter = TabLayoutViewPagerAdapter(this)
+        mTabLayoutViewPagerAdapter = TabLayoutViewPagerAdapter(this,mPresenter)
         viewPagerEbookHome.adapter = mTabLayoutViewPagerAdapter
 
         TabLayoutMediator(tabLayoutHome,viewPagerEbookHome) { tab , position ->
@@ -118,7 +120,17 @@ class HomeFragment : Fragment(),HomeView {
     }
 
     override fun navigateToBookDetailScreen(bookId: Int) {
-        startActivity(BookDetailActivity.newIntent(requireActivity()))
+        startActivity(BookDetailActivity.newIntent(requireActivity(),bookId))
+    }
+
+    override fun navigateToBookListScreen() {
+        startActivity(BookListActivity.newIntent(requireActivity(),tabLayoutHome.selectedTabPosition))
+    }
+
+    override fun onTapOptionButtonOnBook() {
+        val dialog = BottomSheetDialog(requireActivity())
+        dialog.setContentView(R.layout.layout_book_option_bottom_dialog)
+        dialog.show()
     }
 
     override fun showError(error: String) {

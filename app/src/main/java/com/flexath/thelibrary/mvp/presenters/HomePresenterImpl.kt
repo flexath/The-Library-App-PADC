@@ -6,7 +6,7 @@ import com.flexath.thelibrary.mvp.views.HomeView
 
 class HomePresenterImpl : ViewModel(), HomePresenter  {
 
-    private var mView:HomeView?  = null
+    private var mView:HomeView? = null
 
     override fun initView(view: HomeView) {
         mView = view
@@ -16,11 +16,23 @@ class HomePresenterImpl : ViewModel(), HomePresenter  {
 
     }
 
-    override fun onTapAudioBook(bookId: Int) {
+    override fun onTapBookFromBanner(bookId: Int) {
         mView?.navigateToBookDetailScreen(bookId)
     }
 
-    override fun onTapEBook(bookId: Int) {
+    override fun onTapBook(bookId: Int) {
         mView?.navigateToBookDetailScreen(bookId)
+    }
+
+    override fun onTapOptionButtonFromBanner() {
+        mView?.onTapOptionButtonOnBook()
+    }
+
+    override fun onTapOptionButtonOnBook() {
+        mView?.onTapOptionButtonOnBook()
+    }
+
+    override fun onTapGoToBookListScreen() {
+        mView?.navigateToBookListScreen()
     }
 }

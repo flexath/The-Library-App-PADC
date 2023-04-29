@@ -32,7 +32,7 @@
             app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_accent_24dp" />
 
         <include
-            android:id="@+id/vpEBookAudioBook"
+            android:id="@+id/vpAudioBook"
             layout="@layout/layout_e_book_home_viewpod"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

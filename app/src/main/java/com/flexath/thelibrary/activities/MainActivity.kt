@@ -4,9 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.flexath.thelibrary.R
-import com.flexath.thelibrary.fragments.HomeFragment
-import com.flexath.thelibrary.fragments.LibraryFragment
-import com.flexath.thelibrary.fragments.WishlistFragment
+import com.flexath.thelibrary.fragments.home.HomeFragment
+import com.flexath.thelibrary.fragments.library.LibraryFragment
+import com.flexath.thelibrary.fragments.wishlist.WishlistFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

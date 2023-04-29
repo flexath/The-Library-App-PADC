@@ -9,8 +9,12 @@ import com.flexath.thelibrary.R
 class BookDetailActivity : AppCompatActivity() {
 
     companion object {
-        fun newIntent(context: Context) : Intent {
-            return Intent(context,BookDetailActivity::class.java)
+        private const val EXTRA_BOOK_ID = "Book Id"
+
+        fun newIntent(context: Context,bookId:Int) : Intent {
+            val intent = Intent(context,BookDetailActivity::class.java)
+            intent.putExtra(EXTRA_BOOK_ID,bookId)
+            return intent
         }
     }
 
