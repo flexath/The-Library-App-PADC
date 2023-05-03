@@ -13,30 +13,30 @@ import kotlinx.android.synthetic.main.fragment_e_book_home.*
 
 class AudioBookHomeFragment(private val mPresenter: HomePresenter) : Fragment() {
 
-    private lateinit var mAudioBookViewPod: BookViewPod
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_audio_book_home, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        setUpViewPodInstances()
-        setUpListeners()
-    }
-
-    private fun setUpViewPodInstances() {
-        mAudioBookViewPod = vpAudioBook as BookViewPod
-        mAudioBookViewPod.setUpBookViewPod(mPresenter)
-    }
-
-    private fun setUpListeners() {
-        btnForwardAudioBookHome.setOnClickListener {
-            mPresenter.onTapGoToBookListScreen()
-        }
-    }
+//    private lateinit var mAudioBookViewPod: BookViewPod
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        return inflater.inflate(R.layout.fragment_audio_book_home, container, false)
+//    }
+//
+//    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        super.onViewCreated(view, savedInstanceState)
+//
+//        setUpViewPodInstances()
+//        setUpListeners()
+//    }
+//
+//    private fun setUpViewPodInstances() {
+//        mAudioBookViewPod = vpAudioBook as BookViewPod
+//        mAudioBookViewPod.setUpBookViewPod(mPresenter)
+//    }
+//
+//    private fun setUpListeners() {
+//        btnForwardAudioBookHome.setOnClickListener {
+//            mPresenter.onTapGoToBookListScreen()
+//        }
+//    }
 }

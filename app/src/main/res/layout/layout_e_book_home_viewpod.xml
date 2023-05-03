@@ -12,6 +12,7 @@
         android:nestedScrollingEnabled="true"
         android:focusableInTouchMode="true"
         android:layout_margin="@dimen/margin_10dp"
+        tools:itemCount="1"
         tools:listitem="@layout/view_holder_ebook_home" />
 
 </com.flexath.thelibrary.views.viewpods.BookViewPod>

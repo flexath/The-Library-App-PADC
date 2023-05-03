@@ -15,21 +15,31 @@ import com.flexath.thelibrary.R
 import com.flexath.thelibrary.activities.BookDetailActivity
 import com.flexath.thelibrary.activities.BookListActivity
 import com.flexath.thelibrary.adapters.home.BookBannerHomeViewPagerAdapter
-import com.flexath.thelibrary.adapters.home.TabLayoutViewPagerAdapter
+import com.flexath.thelibrary.data.vos.overview.CategoryVO
 import com.flexath.thelibrary.mvp.presenters.HomePresenter
 import com.flexath.thelibrary.mvp.presenters.HomePresenterImpl
 import com.flexath.thelibrary.mvp.views.HomeView
+import com.flexath.thelibrary.views.viewpods.BookViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(),HomeView {
 
-    private var mBannerAdapter: BookBannerHomeViewPagerAdapter? = null
-    private lateinit var mTabLayoutViewPagerAdapter: TabLayoutViewPagerAdapter
+    // ViewPods
+    private lateinit var mFirstViewPod: BookViewPod
+    private lateinit var mSecondViewPod: BookViewPod
+    private lateinit var mThirdViewPod: BookViewPod
 
+    //Adapters
+    private var mBannerAdapter: BookBannerHomeViewPagerAdapter? = null
+//    private lateinit var mTabLayoutViewPagerAdapter: TabLayoutViewPagerAdapter
+
+    // Presenters
     private lateinit var mPresenter:HomePresenter
+
+    // General
+    private val homeTabList = listOf("Ebooks","Audiobooks")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,18 +52,32 @@ class HomeFragment : Fragment(),HomeView {
         super.onViewCreated(view, savedInstanceState)
 
         setUpPresenter()
-
+        setUpTabLayout()
+        setUpViewPodInstances()
         setUpListeners()
-        setUpTabLayoutWithViewPager()
+
+        mPresenter.onUiReady(this)
     }
 
     private fun setUpPresenter() {
         mPresenter = ViewModelProvider(requireActivity())[HomePresenterImpl::class.java]
-        mPresenter.initView(this@HomeFragment)
+        mPresenter.initView(this)
+    }
+
+    private fun setUpViewPodInstances() {
+        mFirstViewPod = vpEBookFirstHome as BookViewPod
+        mFirstViewPod.setUpBookViewPod(mPresenter)
+
+        mSecondViewPod = vpEBookForYou as BookViewPod
+        mSecondViewPod.setUpBookViewPod(mPresenter)
+
+        mThirdViewPod = vpEBookOnYourWishlist as BookViewPod
+        mThirdViewPod.setUpBookViewPod(mPresenter)
     }
 
     private fun setUpBannerViewPager(type: Int) {
         setUpBannerViewPagerPadding()
+
         setUpBannerRecyclerView(type)
 
         val compositePageTransformer = CompositePageTransformer()
@@ -76,24 +100,31 @@ class HomeFragment : Fragment(),HomeView {
             clipToPadding = false  // Show the viewpager in full width without clipping the padding
             offscreenPageLimit = 3  // Render the left and right items
             (getChildAt(0) as RecyclerView).overScrollMode =
-                RecyclerView.OVER_SCROLL_NEVER // Remove the scroll effect
+                RecyclerView.OVER_SCROLL_ALWAYS // Remove the scroll effect
         }
     }
 
-    private fun setUpTabLayoutWithViewPager() {
-        mTabLayoutViewPagerAdapter = TabLayoutViewPagerAdapter(this,mPresenter)
-        viewPagerEbookHome.adapter = mTabLayoutViewPagerAdapter
+    private fun setUpTabLayout() {
+//        mTabLayoutViewPagerAdapter = TabLayoutViewPagerAdapter(this,mPresenter)
+//        viewPagerEbookHome.adapter = mTabLayoutViewPagerAdapter
+//
+//        TabLayoutMediator(tabLayoutHome,viewPagerEbookHome) { tab , position ->
+//            when (position) {
+//                0 -> {
+//                    tab.text = "Ebooks"
+//                }
+//                else -> {
+//                    tab.text = "Audiobooks"
+//                }
+//            }
+//        }.attach()
 
-        TabLayoutMediator(tabLayoutHome,viewPagerEbookHome) { tab , position ->
-            when (position) {
-                0 -> {
-                    tab.text = "Ebooks"
-                }
-                else -> {
-                    tab.text = "Audiobooks"
-                }
+        homeTabList.forEach {
+            tabLayoutHome.newTab().apply {
+                text = it
+                tabLayoutHome.addTab(this)
             }
-        }.attach()
+        }
     }
 
     private fun setUpListeners() {
@@ -117,14 +148,41 @@ class HomeFragment : Fragment(),HomeView {
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
+
+        btnForwardFirstHome.setOnClickListener {
+            mPresenter.onTapGoToBookListScreen(tvFirstTitleHome.text.toString())
+        }
+
+        btnForwardSecondHome.setOnClickListener {
+            mPresenter.onTapGoToBookListScreen(tvSecondTitleHome.text.toString())
+        }
+
+        btnForwardThirdHome.setOnClickListener {
+            mPresenter.onTapGoToBookListScreen(tvThirdTitleHome.text.toString())
+        }
+    }
+
+    override fun showFirstCategory(category: List<CategoryVO>) {
+        tvFirstTitleHome.text = category[0].listName
+        mFirstViewPod.setNewData(category[0])
+    }
+
+    override fun showSecondCategory(category: List<CategoryVO>) {
+        tvSecondTitleHome.text = category[1].listName
+        mSecondViewPod.setNewData(category[1])
+    }
+
+    override fun showThirdCategory(category: List<CategoryVO>) {
+        tvThirdTitleHome.text = category[2].listName
+        mThirdViewPod.setNewData(category[2])
     }
 
     override fun navigateToBookDetailScreen(bookId: Int) {
         startActivity(BookDetailActivity.newIntent(requireActivity(),bookId))
     }
 
-    override fun navigateToBookListScreen() {
-        startActivity(BookListActivity.newIntent(requireActivity(),tabLayoutHome.selectedTabPosition))
+    override fun navigateToBookListScreen(listName:String) {
+        startActivity(BookListActivity.newIntent(requireActivity(),listName,tabLayoutHome.selectedTabPosition))
     }
 
     override fun onTapOptionButtonOnBook() {

@@ -15,4 +15,9 @@
     <string name="add_to_shelves_lbl">Add to shelves...</string>
     <string name="mark_as_read_lbl">Mark as read</string>
     <string name="about_this_book_lbl">About this book</string>
+    <string name="free_sample_lbl">Free Sample</string>
+    <string name="add_to_wishlist_lbl">Add to wishlist</string>
+    <string name="books_that_you_buy_lbl">Books that you buy on the Google Play website can be read in this app.</string>
+    <string name="about_this_ebook_lbl">About this ebook</string>
+    <string name="ratings_and_reviews_lbl">Ratings and reviews</string>
 </resources>

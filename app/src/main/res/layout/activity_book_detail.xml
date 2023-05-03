@@ -1,20 +1,291 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.BookDetailActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:paddingBottom="@dimen/margin_medium_3"
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="335dp"
-        android:layout_marginEnd="173dp"
-        android:text="Detail"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/actionBarBookDetail"
+            layout="@layout/layout_book_detail_toolbar" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/ivCoverBookDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/actionBarBookDetail"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium_3"
+            app:cardCornerRadius="@dimen/margin_medium"
+            app:cardElevation="@dimen/margin_medium">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="110dp"
+                android:layout_height="160dp"
+                android:elevation="@dimen/margin_medium"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/dummy_ebook_banner" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitleBookDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/actionBarBookDetail"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_marginEnd="@dimen/margin_medium_2"
+            android:layout_toEndOf="@+id/ivCoverBookDetail"
+            android:maxLines="2"
+            android:text="A Brief History Of Time"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_heading_1x"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvWriterBookDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitleBookDetail"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_toEndOf="@+id/ivCoverBookDetail"
+            android:maxLines="2"
+            android:text="Stephen Hawking"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="@dimen/text_regular_2x" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBookTypeBookDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvWriterBookDetail"
+            android:layout_marginStart="@dimen/margin_medium_2"
+            android:layout_marginTop="@dimen/margin_small_smaller"
+            android:layout_toEndOf="@+id/ivCoverBookDetail"
+            android:maxLines="2"
+            android:text="EBook"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="@dimen/text_regular_2x" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/dotBookDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvWriterBookDetail"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_card_medium_2"
+            android:layout_toEndOf="@+id/tvBookTypeBookDetail"
+            app:srcCompat="@drawable/ic_baseline_circle_secondary_24dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBookTypeBottomSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvWriterBookDetail"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_small_smaller"
+            android:layout_marginEnd="@dimen/margin_medium_3"
+            android:layout_toEndOf="@+id/dotBookDetail"
+            android:text="187 Pages"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="@dimen/text_regular_2x" />
+
+        <View
+            android:id="@+id/vHorizontalLineOneBookDetail"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/ivCoverBookDetail"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:background="@color/colorPrimaryLight" />
+
+        <LinearLayout
+            android:id="@+id/llButtonsBookDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vHorizontalLineOneBookDetail"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnFreeSampleBookDetail"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/margin_large"
+                android:paddingTop="@dimen/margin_10dp"
+                android:paddingEnd="@dimen/margin_large"
+                android:paddingBottom="@dimen/margin_10dp"
+                android:text="@string/free_sample_lbl"
+                android:textAllCaps="false"
+                android:textColor="@color/colorAccent"
+                app:rippleColor="@color/colorAccent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_10dp"
+                android:backgroundTint="@color/colorAccent"
+                android:paddingStart="@dimen/margin_xlarge"
+                android:paddingTop="@dimen/margin_medium"
+                android:paddingEnd="@dimen/margin_xlarge"
+                android:paddingBottom="@dimen/margin_medium"
+                android:text="@string/add_to_wishlist_lbl"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:icon="@drawable/bookmark"
+                app:iconSize="@dimen/margin_medium_3"
+                app:rippleColor="@color/white" />
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iconInfoBookDetail"
+            android:layout_width="@dimen/width_20dp"
+            android:layout_height="@dimen/width_20dp"
+            android:layout_below="@+id/llButtonsBookDetails"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginTop="@dimen/margin_medium_3"
+            app:srcCompat="@drawable/info" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBooksThatYouBuyBookDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llButtonsBookDetails"
+            android:layout_marginStart="@dimen/margin_card_medium_2"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_toEndOf="@+id/iconInfoBookDetail"
+            android:text="@string/books_that_you_buy_lbl"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="@dimen/text_regular" />
+
+        <View
+            android:id="@+id/vHorizontalLineTwoBookDetail"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@+id/iconInfoBookDetail"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:background="@color/colorPrimaryLight" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAboutThisEBookDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vHorizontalLineTwoBookDetail"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_medium_3"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/about_this_ebook_lbl"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_regular_3x"
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnForwardBookDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vHorizontalLineTwoBookDetail"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_medium_3"
+            app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_accent_24dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBookInfoBookDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvAboutThisEBookDetail"
+            android:layout_marginStart="@dimen/margin_medium_3"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_medium_3"
+            android:maxLines="4"
+            android:text="A Brief History of Time: From the Big Bang to Black Holes is a book on theoretical cosmology by English physicist Stephen Hawking. It was first published in 1988. Hawking wrote the book for readers who had no prior knowledge of physics."
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvRatingAndReviewBookDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvBookInfoBookDetail"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_medium_3"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/ratings_and_reviews_lbl"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_regular_3x"
+            android:textStyle="bold"
+            tools:ignore="RelativeOverlap" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnForwardRatingBookDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvBookInfoBookDetail"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:layout_marginEnd="@dimen/margin_medium_3"
+            app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_accent_24dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvRatingAndReviewBookDetail"
+            android:layout_marginStart="@dimen/margin_xlarge"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_alignParentStart="true"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvRatingBookDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3.9"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_big_2x"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/rbBookDetail"
+                style="?attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:numStars="5"
+                android:rating="3.5"
+                android:layout_gravity="center_horizontal"
+                android:stepSize="0.5" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvRatingsMarkBookDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_gravity="center_horizontal"
+                android:text="95 ratings"
+                android:textColor="@color/colorPrimaryLight"
+                android:textSize="@dimen/text_regular" />
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

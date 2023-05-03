@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.flexath.thelibrary.adapters.home.EBookHomeAdapter
+import com.flexath.thelibrary.data.vos.overview.CategoryVO
 import com.flexath.thelibrary.delegates.home.BookHomeViewHolderDelegate
 import kotlinx.android.synthetic.main.layout_e_book_home_viewpod.view.*
 
@@ -28,5 +29,9 @@ class BookViewPod @JvmOverloads constructor(
         mEBookAdapter = EBookHomeAdapter(this.mDelegate)
         rvEBookHome.adapter = mEBookAdapter
         rvEBookHome.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
+    }
+
+    fun setNewData(category: CategoryVO) {
+        mEBookAdapter.setData(category)
     }
 }

@@ -7,7 +7,7 @@
     android:paddingBottom="@dimen/margin_xxlarge">
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/ivBookListBottomSheet"
+        android:id="@+id/ivCoverBookListBottomSheet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium_3"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/margin_medium_2"
         android:layout_marginEnd="@dimen/margin_medium_3"
-        android:layout_toEndOf="@+id/ivBookListBottomSheet"
+        android:layout_toEndOf="@+id/ivCoverBookListBottomSheet"
         android:maxLines="2"
         android:text="The Art of Learning"
         android:textColor="@color/black"
@@ -43,7 +43,7 @@
         android:layout_below="@+id/tvTitleBookListBottomSheet"
         android:layout_marginStart="@dimen/margin_medium_2"
         android:layout_marginTop="@dimen/margin_small"
-        android:layout_toEndOf="@+id/ivBookListBottomSheet"
+        android:layout_toEndOf="@+id/ivCoverBookListBottomSheet"
         android:maxLines="2"
         android:text="Josh Waitzkin"
         android:textColor="@color/colorPrimaryLight"
@@ -76,7 +76,7 @@
         android:id="@+id/vHorizontalLine"
         android:layout_width="match_parent"
         android:layout_height="0.8dp"
-        android:layout_below="@+id/ivBookListBottomSheet"
+        android:layout_below="@+id/ivCoverBookListBottomSheet"
         android:layout_marginTop="@dimen/margin_medium_3"
         android:background="@color/colorPrimaryLight" />
 

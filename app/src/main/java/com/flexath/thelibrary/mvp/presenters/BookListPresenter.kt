@@ -7,5 +7,6 @@ import com.flexath.thelibrary.mvp.views.BookListView
 interface BookListPresenter : IBasePresenter , BookHomeViewHolderDelegate {
 
     fun initView(view:BookListView)
+    fun onUiReadyForBookList(owner: LifecycleOwner,listName:String)
     fun onTapBack()
 }

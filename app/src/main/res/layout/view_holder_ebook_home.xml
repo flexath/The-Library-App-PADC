@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="150dp"
     android:layout_height="wrap_content"
     android:padding="@dimen/margin_10dp">
@@ -8,15 +9,15 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mcvIvMoreLikeHome"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/margin_10dp"
-        app:cardPreventCornerOverlap="true"
-        android:layout_height="wrap_content">
+        app:cardPreventCornerOverlap="true">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ivEBookMoreLikeHome"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="200dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitXY"
             app:srcCompat="@drawable/dummy_ebook_banner" />
 
     </com.google.android.material.card.MaterialCardView>
@@ -34,12 +35,25 @@
         app:srcCompat="@drawable/dots" />
 
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBookTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mcvIvMoreLikeHome"
+        android:textStyle="bold"
         android:layout_marginTop="@dimen/margin_10dp"
-        android:maxLines="2"
-        android:text="Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship"
-        android:textSize="@dimen/text_regular" />
+        android:maxLines="1"
+        android:textSize="@dimen/text_regular"
+        tools:text="Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvBookWriter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvBookTitle"
+        android:layout_marginTop="@dimen/margin_small_smaller"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:textSize="@dimen/text_regular"
+        tools:text="Steven Hawking" />
 
 </RelativeLayout>
