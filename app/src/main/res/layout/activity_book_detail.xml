@@ -8,12 +8,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:paddingBottom="@dimen/margin_medium_3"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/margin_medium_3">
 
         <include
             android:id="@+id/actionBarBookDetail"
-            layout="@layout/layout_book_detail_toolbar" />
+            layout="@layout/toolbar_book_detail" />
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/ivCoverBookDetail"
@@ -242,49 +242,24 @@
             android:layout_marginEnd="@dimen/margin_medium_3"
             app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_accent_24dp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <include
+            android:id="@+id/vpRatingAndReview"
+            layout="@layout/viewpod_rating_and_review"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvRatingAndReviewBookDetail"
-            android:layout_marginStart="@dimen/margin_xlarge"
-            android:layout_marginTop="@dimen/margin_large"
             android:layout_alignParentStart="true"
-            android:orientation="vertical">
+            android:layout_marginTop="@dimen/margin_small" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvRatingBookDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="3.9"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_big_2x"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatRatingBar
-                android:id="@+id/rbBookDetail"
-                style="?attr/ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_medium"
-                android:numStars="5"
-                android:rating="3.5"
-                android:layout_gravity="center_horizontal"
-                android:stepSize="0.5" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvRatingsMarkBookDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_small"
-                android:layout_gravity="center_horizontal"
-                android:text="95 ratings"
-                android:textColor="@color/colorPrimaryLight"
-                android:textSize="@dimen/text_regular" />
-
-        </LinearLayout>
-
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvReview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vpRatingAndReview"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_10dp"
+            tools:itemCount="2"
+            tools:listitem="@layout/view_holder_review_book_detail" />
 
     </RelativeLayout>
 

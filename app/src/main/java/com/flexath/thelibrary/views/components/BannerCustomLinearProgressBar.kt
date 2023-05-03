@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.flexath.thelibrary.R
 
-class CustomLinearProgressBar(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
+class BannerCustomLinearProgressBar(context: Context?, attrs: AttributeSet?) : View(context, attrs) {
 
     private var contextCircular = context
 

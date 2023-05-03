@@ -12,7 +12,7 @@
 
         <include
             android:id="@+id/actionBarBookList"
-            layout="@layout/layout_book_type_toolbar" />
+            layout="@layout/toolbar_book_type" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBookList"

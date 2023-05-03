@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.AboutEBookActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/actionBarAboutEBook"
+            layout="@layout/toolbar_about_ebook" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvAboutEBook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/actionBarAboutEBook"
+            android:layout_margin="@dimen/margin_medium_3"
+            android:text="The book is semi-autobiographical and is based on Winterson's life growing up in Accrington, Lancashire. I wrote about some of these things in Oranges, and when it was published, my mother sent me a furious note.[2] A parallel non-fictional account of her life at this time is given in her 2011 memoir, Why Be Happy When You Could Be Normal?[3] Although the protagonist of Oranges bears the author's first name, John Mullan has argued that it is neither an autobiography nor a memoir, but a Künstlerroman.[4]"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+
+</androidx.core.widget.NestedScrollView>

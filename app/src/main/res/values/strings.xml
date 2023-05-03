@@ -20,4 +20,9 @@
     <string name="books_that_you_buy_lbl">Books that you buy on the Google Play website can be read in this app.</string>
     <string name="about_this_ebook_lbl">About this ebook</string>
     <string name="ratings_and_reviews_lbl">Ratings and reviews</string>
+    <string name="five_lbl">5</string>
+    <string name="one_lbl">1</string>
+    <string name="two_lbl">2</string>
+    <string name="three_lbl">3</string>
+    <string name="four_lbl">4</string>
 </resources>

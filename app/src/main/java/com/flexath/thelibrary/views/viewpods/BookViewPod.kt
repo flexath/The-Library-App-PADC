@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.flexath.thelibrary.adapters.home.EBookHomeAdapter
 import com.flexath.thelibrary.data.vos.overview.CategoryVO
 import com.flexath.thelibrary.delegates.home.BookHomeViewHolderDelegate
-import kotlinx.android.synthetic.main.layout_e_book_home_viewpod.view.*
+import kotlinx.android.synthetic.main.viewpod_e_book_home.view.*
 
 class BookViewPod @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null

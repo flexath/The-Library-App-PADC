@@ -31,6 +31,7 @@
     <dimen name="text_heading_2x">32sp</dimen>
     <dimen name="text_big">40sp</dimen>
     <dimen name="text_big_2x">60sp</dimen>
+    <dimen name="text_big_2x_5">70sp</dimen>
     <dimen name="text_big_3x">80sp</dimen>
 
 
@@ -45,6 +46,7 @@
     <dimen name="height_20dp">20dp</dimen>
     <dimen name="width_20dp">20dp</dimen>
     <dimen name="margin_small_smaller">2dp</dimen>
+    <dimen name="height_55dp">55dp</dimen>
 
 
 </resources>

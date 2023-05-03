@@ -54,7 +54,7 @@
 
     </FrameLayout>
 
-    <com.flexath.thelibrary.views.components.CustomLinearProgressBar
+    <com.flexath.thelibrary.views.components.BannerCustomLinearProgressBar
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_alignParentBottom="true"

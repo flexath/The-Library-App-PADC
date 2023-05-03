@@ -53,6 +53,7 @@ class HomeFragment : Fragment(),HomeView {
 
         setUpPresenter()
         setUpTabLayout()
+        setUpBannerViewPager(0)
         setUpViewPodInstances()
         setUpListeners()
 
@@ -100,7 +101,7 @@ class HomeFragment : Fragment(),HomeView {
             clipToPadding = false  // Show the viewpager in full width without clipping the padding
             offscreenPageLimit = 3  // Render the left and right items
             (getChildAt(0) as RecyclerView).overScrollMode =
-                RecyclerView.OVER_SCROLL_ALWAYS // Remove the scroll effect
+                RecyclerView.OVER_SCROLL_IF_CONTENT_SCROLLS // Remove the scroll effect
         }
     }
 
@@ -187,7 +188,7 @@ class HomeFragment : Fragment(),HomeView {
 
     override fun onTapOptionButtonOnBook() {
         val dialog = BottomSheetDialog(requireActivity())
-        dialog.setContentView(R.layout.layout_book_option_bottom_dialog)
+        dialog.setContentView(R.layout.bottom_dialog_book_option)
         dialog.show()
     }
 

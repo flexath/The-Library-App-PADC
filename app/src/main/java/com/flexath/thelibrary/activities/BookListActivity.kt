@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -16,7 +15,7 @@ import com.flexath.thelibrary.mvp.presenters.BookListPresenterImpl
 import com.flexath.thelibrary.mvp.views.BookListView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_book_list.*
-import kotlinx.android.synthetic.main.layout_book_type_toolbar.*
+import kotlinx.android.synthetic.main.toolbar_book_type.*
 
 class BookListActivity : AppCompatActivity() , BookListView {
 
@@ -82,7 +81,7 @@ class BookListActivity : AppCompatActivity() , BookListView {
 
     override fun onTapOptionButtonOnBook() {
         val dialog = BottomSheetDialog(this)
-        dialog.setContentView(R.layout.layout_book_list_option_bottom_dialog)
+        dialog.setContentView(R.layout.bottom_dialog_book_list_option)
         dialog.show()
     }
 

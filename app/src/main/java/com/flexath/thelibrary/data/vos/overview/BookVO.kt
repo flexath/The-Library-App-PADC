@@ -78,4 +78,5 @@ data class BookVO(
 
     @SerializedName("weeks_on_list")
     val weeksOnList: Int?
+
 )

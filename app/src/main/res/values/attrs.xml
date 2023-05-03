@@ -11,6 +11,7 @@
         <attr name="customProgressMax" format="integer"/>
         <attr name="customTrackColor" format="color"/>
         <attr name="customIndicatorColor" format="color"/>
+        <attr name="customCornerRadius" format="dimension"/>
     </declare-styleable>
 
 </resources>
