@@ -14,4 +14,10 @@ interface LibraryModel {
         listName:String,
         onFailure: (String) -> Unit
     ) : LiveData<List<BookListResultVO>>?
+
+    fun getCategoryByListId(listId:Int) : LiveData<CategoryVO?>?
+
+    fun getBookFromBookListById(bookListId:Int) : LiveData<BookListResultVO>?
+
+    fun deleteTheWholeBookList()
 }

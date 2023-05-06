@@ -18,7 +18,7 @@ import com.google.gson.annotations.SerializedName
 data class BookListResultVO(
 
     @PrimaryKey(autoGenerate = true)
-    var id:Int = 0,
+    var id:Int,
 
     @SerializedName("amazon_product_url")
     @ColumnInfo("amazon_product_url")

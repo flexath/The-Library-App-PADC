@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/margin_medium_3"
+    android:paddingBottom="@dimen/margin_xxlarge">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvSortByBottomSheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium_3"
+        android:layout_marginEnd="@dimen/margin_medium_3"
+        android:text="@string/sort_by_lbl"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_regular_3x"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/vHorizontalLine"
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:layout_below="@+id/tvSortByBottomSheet"
+        android:layout_marginTop="@dimen/margin_medium_3"
+        android:background="@color/colorPrimaryLight" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/vHorizontalLine"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:layout_marginTop="@dimen/margin_medium_3"
+        android:layout_marginEnd="@dimen/margin_medium_3"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rbRecentlyOpened"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/margin_medium_2"
+            android:text="@string/recently_opened_lbl"
+            android:textColor="@color/colorSecondary"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/rbTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/margin_medium_2"
+            android:text="@string/title_lbl"
+            android:textColor="@color/colorSecondary"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/rbAuthor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/margin_medium_2"
+            android:text="@string/author_lbl"
+            android:textColor="@color/colorSecondary"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+    </RadioGroup>
+
+</RelativeLayout>

@@ -6,7 +6,7 @@ interface BookListView : IBaseView {
 
     fun showBookList(bookList:List<BookListResultVO>)
 
-    fun navigateToBookDetailScreen(bookId:Int)
+    fun navigateToBookDetailScreen(bookName:String,listId:Int)
     fun onTapOptionButtonOnBook()
     fun navigateBack()
 }

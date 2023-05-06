@@ -2,9 +2,9 @@ package com.flexath.thelibrary.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.flexath.thelibrary.R
@@ -16,6 +16,7 @@ import com.flexath.thelibrary.mvp.views.BookListView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_book_list.*
 import kotlinx.android.synthetic.main.toolbar_book_type.*
+import java.util.*
 
 class BookListActivity : AppCompatActivity() , BookListView {
 
@@ -26,16 +27,18 @@ class BookListActivity : AppCompatActivity() , BookListView {
     private lateinit var mPresenter:BookListPresenter
 
     // General
-
+    private lateinit var mListName:String
 
     companion object {
         private const val EXTRA_LIST_NAME = "Category Name"
         private const val EXTRA_BOOK_TYPE = "Book Type"
+        private const val EXTRA_LIST_ID = "Category Id"
 
-        fun newIntent(context: Context,listName:String,type:Int) : Intent {
+        fun newIntent(context: Context,listName:String,type:Int,listId: Int) : Intent {
             val intent = Intent(context,BookListActivity::class.java)
             intent.putExtra(EXTRA_LIST_NAME,listName)
             intent.putExtra(EXTRA_BOOK_TYPE,type)
+            intent.putExtra(EXTRA_LIST_ID,listId)
             return intent
         }
     }
@@ -46,11 +49,14 @@ class BookListActivity : AppCompatActivity() , BookListView {
 
         setUpPresenter()
         setUpListeners()
+
         setUpBookListRecyclerView()
 
-        val mListName = intent.extras?.getString(EXTRA_LIST_NAME,"") ?: ""
+        mListName = intent.extras?.getString(EXTRA_LIST_NAME,"") ?: ""
         tvTitleToolbar.text = mListName
-        mPresenter.onUiReadyForBookList(this,mListName.toLowerCase().replace(' ','-',ignoreCase = true))
+
+        mPresenter.onUiReadyForBookList(this,
+            mListName.lowercase(Locale.ROOT).replace(' ','-',ignoreCase = true))
     }
 
     private fun setUpPresenter() {
@@ -75,13 +81,18 @@ class BookListActivity : AppCompatActivity() , BookListView {
         mBookListAdapter.setData(bookList)
     }
 
-    override fun navigateToBookDetailScreen(bookId: Int) {
-        startActivity(BookDetailActivity.newIntent(this,bookId))
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.deleteTheWholeBookList()
+    }
+
+    override fun navigateToBookDetailScreen(bookName:String,listId:Int) {
+        startActivity(BookDetailActivity.newIntent(this,bookName,listId,"BookListActivity"))
     }
 
     override fun onTapOptionButtonOnBook() {
         val dialog = BottomSheetDialog(this)
-        dialog.setContentView(R.layout.bottom_dialog_book_list_option)
+        dialog.setContentView(R.layout.bottom_dialog_book_option)
         dialog.show()
     }
 

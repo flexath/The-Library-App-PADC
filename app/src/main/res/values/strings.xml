@@ -25,4 +25,15 @@
     <string name="two_lbl">2</string>
     <string name="three_lbl">3</string>
     <string name="four_lbl">4</string>
+    <string name="sort_by_lbl">Sort by:</string>
+    <string name="view_as_lbl">View as</string>
+    <string name="list_lbl">List</string>
+    <string name="large_grid_lbl">Large grid</string>
+    <string name="small_grid_lbl">Small grid</string>
+    <string name="add_to_your_library_lbl">Add to your library</string>
+    <string name="recently_opened_lbl">Recently opened</string>
+    <string name="title_lbl">Title</string>
+    <string name="author_lbl">Author</string>
+    <string name="recent_lbl">Recent</string>
+    <string name="add_to_shelves_title">Add to shelves</string>
 </resources>

@@ -79,7 +79,7 @@
         android:background="@color/colorPrimaryLight" />
 
     <LinearLayout
-        android:id="@+id/llDownloadButtonBookListBottomSheet"
+        android:id="@+id/btnDownloadBottomSheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/vHorizontalLine"
@@ -107,10 +107,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llDeleteButtonBookListBottomSheet"
+        android:id="@+id/btnDeleteBottomSheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/llDownloadButtonBookListBottomSheet"
+        android:layout_below="@+id/btnDownloadBottomSheet"
         android:layout_marginStart="@dimen/margin_medium_3"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_medium_3"
@@ -135,10 +135,38 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llAddToShelvesButtonBottomSheet"
+        android:id="@+id/btnAddToLibraryBottomSheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/llDeleteButtonBookListBottomSheet"
+        android:layout_below="@+id/btnDeleteBottomSheet"
+        android:layout_marginStart="@dimen/margin_medium_3"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_medium_3"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/width_24dp"
+            android:layout_height="@dimen/height_24dp"
+            android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/delete" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_medium_3"
+            android:text="@string/add_to_your_library_lbl"
+            android:textColor="@color/colorSecondary"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnAddToShelvesBottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnAddToLibraryBottomSheet"
         android:layout_marginStart="@dimen/margin_medium_3"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_medium_3"
@@ -163,10 +191,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llMarkAsReadButtonBottomSheet"
+        android:id="@+id/btnMarkAsReadBottomSheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/llAddToShelvesButtonBottomSheet"
+        android:layout_below="@+id/btnAddToShelvesBottomSheet"
         android:layout_marginStart="@dimen/margin_medium_3"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_medium_3"
@@ -184,6 +212,34 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="@dimen/margin_medium_3"
             android:text="@string/mark_as_read_lbl"
+            android:textColor="@color/colorSecondary"
+            android:textSize="@dimen/text_regular_2x"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/btnAboutThisBookBottomSheet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnMarkAsReadBottomSheet"
+        android:layout_marginStart="@dimen/margin_medium_3"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_medium_3"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/width_24dp"
+            android:layout_height="@dimen/height_24dp"
+            android:layout_gravity="center_vertical"
+            app:srcCompat="@drawable/book" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/margin_medium_3"
+            android:text="@string/about_this_book_lbl"
             android:textColor="@color/colorSecondary"
             android:textSize="@dimen/text_regular_2x"
             android:textStyle="bold" />

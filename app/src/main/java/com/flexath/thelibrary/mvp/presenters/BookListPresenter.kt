@@ -8,5 +8,6 @@ interface BookListPresenter : IBasePresenter , BookHomeViewHolderDelegate {
 
     fun initView(view:BookListView)
     fun onUiReadyForBookList(owner: LifecycleOwner,listName:String)
+    fun deleteTheWholeBookList()
     fun onTapBack()
 }

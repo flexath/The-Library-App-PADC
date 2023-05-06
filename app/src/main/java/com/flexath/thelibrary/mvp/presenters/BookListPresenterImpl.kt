@@ -1,5 +1,6 @@
 package com.flexath.thelibrary.mvp.presenters
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.flexath.thelibrary.data.models.LibraryModel
@@ -23,14 +24,18 @@ class BookListPresenterImpl : ViewModel() , BookListPresenter {
         }
     }
 
+    override fun deleteTheWholeBookList() {
+        mLibraryModel.deleteTheWholeBookList()
+    }
+
     override fun onTapBack() {
         mView?.navigateBack()
     }
 
     override fun onUiReady(owner: LifecycleOwner) {}
 
-    override fun onTapBook(bookId: Int) {
-        mView?.navigateToBookDetailScreen(bookId)
+    override fun onTapBook(bookName:String,listId:Int) {
+        mView?.navigateToBookDetailScreen(bookName,listId)
     }
 
     override fun onTapOptionButtonOnBook() {

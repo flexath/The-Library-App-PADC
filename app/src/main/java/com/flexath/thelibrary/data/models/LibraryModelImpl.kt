@@ -36,4 +36,14 @@ object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
         return mLibraryDatabase?.libraryDao()?.getBookList()
     }
 
+    override fun getCategoryByListId(listId: Int): LiveData<CategoryVO?>? =
+        mLibraryDatabase?.libraryDao()?.getCategoryByListId(listId)
+
+    override fun getBookFromBookListById(bookListId: Int): LiveData<BookListResultVO>? =
+        mLibraryDatabase?.libraryDao()?.getBookFromBookListById(bookListId)
+
+    override fun deleteTheWholeBookList() {
+        mLibraryDatabase?.libraryDao()?.deleteTheWholeBookList()
+    }
+
 }

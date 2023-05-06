@@ -64,8 +64,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="@dimen/margin_10dp"
         android:maxLines="2"
-        android:textStyle="bold"
-        tools:text="Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship"
+        android:textColor="@color/colorSecondary"
+        android:text="Data Structure and Designs"
         android:textSize="@dimen/text_regular" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -76,8 +76,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="@dimen/margin_small"
         android:maxLines="2"
-        android:textStyle="bold"
-        tools:text="Steven Hawking"
+        android:textColor="@color/colorSecondary"
+        android:text="Steven Hawking"
         android:textSize="@dimen/text_regular" />
 
 </RelativeLayout>

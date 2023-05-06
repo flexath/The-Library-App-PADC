@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="@dimen/margin_medium_2"
+    android:paddingStart="@dimen/margin_card_medium_2"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivCoverAddToShelves"
+        android:layout_width="70dp"
+        app:srcCompat="@drawable/dummy_ebook_banner"
+        android:scaleType="centerCrop"
+        android:layout_alignParentStart="true"
+        android:layout_height="70dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvTitleAddToShelves"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Action"
+        android:textSize="@dimen/text_regular_2x_n"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:layout_toEndOf="@+id/ivCoverAddToShelves"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvNumberOfBooksAddToShelves"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvTitleAddToShelves"
+        android:text="2 books"
+        android:textSize="@dimen/text_regular_2x"
+        android:layout_marginStart="@dimen/margin_medium_2"
+        android:textColor="@color/colorSecondary"
+        android:layout_toEndOf="@+id/ivCoverAddToShelves"/>
+
+    <androidx.appcompat.widget.AppCompatCheckBox
+        android:layout_width="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_height="wrap_content"/>
+
+
+</RelativeLayout>

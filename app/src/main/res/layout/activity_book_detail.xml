@@ -16,7 +16,7 @@
             layout="@layout/toolbar_book_detail" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/ivCoverBookDetail"
+            android:id="@+id/mcCoverBookDetail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/actionBarBookDetail"
@@ -26,6 +26,7 @@
             app:cardElevation="@dimen/margin_medium">
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivCoverBookDetail"
                 android:layout_width="110dp"
                 android:layout_height="160dp"
                 android:elevation="@dimen/margin_medium"
@@ -42,7 +43,7 @@
             android:layout_marginStart="@dimen/margin_medium_2"
             android:layout_marginTop="@dimen/margin_medium_2"
             android:layout_marginEnd="@dimen/margin_medium_2"
-            android:layout_toEndOf="@+id/ivCoverBookDetail"
+            android:layout_toEndOf="@+id/mcCoverBookDetail"
             android:maxLines="2"
             android:text="A Brief History Of Time"
             android:textColor="@color/black"
@@ -56,7 +57,7 @@
             android:layout_below="@+id/tvTitleBookDetail"
             android:layout_marginStart="@dimen/margin_medium_2"
             android:layout_marginTop="@dimen/margin_medium"
-            android:layout_toEndOf="@+id/ivCoverBookDetail"
+            android:layout_toEndOf="@+id/mcCoverBookDetail"
             android:maxLines="2"
             android:text="Stephen Hawking"
             android:textColor="@color/colorPrimaryLight"
@@ -69,7 +70,7 @@
             android:layout_below="@+id/tvWriterBookDetail"
             android:layout_marginStart="@dimen/margin_medium_2"
             android:layout_marginTop="@dimen/margin_small_smaller"
-            android:layout_toEndOf="@+id/ivCoverBookDetail"
+            android:layout_toEndOf="@+id/mcCoverBookDetail"
             android:maxLines="2"
             android:text="EBook"
             android:textColor="@color/colorPrimaryLight"
@@ -102,7 +103,7 @@
             android:id="@+id/vHorizontalLineOneBookDetail"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:layout_below="@+id/ivCoverBookDetail"
+            android:layout_below="@+id/mcCoverBookDetail"
             android:layout_marginTop="@dimen/margin_xlarge"
             android:background="@color/colorPrimaryLight" />
 

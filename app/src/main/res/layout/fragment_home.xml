@@ -61,7 +61,7 @@
                 android:layout_marginStart="@dimen/margin_medium_3"
                 tools:text="@string/more_like_don_t_make_me_think_revisit_lbl"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_regular_2x_n"
+                android:textSize="@dimen/text_regular_3x"
                 android:textStyle="bold"
                 tools:ignore="RelativeOverlap" />
 
@@ -90,7 +90,7 @@
                 android:layout_marginTop="@dimen/margin_10dp"
                 tools:text="@string/ebooks_for_you_lbl"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_regular_2x_n"
+                android:textSize="@dimen/text_regular_3x"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -119,7 +119,7 @@
                 android:layout_marginTop="@dimen/margin_10dp"
                 tools:text="@string/on_your_wishlist_lbl"
                 android:textColor="@color/black"
-                android:textSize="@dimen/text_regular_2x_n"
+                android:textSize="@dimen/text_regular_3x"
                 android:textStyle="bold" />
 
             <androidx.appcompat.widget.AppCompatImageView

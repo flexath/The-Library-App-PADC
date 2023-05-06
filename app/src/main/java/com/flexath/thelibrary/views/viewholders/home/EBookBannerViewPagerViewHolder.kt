@@ -11,7 +11,7 @@ class EBookBannerViewPagerViewHolder(itemView: View,private val delegate: Banner
 
     private fun setUpListeners() {
         itemView.setOnClickListener {
-            delegate.onTapBookFromBanner(1)
+            delegate.onTapBookFromBanner("",1)
         }
 
         itemView.btnOptionBannerHome.setOnClickListener {

@@ -39,9 +39,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mcvIvMoreLikeHome"
-        android:textStyle="bold"
         android:layout_marginTop="@dimen/margin_10dp"
         android:maxLines="1"
+        android:textColor="@color/colorSecondary"
         android:textSize="@dimen/text_regular"
         tools:text="Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship" />
 
@@ -52,7 +52,7 @@
         android:layout_below="@+id/tvBookTitle"
         android:layout_marginTop="@dimen/margin_small_smaller"
         android:maxLines="1"
-        android:textStyle="bold"
+        android:textColor="@color/colorSecondary"
         android:textSize="@dimen/text_regular"
         tools:text="Steven Hawking" />
 

@@ -1,12 +1,11 @@
 package com.flexath.thelibrary.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.flexath.thelibrary.R
 import com.flexath.thelibrary.fragments.home.HomeFragment
 import com.flexath.thelibrary.fragments.library.LibraryFragment
-import com.flexath.thelibrary.fragments.wishlist.WishlistFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +14,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         setUpBottomNavigationView()
+        setUpListeners()
+    }
+
+    private fun setUpListeners() {
+
     }
 
     private fun setUpBottomNavigationView() {
@@ -27,10 +31,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.nvgLibrary -> {
                     switchFragment(LibraryFragment())
-                    true
-                }
-                R.id.nvgWishlist -> {
-                    switchFragment(WishlistFragment())
                     true
                 }
                 else -> false

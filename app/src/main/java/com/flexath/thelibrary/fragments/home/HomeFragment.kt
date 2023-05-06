@@ -2,6 +2,7 @@ package com.flexath.thelibrary.fragments.home
 
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,6 +41,9 @@ class HomeFragment : Fragment(),HomeView {
 
     // General
     private val homeTabList = listOf("Ebooks","Audiobooks")
+    private var mFirstListId:Int = 0
+    private var mSecondListId:Int = 0
+    private var mThirdListId:Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -151,39 +155,50 @@ class HomeFragment : Fragment(),HomeView {
         })
 
         btnForwardFirstHome.setOnClickListener {
-            mPresenter.onTapGoToBookListScreen(tvFirstTitleHome.text.toString())
+            mPresenter.onTapGoToBookListScreen(tvFirstTitleHome.text.toString(),mFirstListId)
         }
 
         btnForwardSecondHome.setOnClickListener {
-            mPresenter.onTapGoToBookListScreen(tvSecondTitleHome.text.toString())
+            mPresenter.onTapGoToBookListScreen(tvSecondTitleHome.text.toString(),mSecondListId)
         }
 
         btnForwardThirdHome.setOnClickListener {
-            mPresenter.onTapGoToBookListScreen(tvThirdTitleHome.text.toString())
+            mPresenter.onTapGoToBookListScreen(tvThirdTitleHome.text.toString(),mThirdListId)
         }
     }
 
-    override fun showFirstCategory(category: List<CategoryVO>) {
-        tvFirstTitleHome.text = category[0].listName
-        mFirstViewPod.setNewData(category[0])
+    override fun showFirstCategory(category: List<CategoryVO>?) {
+        if(category?.size != 0) {
+            tvFirstTitleHome.text = category?.get(0)?.listName ?: ""
+            mFirstListId = category?.get(0)?.listId ?: 0
+            category?.get(0)?.let {
+                mFirstViewPod.setNewData(it)
+            }
+        }
     }
 
-    override fun showSecondCategory(category: List<CategoryVO>) {
-        tvSecondTitleHome.text = category[1].listName
-        mSecondViewPod.setNewData(category[1])
+    override fun showSecondCategory(category: List<CategoryVO>?) {
+        if(category?.size != 0) {
+            tvSecondTitleHome.text = category?.get(1)?.listName ?: ""
+            mSecondListId = category?.get(1)?.listId ?: 0
+            category?.get(1)?.let { mSecondViewPod.setNewData(it) }
+        }
     }
 
-    override fun showThirdCategory(category: List<CategoryVO>) {
-        tvThirdTitleHome.text = category[2].listName
-        mThirdViewPod.setNewData(category[2])
+    override fun showThirdCategory(category: List<CategoryVO>?) {
+        if(category?.size != 0) {
+            tvThirdTitleHome.text = category?.get(2)?.listName ?: ""
+            mThirdListId = category?.get(2)?.listId ?: 0
+            category?.get(2)?.let { mThirdViewPod.setNewData(it) }
+        }
     }
 
-    override fun navigateToBookDetailScreen(bookId: Int) {
-        startActivity(BookDetailActivity.newIntent(requireActivity(),bookId))
+    override fun navigateToBookDetailScreen(bookName:String,listId:Int) {
+        startActivity(BookDetailActivity.newIntent(requireContext(),bookName,listId,"HomeFragment"))
     }
 
-    override fun navigateToBookListScreen(listName:String) {
-        startActivity(BookListActivity.newIntent(requireActivity(),listName,tabLayoutHome.selectedTabPosition))
+    override fun navigateToBookListScreen(listName:String,listId:Int) {
+        startActivity(BookListActivity.newIntent(requireActivity(),listName,tabLayoutHome.selectedTabPosition,listId))
     }
 
     override fun onTapOptionButtonOnBook() {

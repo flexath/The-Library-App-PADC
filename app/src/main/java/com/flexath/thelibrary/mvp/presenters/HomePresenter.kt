@@ -7,6 +7,6 @@ import com.flexath.thelibrary.mvp.views.HomeView
 interface HomePresenter : IBasePresenter, BannerHomeViewHolderDelegate, BookHomeViewHolderDelegate {
 
     fun initView(view: HomeView)
-    fun onTapGoToBookListScreen(listName:String)
+    fun onTapGoToBookListScreen(listName:String,listInt: Int)
 
 }

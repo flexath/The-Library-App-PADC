@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/btnBackBookList"
@@ -19,7 +20,7 @@
         android:textSize="@dimen/text_regular_3x"
         android:textStyle="bold"
         android:textColor="@color/black"
-        android:text="More Like Fingersmiths"
+        tools:text="More Like Fingersmiths"
         android:layout_centerInParent="true"/>
 
     <View

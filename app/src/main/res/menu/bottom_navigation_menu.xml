@@ -12,10 +12,4 @@
         android:title="@string/library_lbl"
         app:showAsAction="always"
         android:icon="@drawable/ic_baseline_library_books_secondary_24dp"/>
-
-    <item
-        android:id="@+id/nvgWishlist"
-        android:title="@string/wishlist_lbl"
-        app:showAsAction="always"
-        android:icon="@drawable/bookmark"/>
 </menu>

@@ -16,6 +16,20 @@
         android:theme="@style/Theme.TheLibrary"
         tools:targetApi="31">
         <activity
+            android:name=".activities.BookSearchActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activities.AddToShelvesActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".activities.AboutEBookActivity"
             android:exported="false">
             <meta-data

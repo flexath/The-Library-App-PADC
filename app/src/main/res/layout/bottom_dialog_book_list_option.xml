@@ -81,7 +81,7 @@
         android:background="@color/colorPrimaryLight" />
 
     <LinearLayout
-        android:id="@+id/llDownloadButtonBookListBottomSheet"
+        android:id="@+id/btnDownloadBottomSheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/vHorizontalLine"
@@ -109,10 +109,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llDeleteButtonBookListBottomSheet"
+        android:id="@+id/btnDeleteBottomSheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/llDownloadButtonBookListBottomSheet"
+        android:layout_below="@+id/btnDownloadBottomSheet"
         android:layout_marginStart="@dimen/margin_medium_3"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_medium_3"
@@ -137,10 +137,10 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/llAddToShelvesButtonBookListBottomSheet"
+        android:id="@+id/btnAboutThisBookBottomSheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/llDeleteButtonBookListBottomSheet"
+        android:layout_below="@+id/btnDeleteBottomSheet"
         android:layout_marginStart="@dimen/margin_medium_3"
         android:layout_marginTop="@dimen/margin_large"
         android:layout_marginEnd="@dimen/margin_medium_3"
