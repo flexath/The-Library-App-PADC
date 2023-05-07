@@ -18,7 +18,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setUpListeners() {
-
+        btnSearchHome.setOnClickListener {
+            startActivity(BookSearchActivity.newIntent(this))
+        }
     }
 
     private fun setUpBottomNavigationView() {

@@ -96,7 +96,12 @@ class HomeFragment : Fragment(),HomeView {
 
     private fun setUpBannerRecyclerView(type:Int) {
         mBannerAdapter = BookBannerHomeViewPagerAdapter(type,mPresenter)
-        viewPagerEBookBannerHome.adapter = mBannerAdapter
+        if (mBannerAdapter?.itemCount!! == 0) {
+            viewPagerEBookBannerHome.visibility = View.GONE
+        } else {
+            viewPagerEBookBannerHome.visibility = View.VISIBLE
+            viewPagerEBookBannerHome.adapter = mBannerAdapter
+        }
     }
 
     private fun setUpBannerViewPagerPadding() {
@@ -105,7 +110,7 @@ class HomeFragment : Fragment(),HomeView {
             clipToPadding = false  // Show the viewpager in full width without clipping the padding
             offscreenPageLimit = 3  // Render the left and right items
             (getChildAt(0) as RecyclerView).overScrollMode =
-                RecyclerView.OVER_SCROLL_IF_CONTENT_SCROLLS // Remove the scroll effect
+                RecyclerView.OVER_SCROLL_ALWAYS // Remove the scroll effect
         }
     }
 

@@ -6,67 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/flSearchHome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="@dimen/margin_large"
-        android:layout_marginTop="@dimen/margin_medium_3"
-        android:layout_marginEnd="@dimen/margin_large"
-        android:background="@drawable/et_search_background"
-        android:elevation="@dimen/margin_medium">
-
-        <com.flexath.thelibrary.views.components.RoundedProfileImage
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_vertical|end"
-            android:layout_marginEnd="@dimen/margin_card_medium_2"
-            android:scaleType="centerCrop"
-            android:elevation="@dimen/margin_medium"
-            app:cornerRadius="20dp"
-            app:srcCompat="@drawable/dummy_ath" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/etSearchHome"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxBackgroundColor="@color/white"
-            android:layout_gravity="center_vertical"
-            app:boxBackgroundMode="outline"
-            app:boxCornerRadiusBottomEnd="@dimen/margin_card_medium_2"
-            app:boxCornerRadiusBottomStart="@dimen/margin_card_medium_2"
-            app:boxCornerRadiusTopEnd="@dimen/margin_card_medium_2"
-            app:boxCornerRadiusTopStart="@dimen/margin_card_medium_2"
-            app:boxStrokeWidth="0dp"
-            app:hintAnimationEnabled="false"
-            app:startIconDrawable="@drawable/ic_baseline_search_secondary_24dp">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/search_play_books_lbl"
-                android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
-                android:cursorVisible="true"
-                android:textIsSelectable="true"
-                android:textCursorDrawable="@color/colorSecondary"
-                android:textColorHint="@color/colorSecondary"
-                android:textSize="@dimen/text_regular_2x"
-                app:textInputLayoutFocusedRectEnabled="true" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </FrameLayout>
+    <include
+        layout="@layout/toolbar_search_home"
+        android:id="@+id/btnSearchHome"/>
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottomNavigationView"
-        android:layout_below="@+id/flSearchHome" />
+        android:layout_below="@+id/btnSearchHome" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

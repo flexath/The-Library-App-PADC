@@ -5,4 +5,9 @@
         <item name="textAllCaps">false</item>
         <item name="android:textAlignment">center</item>
     </style>
+
+    <style name="CustomEditTextStyle" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/search_cursor_color</item>
+    </style>
+
 </resources>

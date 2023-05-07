@@ -11,6 +11,8 @@ class LibraryBooksListViewHolder(
 
     init {
         setUpListeners()
+        itemView.ivDownloadDoneListLibrary.visibility = View.VISIBLE
+        itemView.btnOptionListLibrary.visibility = View.VISIBLE
     }
 
     private fun setUpListeners() {

@@ -36,4 +36,6 @@
     <string name="author_lbl">Author</string>
     <string name="recent_lbl">Recent</string>
     <string name="add_to_shelves_title">Add to shelves</string>
+    <string name="results_from_google_play_lbl">Results from Google Play</string>
+    <string name="no_shelves_lbl">No shelves</string>
 </resources>

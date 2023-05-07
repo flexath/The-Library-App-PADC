@@ -8,13 +8,61 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
+        <include
+            android:id="@+id/actionbarSearchActivity"
+            layout="@layout/toolbar_search_activity" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayoutSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/actionbarSearchActivity"
+            android:layout_centerHorizontal="true"
+            app:tabGravity="center"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabIndicatorColor="@color/colorAccent"
+            app:tabIndicatorFullWidth="false"
+            app:tabIndicatorGravity="bottom"
+            app:tabMode="fixed"
+            app:tabPaddingEnd="@dimen/margin_40dp"
+            app:tabPaddingStart="@dimen/margin_40dp"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabTextColor="@color/colorSecondary" />
+
+        <View
+            android:layout_width="match_parent"
+            android:background="@color/colorPrimaryLight"
+            android:layout_below="@+id/tabLayoutSearch"
+            android:layout_height="0.3dp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvResultFromGooglePlay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tabLayoutSearch"
+            android:layout_marginStart="@dimen/margin_medium_3"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/results_from_google_play_lbl"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_regular_3x"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSearch"
+            android:layout_below="@+id/tvResultFromGooglePlay"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_medium_2"
+            android:layout_marginStart="@dimen/margin_10dp"
+            android:layout_marginEnd="@dimen/margin_card_medium_2"
+            android:layout_height="wrap_content"/>
 
 
 
     </RelativeLayout>
-
 
 
 </androidx.core.widget.NestedScrollView>
