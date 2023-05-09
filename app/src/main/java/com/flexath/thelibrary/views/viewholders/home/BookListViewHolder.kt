@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.flexath.thelibrary.data.vos.list.BookListResultVO
+import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.home.BookHomeViewHolderDelegate
 import com.flexath.thelibrary.views.viewholders.library.ILibraryBooksBaseViewHolder
 import kotlinx.android.synthetic.main.view_holder_book_list.view.*
@@ -46,6 +47,10 @@ class BookListViewHolder(itemView: View, private val type:Int,private val delega
 
         itemView.tvTitleBookList.text = bookList.bookDetails?.get(0)?.title ?: ""
         itemView.tvAuthorBookList.text = bookList.bookDetails?.get(0)?.author ?: ""
+    }
+
+    override fun bindData(iBookVO: BookVO) {
+
     }
 
 }

@@ -62,6 +62,12 @@ class YourBooksLibraryFragment : Fragment() , YourBooksLibraryView , LibraryBook
         btnSortByLibrary.setOnClickListener {
             mPresenter.onTapSortButton()
         }
+
+
+        // dummy code
+        cb.setOnClickListener {
+            startActivity(AddToShelvesActivity.newIntent(requireActivity()))
+        }
     }
 
     override fun showBottomSheetDialogForFiltering() {

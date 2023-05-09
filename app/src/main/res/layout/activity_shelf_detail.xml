@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ShelfDetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/actionBarShelfDetail"
+            layout="@layout/toolbar_shelf_detail" />
+
+        <LinearLayout
+            android:id="@+id/llEtShelfDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/actionBarShelfDetail"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etShelfDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium_3"
+                android:layout_marginTop="@dimen/margin_xxlarge"
+                android:layout_marginEnd="@dimen/margin_medium_3"
+                android:hint="@string/rename_your_shelf_name_lbl"
+                android:imeOptions="actionDone"
+                android:includeFontPadding="true"
+                android:maxLength="50"
+                android:visibility="gone"
+                android:paddingTop="@dimen/margin_medium_2"
+                android:paddingBottom="@dimen/margin_medium_2"
+                android:singleLine="true"
+                android:textColor="@color/colorSecondary"
+                android:textSize="@dimen/text_heading_1x"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvShelfNameShelfDetail"
+                android:layout_width="match_parent"
+                android:text="Historical Books"
+                android:layout_marginStart="@dimen/margin_medium_3"
+                android:layout_marginTop="@dimen/margin_xxlarge"
+                android:layout_marginEnd="@dimen/margin_medium_3"
+                android:paddingTop="@dimen/margin_medium_2"
+                android:paddingBottom="@dimen/margin_medium_2"
+                android:visibility="visible"
+                android:maxLines="3"
+                android:maxLength="50"
+                android:textColor="@color/colorSecondary"
+                android:textSize="@dimen/text_heading_1x"
+                android:textStyle="bold"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBookCountShelfDetail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/llEtShelfDetail"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="@dimen/margin_large"
+            android:text="5 books"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="@dimen/text_regular_2x" />
+
+        <View
+            android:id="@+id/vHorizontalLineShelfDetail"
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:layout_below="@+id/tvBookCountShelfDetail"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:background="@color/colorPrimaryLight" />
+
+        <include
+            android:id="@+id/vpShelfDetail"
+            android:layout_below="@+id/vHorizontalLineShelfDetail"
+            layout="@layout/viewpod_books_library"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+</androidx.core.widget.NestedScrollView>

@@ -1,5 +1,6 @@
 package com.flexath.thelibrary.data.vos.overview
 
+import com.flexath.thelibrary.data.vos.IBookVO
 import com.google.gson.annotations.SerializedName
 
 data class BookVO(
@@ -79,4 +80,4 @@ data class BookVO(
     @SerializedName("weeks_on_list")
     val weeksOnList: Int?
 
-)
+) : IBookVO

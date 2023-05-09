@@ -1,6 +1,7 @@
 package com.flexath.thelibrary.data.models
 
 import androidx.lifecycle.LiveData
+import com.flexath.thelibrary.data.vos.ShelfVO
 import com.flexath.thelibrary.data.vos.list.BookListResultVO
 import com.flexath.thelibrary.data.vos.overview.CategoryVO
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -44,6 +45,26 @@ object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
 
     override fun deleteTheWholeBookList() {
         mLibraryDatabase?.libraryDao()?.deleteTheWholeBookList()
+    }
+
+    override fun insertShelf(shelf: ShelfVO) {
+        mLibraryDatabase?.libraryDao()?.insertShelf(shelf)
+    }
+
+    override fun getShelfList(): LiveData<List<ShelfVO>>? {
+        return mLibraryDatabase?.libraryDao()?.getShelfList()
+    }
+
+    override fun getShelfById(shelfId: Int): LiveData<ShelfVO>? {
+        return mLibraryDatabase?.libraryDao()?.getShelfById(shelfId)
+    }
+
+    override fun deleteShelf(shelfId: Int) {
+        mLibraryDatabase?.libraryDao()?.deleteShelfById(shelfId)
+    }
+
+    override fun updateShelf(shelf: ShelfVO) {
+        mLibraryDatabase?.libraryDao()?.updateShelf(shelf)
     }
 
 }

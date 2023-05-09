@@ -1,5 +1,6 @@
 package com.flexath.thelibrary.data.vos.list
 
+import com.flexath.thelibrary.data.vos.IBookVO
 import com.google.gson.annotations.SerializedName
 
 data class BookDetailVO(
@@ -33,4 +34,4 @@ data class BookDetailVO(
 
     @SerializedName("title")
     val title: String?
-)
+) : IBookVO

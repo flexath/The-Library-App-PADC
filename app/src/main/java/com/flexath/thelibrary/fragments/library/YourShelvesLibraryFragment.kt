@@ -5,15 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.flexath.thelibrary.R
-import com.flexath.thelibrary.activities.NewShelfActivity
+import com.flexath.thelibrary.activities.ShelfDetailActivity
 import com.flexath.thelibrary.adapters.library.ShelvesListAdapter
+import com.flexath.thelibrary.data.vos.ShelfVO
 import com.flexath.thelibrary.mvp.presenters.YourShelvesLibraryPresenter
 import com.flexath.thelibrary.mvp.presenters.YourShelvesLibraryPresenterImpl
 import com.flexath.thelibrary.mvp.views.YourShelvesLibraryView
@@ -40,7 +40,8 @@ class YourShelvesLibraryFragment : Fragment() , YourShelvesLibraryView {
 
         setUpPresenters()
         setUpRecyclerView()
-        hideOrShowEmptyPlaceHolder()
+
+        mPresenter.onUiReady(this)
     }
 
     private fun setUpPresenters() {
@@ -57,16 +58,20 @@ class YourShelvesLibraryFragment : Fragment() , YourShelvesLibraryView {
 
         val divider = DividerItemDecoration(context?.applicationContext, linearLayoutManager.orientation)
         rvShelvesList.addItemDecoration(divider)
-        mAdapter.notifyDataSetChanged()
     }
 
     private fun hideOrShowEmptyPlaceHolder() {
-        if(mAdapter.itemCount == 0 ) llNoShelvesPlaceHolder.visibility = View.VISIBLE
-        else llNoShelvesPlaceHolder.visibility = View.GONE
+        if(mAdapter.itemCount > 0 ) llNoShelvesPlaceHolder.visibility = View.GONE
+        else llNoShelvesPlaceHolder.visibility = View.VISIBLE
     }
 
-    override fun navigateToNewShelfScreen(shelfId: Int) {
-        startActivity(NewShelfActivity.newIntent(requireActivity(),shelfId))
+    override fun showShelfList(shelfList: List<ShelfVO>) {
+        mAdapter.setNewData(shelfList)
+        hideOrShowEmptyPlaceHolder()
+    }
+
+    override fun navigateToShelfDetailScreen(shelfId: Int) {
+        startActivity(ShelfDetailActivity.newIntent(requireActivity(),shelfId))
     }
 
     override fun showError(error: String) {

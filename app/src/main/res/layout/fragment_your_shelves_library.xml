@@ -1,62 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="@dimen/margin_medium_3"
     tools:context=".fragments.library.YourShelvesLibraryFragment">
 
-    <RelativeLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvShelvesList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/margin_card_medium_2"
+        android:layout_marginTop="@dimen/margin_medium_2"
+        android:layout_marginEnd="@dimen/margin_card_medium_2"
+        tools:itemCount="3"
+        tools:listitem="@layout/view_holder_shelves_list" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvShelvesList"
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/llNoShelvesPlaceHolder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="visible"
+        android:layout_marginTop="350dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center_horizontal"
+            app:srcCompat="@drawable/bookshelf" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_medium_2"
-            android:layout_marginStart="@dimen/margin_card_medium_2"
-            android:layout_marginEnd="@dimen/margin_card_medium_2"
-            tools:listitem="@layout/view_holder_shelves_list" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_xlarge"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:text="@string/no_shelves_lbl"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_small_2x"
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:id="@+id/llNoShelvesPlaceHolder"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="350dp"
-            android:orientation="vertical">
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:text="Create shelves to match the way\nyou think"
+            android:textColor="@color/colorPrimaryLight"
+            android:textSize="@dimen/text_regular_2x" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                app:srcCompat="@drawable/bookshelf" />
+    </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_xlarge"
-                android:layout_marginBottom="@dimen/margin_medium"
-                android:text="@string/no_shelves_lbl"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_small_2x"
-                android:textStyle="bold" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center"
-                android:text="Create shelves to match the way\nyou think"
-                android:textColor="@color/colorPrimaryLight"
-                android:textSize="@dimen/text_regular_2x" />
-
-
-        </LinearLayout>
-
-
-    </RelativeLayout>
-
-</androidx.core.widget.NestedScrollView>
+</RelativeLayout>

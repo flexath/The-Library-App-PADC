@@ -1,6 +1,8 @@
 package com.flexath.thelibrary.views.viewholders.library
 
 import android.view.View
+import com.flexath.thelibrary.data.vos.IBookVO
+import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.library.LibraryBooksViewHolderDelegate
 import kotlinx.android.synthetic.main.view_holder_list_library.view.*
 
@@ -23,6 +25,10 @@ class LibraryBooksListViewHolder(
         itemView.btnOptionListLibrary.setOnClickListener {
             delegate.onTapOptionButtonOnBook()
         }
+    }
+
+    override fun bindData(iBookVO: BookVO) {
+
     }
 
 }

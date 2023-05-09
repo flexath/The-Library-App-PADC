@@ -1,41 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.library.LibraryFragment">
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tabLayoutLibrary"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin_medium_2"
-            android:scrollbarAlwaysDrawHorizontalTrack="true"
-            android:touchscreenBlocksFocus="true"
-            app:tabGravity="start"
-            app:tabIndicatorAnimationMode="elastic"
-            app:tabIndicatorColor="@color/colorAccent"
-            app:tabIndicatorFullWidth="false"
-            app:tabIndicatorGravity="bottom"
-            app:tabMode="fixed"
-            app:tabPaddingEnd="55dp"
-            app:tabPaddingStart="55dp"
-            app:tabSelectedTextColor="@color/colorAccent"
-            app:tabTextAppearance="@style/TabLayoutTextStyle"
-            app:tabTextColor="@color/colorSecondary" />
+            android:layout_height="match_parent">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/viewPagerLibrary"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tabLayoutLibrary" />
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayoutLibrary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/margin_medium_2"
+                android:scrollbarAlwaysDrawHorizontalTrack="true"
+                android:touchscreenBlocksFocus="true"
+                app:tabGravity="start"
+                app:tabIndicatorAnimationMode="elastic"
+                app:tabIndicatorColor="@color/colorAccent"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorGravity="bottom"
+                app:tabMode="fixed"
+                app:tabPaddingEnd="55dp"
+                app:tabPaddingStart="55dp"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabTextAppearance="@style/TabLayoutTextStyle"
+                app:tabTextColor="@color/colorSecondary" />
 
-    </RelativeLayout>
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPagerLibrary"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tabLayoutLibrary" />
 
-</androidx.core.widget.NestedScrollView>
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCreateNewShelf"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_medium"
+        android:backgroundTint="@color/colorAccent"
+        android:gravity="center"
+        android:paddingTop="@dimen/margin_medium_2"
+        android:paddingEnd="@dimen/margin_large"
+        android:paddingBottom="@dimen/margin_medium_2"
+        android:text="@string/create_new_lbl"
+        android:textAllCaps="false"
+        android:elevation="@dimen/margin_medium"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_regular_2x"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:cornerRadius="30dp"
+        app:elevation="@dimen/margin_medium"
+        app:icon="@drawable/ic_baseline_edit_white_24dp" />
+
+</RelativeLayout>

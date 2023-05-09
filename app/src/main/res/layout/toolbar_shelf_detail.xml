@@ -6,27 +6,21 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btnBackBookList"
+        android:id="@+id/btnBackShelfDetail"
         android:layout_width="wrap_content"
         app:srcCompat="@drawable/ic_baseline_arrow_back_ios_secondary_24dp"
         android:layout_centerVertical="true"
+        android:layout_alignParentStart="true"
         android:layout_marginStart="@dimen/margin_medium_3"
         android:layout_height="wrap_content"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvTitleToolbar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/text_regular_3x"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        tools:text="More Like Fingersmiths"
-        android:layout_centerInParent="true"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimaryLight"
-        android:layout_height="0.3dp"/>
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnOptionShelfDetail"
+        android:layout_width="@dimen/width_24dp"
+        app:srcCompat="@drawable/dots_secondary"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/margin_medium_3"
+        android:layout_height="@dimen/height_24dp"/>
 
 </RelativeLayout>

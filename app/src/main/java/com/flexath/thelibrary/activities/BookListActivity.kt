@@ -15,7 +15,7 @@ import com.flexath.thelibrary.mvp.presenters.BookListPresenterImpl
 import com.flexath.thelibrary.mvp.views.BookListView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_book_list.*
-import kotlinx.android.synthetic.main.toolbar_book_type.*
+import kotlinx.android.synthetic.main.toolbar_book_list.*
 import java.util.*
 
 class BookListActivity : AppCompatActivity() , BookListView {
@@ -53,7 +53,7 @@ class BookListActivity : AppCompatActivity() , BookListView {
         setUpBookListRecyclerView()
 
         mListName = intent.extras?.getString(EXTRA_LIST_NAME,"") ?: ""
-        tvTitleToolbar.text = mListName
+        tvTitleToolbarBookList.text = mListName
 
         mPresenter.onUiReadyForBookList(this,
             mListName.lowercase(Locale.ROOT).replace(' ','-',ignoreCase = true))

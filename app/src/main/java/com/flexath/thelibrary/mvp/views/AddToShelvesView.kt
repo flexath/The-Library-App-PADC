@@ -2,8 +2,9 @@ package com.flexath.thelibrary.mvp.views
 
 import com.flexath.thelibrary.data.vos.ShelfVO
 
-interface YourShelvesLibraryView : IBaseView {
+interface AddToShelvesView : IBaseView {
 
     fun showShelfList(shelfList:List<ShelfVO>)
-    fun navigateToShelfDetailScreen(shelfId:Int)
+
+    fun onClickCheckBox(shelfId:Int,checked:Boolean)
 }

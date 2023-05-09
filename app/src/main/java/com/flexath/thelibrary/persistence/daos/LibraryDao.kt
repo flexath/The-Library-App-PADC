@@ -1,10 +1,8 @@
 package com.flexath.thelibrary.persistence.daos
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import com.flexath.thelibrary.data.vos.ShelfVO
 import com.flexath.thelibrary.data.vos.list.BookDetailVO
 import com.flexath.thelibrary.data.vos.list.BookListResultVO
 import com.flexath.thelibrary.data.vos.overview.CategoryVO
@@ -32,4 +30,19 @@ interface LibraryDao {
 
     @Query("DELETE FROM book_list_table")
     fun deleteTheWholeBookList()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertShelf(shelf:ShelfVO)
+
+    @Query("SELECT * FROM shelf_table")
+    fun getShelfList():LiveData<List<ShelfVO>>
+
+    @Query("SELECT * FROM shelf_table WHERE id = :shelfId")
+    fun getShelfById(shelfId:Int):LiveData<ShelfVO>
+
+    @Query("DELETE FROM shelf_table WHERE id = :shelfId")
+    fun deleteShelfById(shelfId:Int)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    fun updateShelf(shelf:ShelfVO)
 }
