@@ -6,5 +6,5 @@ import com.flexath.thelibrary.data.vos.IBookVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
 
 abstract class ILibraryBooksBaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    abstract fun bindData(iBookVO: BookVO)
+    abstract fun bindData(book: BookVO?)
 }

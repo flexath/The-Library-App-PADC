@@ -6,11 +6,14 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.flexath.thelibrary.R
 import com.flexath.thelibrary.data.vos.ShelfVO
+import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.library.LibraryBooksViewHolderDelegate
 import com.flexath.thelibrary.mvp.presenters.ShelfDetailPresenter
 import com.flexath.thelibrary.mvp.presenters.ShelfDetailPresenterImpl
@@ -18,6 +21,7 @@ import com.flexath.thelibrary.mvp.views.ShelfDetailView
 import com.flexath.thelibrary.views.viewpods.LibraryBooksViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.android.synthetic.main.activity_new_shelf.*
 import kotlinx.android.synthetic.main.activity_shelf_detail.*
 import kotlinx.android.synthetic.main.bottom_dialog_book_filter.*
 import kotlinx.android.synthetic.main.bottom_dialog_book_sort.*
@@ -35,6 +39,9 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
 
     // General
     private var shelfId:Int = 0
+    private var mBookCount = 0
+    private var mBookList:List<BookVO> = listOf()
+    private var mIsChecked:Boolean = false
 
     companion object {
         private const val EXTRA_SHELF_ID = "Shelf Id"
@@ -91,7 +98,25 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
         dialog.show()
 
         dialog.btnRenameShelfBottomSheet.setOnClickListener {
+            dialog.dismiss()
+            etShelfNameShelfDetail.visibility = View.VISIBLE
 
+            val netEtShelfName = tvShelfNameShelfDetail.text.toString()
+            tvShelfNameShelfDetail.visibility = View.GONE
+
+            etShelfNameShelfDetail.setText(netEtShelfName)
+
+            etShelfNameShelfDetail.setOnEditorActionListener { _, actionId, _ ->
+                if(actionId == EditorInfo.IME_ACTION_DONE) {
+                    val etShelfName = etShelfNameShelfDetail.text.toString()
+                    val shelf = ShelfVO(shelfId,etShelfName,mBookCount,mBookList,mIsChecked)
+                    mPresenter.updateShelf(shelf)
+                    finish()
+                    true
+                } else {
+                    false
+                }
+            }
         }
 
         dialog.btnDeleteShelfBottomSheet.setOnClickListener {
@@ -170,6 +195,10 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
     }
 
     override fun showShelfDetail(shelfVO: ShelfVO?) {
+
+        mBookCount = shelfVO?.bookCount ?: 0
+        mBookList = shelfVO?.bookList ?: listOf()
+
         tvShelfNameShelfDetail.text = shelfVO?.shelfName ?: ""
 
         var bookCount = "${shelfVO?.bookCount} books"

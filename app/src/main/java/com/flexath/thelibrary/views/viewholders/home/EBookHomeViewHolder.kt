@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.view_holder_ebook_home.view.*
 
 class EBookHomeViewHolder(itemView: View,private val delegate: BookHomeViewHolderDelegate) : RecyclerView.ViewHolder(itemView) {
 
-    private var mBookName:String? = ""
+    private var mBook:BookVO? = null
     private var mListId:Int = 0
 
     init {
@@ -18,19 +18,19 @@ class EBookHomeViewHolder(itemView: View,private val delegate: BookHomeViewHolde
 
     private fun setUpListeners() {
         itemView.setOnClickListener {
-            mBookName?.let { bookName ->
+            mBook?.title?.let { bookName ->
                 delegate.onTapBook(bookName,mListId)
             }
         }
 
         itemView.btnOptionHome.setOnClickListener {
-            delegate.onTapOptionButtonOnBook()
+            mBook?.let { it1 -> delegate.onTapOptionButtonOnBook(it1) }
         }
     }
 
     fun bindData(bookVO: BookVO,listId:Int) {
 
-        mBookName = bookVO.title
+        mBook = bookVO
         mListId = listId
 
         Glide.with(itemView.context)

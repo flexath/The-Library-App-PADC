@@ -21,6 +21,10 @@ class ShelvesListViewHolder(itemView: View,private val delegate: YourShelvesLibr
         itemView.btnForwardShelvesList.setOnClickListener {
             delegate.onTapForwardButtonOnItem(mShelfId)
         }
+
+        itemView.setOnClickListener {
+            delegate.onTapForwardButtonOnItem(mShelfId)
+        }
     }
 
     fun bindData(shelf: ShelfVO) {

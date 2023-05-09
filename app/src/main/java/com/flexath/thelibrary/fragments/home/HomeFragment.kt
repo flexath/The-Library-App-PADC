@@ -16,6 +16,7 @@ import com.flexath.thelibrary.R
 import com.flexath.thelibrary.activities.BookDetailActivity
 import com.flexath.thelibrary.activities.BookListActivity
 import com.flexath.thelibrary.adapters.home.BookBannerHomeViewPagerAdapter
+import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.data.vos.overview.CategoryVO
 import com.flexath.thelibrary.mvp.presenters.HomePresenter
 import com.flexath.thelibrary.mvp.presenters.HomePresenterImpl
@@ -23,9 +24,10 @@ import com.flexath.thelibrary.mvp.views.HomeView
 import com.flexath.thelibrary.views.viewpods.BookViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.bottom_dialog_book_option.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment(),HomeView {
+class HomeFragment : Fragment(), HomeView {
 
     // ViewPods
     private lateinit var mFirstViewPod: BookViewPod
@@ -37,13 +39,17 @@ class HomeFragment : Fragment(),HomeView {
 //    private lateinit var mTabLayoutViewPagerAdapter: TabLayoutViewPagerAdapter
 
     // Presenters
-    private lateinit var mPresenter:HomePresenter
+    private lateinit var mPresenter: HomePresenter
 
     // General
-    private val homeTabList = listOf("Ebooks","Audiobooks")
-    private var mFirstListId:Int = 0
-    private var mSecondListId:Int = 0
-    private var mThirdListId:Int = 0
+    private val homeTabList = listOf("Ebooks", "Audiobooks")
+    private var mBookList: List<BookVO> = listOf()
+    private var mFirstListId: Int = 0
+    private var mSecondListId: Int = 0
+    private var mThirdListId: Int = 0
+    private var mFirstListName: String = ""
+    private var mSecondListName: String = ""
+    private var mThirdListName: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,9 +88,9 @@ class HomeFragment : Fragment(),HomeView {
 
     private fun setUpBannerViewPager(type: Int) {
         setUpBannerViewPagerPadding()
-
         setUpBannerRecyclerView(type)
 
+        // Copy from ChatGPT
         val compositePageTransformer = CompositePageTransformer()
         compositePageTransformer.addTransformer(MarginPageTransformer((20 * Resources.getSystem().displayMetrics.density).toInt()))
         compositePageTransformer.addTransformer { page, position ->
@@ -94,17 +100,13 @@ class HomeFragment : Fragment(),HomeView {
         viewPagerEBookBannerHome.setPageTransformer(compositePageTransformer)
     }
 
-    private fun setUpBannerRecyclerView(type:Int) {
-        mBannerAdapter = BookBannerHomeViewPagerAdapter(type,mPresenter)
-        if (mBannerAdapter?.itemCount!! == 0) {
-            viewPagerEBookBannerHome.visibility = View.GONE
-        } else {
-            viewPagerEBookBannerHome.visibility = View.VISIBLE
-            viewPagerEBookBannerHome.adapter = mBannerAdapter
-        }
+    private fun setUpBannerRecyclerView(type: Int) {
+        mBannerAdapter = BookBannerHomeViewPagerAdapter(type, mPresenter)
+        viewPagerEBookBannerHome.adapter = mBannerAdapter
     }
 
     private fun setUpBannerViewPagerPadding() {
+        // Copy from ChatGPT
         viewPagerEBookBannerHome?.apply {
             clipChildren = false  // No clipping the left and right items
             clipToPadding = false  // Show the viewpager in full width without clipping the padding
@@ -115,20 +117,6 @@ class HomeFragment : Fragment(),HomeView {
     }
 
     private fun setUpTabLayout() {
-//        mTabLayoutViewPagerAdapter = TabLayoutViewPagerAdapter(this,mPresenter)
-//        viewPagerEbookHome.adapter = mTabLayoutViewPagerAdapter
-//
-//        TabLayoutMediator(tabLayoutHome,viewPagerEbookHome) { tab , position ->
-//            when (position) {
-//                0 -> {
-//                    tab.text = "Ebooks"
-//                }
-//                else -> {
-//                    tab.text = "Audiobooks"
-//                }
-//            }
-//        }.attach()
-
         homeTabList.forEach {
             tabLayoutHome.newTab().apply {
                 text = it
@@ -138,20 +126,22 @@ class HomeFragment : Fragment(),HomeView {
     }
 
     private fun setUpListeners() {
-        tabLayoutHome.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+        tabLayoutHome.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 setUpBannerViewPager(tab?.position ?: 0)
 
-                if(tab?.position == 0) {
+                if (tab?.position == 0) {
                     val layoutParams: ViewGroup.LayoutParams = viewPagerEBookBannerHome.layoutParams
                     layoutParams.width = 700
                     layoutParams.height = 700
                     viewPagerEBookBannerHome.layoutParams = layoutParams
+                    mBannerAdapter?.setNewData(mBookList)
                 } else {
                     val layoutParams: ViewGroup.LayoutParams = viewPagerEBookBannerHome.layoutParams
                     layoutParams.width = 450
                     layoutParams.height = 700
                     viewPagerEBookBannerHome.layoutParams = layoutParams
+                    mBannerAdapter?.setNewData(mBookList)
                 }
             }
 
@@ -160,22 +150,30 @@ class HomeFragment : Fragment(),HomeView {
         })
 
         btnForwardFirstHome.setOnClickListener {
-            mPresenter.onTapGoToBookListScreen(tvFirstTitleHome.text.toString(),mFirstListId)
+            mPresenter.onTapGoToBookListScreen(tvFirstTitleHome.text.toString(), mFirstListId)
         }
 
         btnForwardSecondHome.setOnClickListener {
-            mPresenter.onTapGoToBookListScreen(tvSecondTitleHome.text.toString(),mSecondListId)
+            mPresenter.onTapGoToBookListScreen(tvSecondTitleHome.text.toString(), mSecondListId)
         }
 
         btnForwardThirdHome.setOnClickListener {
-            mPresenter.onTapGoToBookListScreen(tvThirdTitleHome.text.toString(),mThirdListId)
+            mPresenter.onTapGoToBookListScreen(tvThirdTitleHome.text.toString(), mThirdListId)
         }
     }
 
+    override fun showBooksForBanner(bookList: List<BookVO>?) {
+        mBookList = bookList ?: listOf()
+        mBannerAdapter?.setNewData(bookList)
+    }
+
     override fun showFirstCategory(category: List<CategoryVO>?) {
-        if(category?.size != 0) {
+        if (category?.size != 0) {
             tvFirstTitleHome.text = category?.get(0)?.listName ?: ""
+
             mFirstListId = category?.get(0)?.listId ?: 0
+            mFirstListName = category?.get(0)?.listName ?: ""
+
             category?.get(0)?.let {
                 mFirstViewPod.setNewData(it)
             }
@@ -183,36 +181,65 @@ class HomeFragment : Fragment(),HomeView {
     }
 
     override fun showSecondCategory(category: List<CategoryVO>?) {
-        if(category?.size != 0) {
+        if (category?.size != 0) {
             tvSecondTitleHome.text = category?.get(1)?.listName ?: ""
+
             mSecondListId = category?.get(1)?.listId ?: 0
-            category?.get(1)?.let { mSecondViewPod.setNewData(it) }
+            mSecondListName = category?.get(1)?.listName ?: ""
+
+            category?.get(1)?.let {
+                mSecondViewPod.setNewData(it)
+            }
         }
     }
 
     override fun showThirdCategory(category: List<CategoryVO>?) {
-        if(category?.size != 0) {
+        if (category?.size != 0) {
             tvThirdTitleHome.text = category?.get(2)?.listName ?: ""
+
             mThirdListId = category?.get(2)?.listId ?: 0
+            mThirdListName = category?.get(2)?.listName ?: ""
+
             category?.get(2)?.let { mThirdViewPod.setNewData(it) }
         }
     }
 
-    override fun navigateToBookDetailScreen(bookName:String,listId:Int) {
-        startActivity(BookDetailActivity.newIntent(requireContext(),bookName,listId,"HomeFragment"))
+    override fun navigateToBookDetailScreen(bookName: String, listId: Int) {
+        startActivity(
+            BookDetailActivity.newIntent(
+                requireContext(),
+                bookName,
+                listId,
+                "HomeFragment"
+            )
+        )
     }
 
-    override fun navigateToBookListScreen(listName:String,listId:Int) {
-        startActivity(BookListActivity.newIntent(requireActivity(),listName,tabLayoutHome.selectedTabPosition,listId))
+    override fun navigateToBookListScreen(listName: String, listId: Int) {
+        startActivity(
+            BookListActivity.newIntent(
+                requireActivity(),
+                listName,
+                tabLayoutHome.selectedTabPosition,
+                listId
+            )
+        )
     }
 
-    override fun onTapOptionButtonOnBook() {
+    override fun onTapOptionButtonOnBook(book: BookVO?) {
         val dialog = BottomSheetDialog(requireActivity())
         dialog.setContentView(R.layout.bottom_dialog_book_option)
         dialog.show()
+
+        dialog.btnAddToLibraryBottomSheetHome.setOnClickListener {
+            mPresenter.insertBookIntoLibrary(book)
+            dialog.dismiss()
+        }
+
+        dialog.btnDeleteBottomSheetHome.visibility = View.GONE
     }
 
     override fun showError(error: String) {
-        Toast.makeText(requireActivity(),error,Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireActivity(), error, Toast.LENGTH_SHORT).show()
     }
 }

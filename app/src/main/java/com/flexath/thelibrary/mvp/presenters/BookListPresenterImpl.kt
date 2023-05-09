@@ -1,10 +1,10 @@
 package com.flexath.thelibrary.mvp.presenters
 
-import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.flexath.thelibrary.data.models.LibraryModel
 import com.flexath.thelibrary.data.models.LibraryModelImpl
+import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.mvp.views.BookListView
 
 class BookListPresenterImpl : ViewModel() , BookListPresenter {
@@ -38,7 +38,7 @@ class BookListPresenterImpl : ViewModel() , BookListPresenter {
         mView?.navigateToBookDetailScreen(bookName,listId)
     }
 
-    override fun onTapOptionButtonOnBook() {
+    override fun onTapOptionButtonOnBook(book: BookVO?) {
         mView?.onTapOptionButtonOnBook()
     }
 

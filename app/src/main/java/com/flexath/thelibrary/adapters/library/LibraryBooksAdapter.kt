@@ -1,6 +1,7 @@
 package com.flexath.thelibrary.adapters.library
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -37,12 +38,8 @@ class LibraryBooksAdapter(private val spanCount: Int,private val delegate: Libra
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
-    }
-
     override fun onBindViewHolder(holder: ILibraryBooksBaseViewHolder, position: Int) {
-        when (holder.itemViewType) {
+        when (spanCount) {
             1 -> (holder as LibraryBooksListViewHolder).bindData(mBookList[position])
             2 -> (holder as LibraryBooksLargeGridViewHolder).bindData(mBookList[position])
             3 -> (holder as LibraryBooksSmallGridViewHolder).bindData(mBookList[position])
@@ -55,8 +52,9 @@ class LibraryBooksAdapter(private val spanCount: Int,private val delegate: Libra
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(bookList: List<BookVO>) {
-        mBookList = bookList
+    fun setData(bookList: List<BookVO>?) {
+        mBookList = bookList ?: listOf()
+        Log.i("Doner",mBookList.toString())
         notifyDataSetChanged()
     }
 }

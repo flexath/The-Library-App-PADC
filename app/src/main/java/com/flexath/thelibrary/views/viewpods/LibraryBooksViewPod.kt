@@ -48,7 +48,7 @@ class LibraryBooksViewPod @JvmOverloads constructor(
         rvFilterBooksLibrary.layoutManager = GridLayoutManager(context,spanCount)
     }
 
-    fun setNewData(bookList: List<BookVO>) {
-//        mLibraryBooksAdapter.setData(bookList)
+    fun setNewData(bookList: List<BookVO>?) {
+        mLibraryBooksAdapter.setData(bookList)
     }
 }

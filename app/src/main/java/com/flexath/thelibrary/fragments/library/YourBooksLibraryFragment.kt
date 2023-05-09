@@ -11,22 +11,32 @@ import androidx.lifecycle.ViewModelProvider
 import com.flexath.thelibrary.R
 import com.flexath.thelibrary.activities.AddToShelvesActivity
 import com.flexath.thelibrary.activities.BookDetailActivity
+import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.library.LibraryBooksViewHolderDelegate
 import com.flexath.thelibrary.mvp.presenters.YourBooksLibraryPresenter
 import com.flexath.thelibrary.mvp.presenters.YourBooksLibraryPresenterImpl
 import com.flexath.thelibrary.mvp.views.YourBooksLibraryView
 import com.flexath.thelibrary.views.viewpods.LibraryBooksViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.bottom_dialog_book_filter.*
+import kotlinx.android.synthetic.main.bottom_dialog_book_list_option.*
 import kotlinx.android.synthetic.main.bottom_dialog_book_option.*
 import kotlinx.android.synthetic.main.bottom_dialog_book_sort.*
+import kotlinx.android.synthetic.main.fragment_library.*
 import kotlinx.android.synthetic.main.fragment_your_books_library.*
 import kotlinx.android.synthetic.main.viewpod_books_library.*
 
-class YourBooksLibraryFragment : Fragment() , YourBooksLibraryView , LibraryBooksViewHolderDelegate {
+class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , YourBooksLibraryView , LibraryBooksViewHolderDelegate {
 
+    // ViewPods
     private lateinit var mLibraryBooksViewPod:LibraryBooksViewPod
+
+    // Presenters
     private lateinit var mPresenter: YourBooksLibraryPresenter
+
+    // Generals
+    private var mBookList:List<BookVO> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +52,23 @@ class YourBooksLibraryFragment : Fragment() , YourBooksLibraryView , LibraryBook
 
         setUpViewPodInstances()
         setUpListeners()
+
+        mPresenter.onUiReady(this)
+
+        setUpTabLayout()
+    }
+
+    private fun setUpTabLayout() {
+        fragment.tabLayoutLibrary.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                if (tab?.position == 0) {
+                    mLibraryBooksViewPod.setNewData(mBookList)
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
+        })
     }
 
     private fun setUpPresenter() {
@@ -63,11 +90,11 @@ class YourBooksLibraryFragment : Fragment() , YourBooksLibraryView , LibraryBook
             mPresenter.onTapSortButton()
         }
 
+    }
 
-        // dummy code
-        cb.setOnClickListener {
-            startActivity(AddToShelvesActivity.newIntent(requireActivity()))
-        }
+    override fun showBooksInLibrary(bookList: List<BookVO>?) {
+        mBookList = bookList ?: listOf()
+        mLibraryBooksViewPod.setNewData(mBookList)
     }
 
     override fun showBottomSheetDialogForFiltering() {
@@ -78,6 +105,7 @@ class YourBooksLibraryFragment : Fragment() , YourBooksLibraryView , LibraryBook
         dialog.rbList.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 mLibraryBooksViewPod.setDelegate(1,this)
+                mLibraryBooksViewPod.setNewData(mBookList)
                 dialog.dismiss()
             }
         }
@@ -85,6 +113,7 @@ class YourBooksLibraryFragment : Fragment() , YourBooksLibraryView , LibraryBook
         dialog.rbLargeGrid.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 mLibraryBooksViewPod.setDelegate(2,this)
+                mLibraryBooksViewPod.setNewData(mBookList)
                 dialog.dismiss()
             }
         }
@@ -92,6 +121,7 @@ class YourBooksLibraryFragment : Fragment() , YourBooksLibraryView , LibraryBook
         dialog.rbSmallGrid.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 mLibraryBooksViewPod.setDelegate(3,this)
+                mLibraryBooksViewPod.setNewData(mBookList)
                 dialog.dismiss()
             }
         }
@@ -138,28 +168,26 @@ class YourBooksLibraryFragment : Fragment() , YourBooksLibraryView , LibraryBook
         dialog.setContentView(R.layout.bottom_dialog_book_option)
         dialog.show()
 
-        dialog.btnDownloadBottomSheet.setOnClickListener {
+        dialog.btnDownloadBottomSheetHome.setOnClickListener {
             Toast.makeText(requireActivity(),"Downloading",Toast.LENGTH_SHORT).show()
         }
 
-        dialog.btnDeleteBottomSheet.setOnClickListener {
+        dialog.btnDeleteBottomSheetHome.setOnClickListener {
             Toast.makeText(requireActivity(),"Deleted from your library",Toast.LENGTH_SHORT).show()
         }
 
-        dialog.btnAddToLibraryBottomSheet.setOnClickListener {
-            Toast.makeText(requireActivity(),"Added to your library",Toast.LENGTH_SHORT).show()
-        }
+        dialog.btnAddToLibraryBottomSheetHome.visibility = View.GONE
 
-        dialog.btnAddToShelvesBottomSheet.setOnClickListener {
+        dialog.btnAddToShelvesBottomSheetHome.setOnClickListener {
             startActivity(AddToShelvesActivity.newIntent(requireActivity()))
             dialog.dismiss()
         }
 
-        dialog.btnMarkAsReadBottomSheet.setOnClickListener {
+        dialog.btnMarkAsReadBottomSheetHome.setOnClickListener {
             Toast.makeText(requireActivity(),"Marks as read",Toast.LENGTH_SHORT).show()
         }
 
-        dialog.btnAboutThisBookBottomSheet.setOnClickListener {
+        dialog.btnAboutThisBookBottomSheetHome.setOnClickListener {
             Toast.makeText(requireActivity(),"About this ebook",Toast.LENGTH_SHORT).show()
         }
     }

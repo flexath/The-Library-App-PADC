@@ -16,7 +16,7 @@
         app:cardPreventCornerOverlap="true">
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivEBookMoreLikeHome"
+            android:id="@+id/ivCoverSmallGrid"
             android:layout_width="match_parent"
             android:layout_height="170dp"
             android:scaleType="centerCrop"
@@ -40,7 +40,7 @@
         android:id="@+id/btnHeadphoneLibrary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/tvTitleLibrary"
+        android:layout_above="@id/tvTitleLibrarySmallGrid"
         android:layout_alignParentStart="true"
         android:layout_marginStart="@dimen/margin_10dp"
         android:layout_marginBottom="@dimen/margin_10dp"
@@ -62,7 +62,7 @@
         android:id="@+id/btnCorrectLibrary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/tvTitleLibrary"
+        android:layout_above="@id/tvTitleLibrarySmallGrid"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/margin_10dp"
         android:layout_marginBottom="@dimen/margin_10dp"
@@ -81,7 +81,7 @@
     </FrameLayout>
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvTitleLibrary"
+        android:id="@+id/tvTitleLibrarySmallGrid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/mcvCoverPhotoLibrary"
@@ -93,10 +93,10 @@
         android:text="Clean.Code.A.Handbook.of.Agile.Software.Craftsmanship" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tvAuthorLibrary"
+        android:id="@+id/tvAuthorLibrarySmallGrid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvTitleLibrary"
+        android:layout_below="@+id/tvTitleLibrarySmallGrid"
         android:layout_alignParentStart="true"
         android:layout_marginTop="@dimen/margin_small"
         android:textColor="@color/colorSecondary"

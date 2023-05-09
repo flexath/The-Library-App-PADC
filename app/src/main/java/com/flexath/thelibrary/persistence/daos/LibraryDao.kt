@@ -5,6 +5,7 @@ import androidx.room.*
 import com.flexath.thelibrary.data.vos.ShelfVO
 import com.flexath.thelibrary.data.vos.list.BookDetailVO
 import com.flexath.thelibrary.data.vos.list.BookListResultVO
+import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.data.vos.overview.CategoryVO
 
 @Dao
@@ -45,4 +46,10 @@ interface LibraryDao {
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun updateShelf(shelf:ShelfVO)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertBookIntoLibrary(book:BookVO?)
+
+    @Query("SELECT * FROM library_table")
+    fun getAllBooksFromLibrary():LiveData<List<BookVO>>
 }

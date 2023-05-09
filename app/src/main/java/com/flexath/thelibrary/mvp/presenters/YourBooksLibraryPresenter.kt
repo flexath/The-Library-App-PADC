@@ -5,6 +5,9 @@ import com.flexath.thelibrary.mvp.views.YourBooksLibraryView
 interface YourBooksLibraryPresenter : IBasePresenter {
 
     fun initView(view:YourBooksLibraryView)
+
+
+
     fun onTapFilterButton()
     fun onTapSortButton()
 }

@@ -3,7 +3,6 @@ package com.flexath.thelibrary.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -19,9 +18,9 @@ import com.flexath.thelibrary.mvp.presenters.BookDetailPresenterImpl
 import com.flexath.thelibrary.mvp.views.BookDetailView
 import kotlinx.android.synthetic.main.activity_book_detail.*
 
-
 class BookDetailActivity : AppCompatActivity() , BookDetailView {
 
+    // Adapters
     private lateinit var mAdapter: BookRatingAndReviewAdapter
 
     // Presenter
@@ -84,6 +83,9 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
         for(book in category.books!!) {
             if(mBookName == book.title) {
                 bindData(book)
+                book.listId = category.listId
+                book.listName = category.listName ?: ""
+                mPresenter.insertBookIntoLibrary(book)
                 break
             }
         }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import com.flexath.thelibrary.data.models.LibraryModel
 import com.flexath.thelibrary.data.models.LibraryModelImpl
+import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.mvp.views.HomeView
 
 class HomePresenterImpl : ViewModel(), HomePresenter  {
@@ -15,7 +16,12 @@ class HomePresenterImpl : ViewModel(), HomePresenter  {
         mView = view
     }
 
+    override fun insertBookIntoLibrary(book: BookVO?) {
+        mLibraryModel.insertBookIntoLibrary(book)
+    }
+
     override fun onUiReady(owner: LifecycleOwner) {
+
         mLibraryModel.getBookOverview { error ->
             mView?.showError(error)
         }?.observe(owner) {
@@ -33,6 +39,10 @@ class HomePresenterImpl : ViewModel(), HomePresenter  {
         }?.observe(owner) {
             mView?.showThirdCategory(it ?: listOf())
         }
+
+        mLibraryModel.getAllBooksFromLibrary()?.observe(owner) {
+            mView?.showBooksForBanner(it ?: listOf())
+        }
     }
 
     override fun onTapBookFromBanner(bookName:String,listId:Int) {
@@ -43,12 +53,12 @@ class HomePresenterImpl : ViewModel(), HomePresenter  {
         mView?.navigateToBookDetailScreen(bookName,listId)
     }
 
-    override fun onTapOptionButtonFromBanner() {
-        mView?.onTapOptionButtonOnBook()
+    override fun onTapOptionButtonFromBanner(book: BookVO?) {
+        mView?.onTapOptionButtonOnBook(book)
     }
 
-    override fun onTapOptionButtonOnBook() {
-        mView?.onTapOptionButtonOnBook()
+    override fun onTapOptionButtonOnBook(book: BookVO?) {
+        mView?.onTapOptionButtonOnBook(book)
     }
 
     override fun onTapGoToBookListScreen(listName:String, listInt: Int) {

@@ -1,6 +1,7 @@
 package com.flexath.thelibrary.views.viewholders.library
 
 import android.view.View
+import com.bumptech.glide.Glide
 import com.flexath.thelibrary.data.vos.IBookVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.library.LibraryBooksViewHolderDelegate
@@ -25,7 +26,12 @@ class LibraryBooksLargeGridViewHolder(
         }
     }
 
-    override fun bindData(iBookVO: BookVO) {
+    override fun bindData(book: BookVO?) {
+        Glide.with(itemView.context)
+            .load(book?.bookImage)
+            .into(itemView.ivCoverBookList)
 
+        itemView.tvTitleBookList.text = book?.title ?: ""
+        itemView.tvAuthorBookList.text = book?.author ?: ""
     }
 }

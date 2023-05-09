@@ -36,7 +36,7 @@ class BookListViewHolder(itemView: View, private val type:Int,private val delega
         }
 
         itemView.btnOptionBookList.setOnClickListener {
-            delegate.onTapOptionButtonOnBook()
+//            delegate.onTapOptionButtonOnBook()
         }
     }
 
@@ -49,7 +49,7 @@ class BookListViewHolder(itemView: View, private val type:Int,private val delega
         itemView.tvAuthorBookList.text = bookList.bookDetails?.get(0)?.author ?: ""
     }
 
-    override fun bindData(iBookVO: BookVO) {
+    override fun bindData(book: BookVO?) {
 
     }
 

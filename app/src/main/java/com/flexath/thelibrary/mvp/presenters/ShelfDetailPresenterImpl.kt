@@ -26,6 +26,10 @@ class ShelfDetailPresenterImpl : ViewModel() , ShelfDetailPresenter {
         mLibraryModel.deleteShelf(shelfId)
     }
 
+    override fun updateShelf(shelf: ShelfVO) {
+        mLibraryModel.updateShelf(shelf)
+    }
+
     override fun onTapBackButton() {
         mView?.navigateBackToPreviousScreen()
     }

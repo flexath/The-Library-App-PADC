@@ -5,7 +5,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.flexath.thelibrary.fragments.library.YourBooksLibraryFragment
 import com.flexath.thelibrary.fragments.library.YourShelvesLibraryFragment
 
-class LibraryTabLayoutViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
+class LibraryTabLayoutViewPagerAdapter(private val fragment: Fragment) : FragmentStateAdapter(fragment) {
 
 
     override fun getItemCount(): Int {
@@ -15,7 +15,7 @@ class LibraryTabLayoutViewPagerAdapter(fragment: Fragment) : FragmentStateAdapte
     override fun createFragment(position: Int): Fragment {
         return when(position) {
             0 -> {
-                YourBooksLibraryFragment()
+                YourBooksLibraryFragment(fragment)
             }
             else -> {
                 YourShelvesLibraryFragment()

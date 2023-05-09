@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etShelfDetail"
+                android:id="@+id/etShelfNameShelfDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium_3"

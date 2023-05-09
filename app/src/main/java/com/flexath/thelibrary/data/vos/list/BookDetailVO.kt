@@ -34,4 +34,4 @@ data class BookDetailVO(
 
     @SerializedName("title")
     val title: String?
-) : IBookVO
+)

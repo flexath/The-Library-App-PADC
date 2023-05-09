@@ -3,6 +3,7 @@ package com.flexath.thelibrary.data.models
 import androidx.lifecycle.LiveData
 import com.flexath.thelibrary.data.vos.ShelfVO
 import com.flexath.thelibrary.data.vos.list.BookListResultVO
+import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.data.vos.overview.CategoryVO
 
 interface LibraryModel {
@@ -31,4 +32,8 @@ interface LibraryModel {
     fun deleteShelf(shelfId:Int)
 
     fun updateShelf(shelf: ShelfVO)
+
+    fun insertBookIntoLibrary(bookVO: BookVO?)
+
+    fun getAllBooksFromLibrary() : LiveData<List<BookVO>>?
 }
