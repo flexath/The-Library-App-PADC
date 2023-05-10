@@ -15,13 +15,7 @@ class AddToShelvesViewHolder(itemView: View,private val delegate: AddToShelvesDe
     }
 
     private fun setUpListeners() {
-        itemView.cbAddToShelves.setOnCheckedChangeListener { _, isChecked ->
-            if(isChecked) {
-                delegate.onTapCheckBox(mShelf?.Id ?: 0,true)
-            } else {
-                delegate.onTapCheckBox(mShelf?.Id ?: 0,false)
-            }
-        }
+
     }
 
     fun bindData(shelf: ShelfVO) {
@@ -36,5 +30,13 @@ class AddToShelvesViewHolder(itemView: View,private val delegate: AddToShelvesDe
         itemView.tvNumberOfBooksAddToShelves.text = bookCount
 
         itemView.cbAddToShelves.isChecked = shelf.isChecked ?: false
+
+        itemView.cbAddToShelves.setOnCheckedChangeListener { _, isChecked ->
+            if(isChecked) {
+                delegate.onTapCheckBox(mShelf?.Id ?: 0,true)
+            } else {
+                delegate.onTapCheckBox(mShelf?.Id ?: 0,false)
+            }
+        }
     }
 }

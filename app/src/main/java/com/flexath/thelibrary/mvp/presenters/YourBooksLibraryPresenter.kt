@@ -6,7 +6,7 @@ interface YourBooksLibraryPresenter : IBasePresenter {
 
     fun initView(view:YourBooksLibraryView)
 
-
+    fun deleteBookByTitle(title:String)
 
     fun onTapFilterButton()
     fun onTapSortButton()

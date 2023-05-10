@@ -15,6 +15,10 @@ class YourBooksLibraryPresenterImpl : ViewModel() , YourBooksLibraryPresenter {
         mView = view
     }
 
+    override fun deleteBookByTitle(title: String) {
+        mLibraryModel.deleteBookByTitle(title)
+    }
+
     override fun onTapFilterButton() {
         mView?.showBottomSheetDialogForFiltering()
     }

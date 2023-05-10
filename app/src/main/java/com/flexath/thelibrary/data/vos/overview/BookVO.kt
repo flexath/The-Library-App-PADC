@@ -14,6 +14,10 @@ import com.google.gson.annotations.SerializedName
 )
 data class BookVO(
 
+    @SerializedName("title")
+    @PrimaryKey
+    val title: String,
+
     @SerializedName("age_group")
     @ColumnInfo("age_group")
     val ageGroup: String?,
@@ -101,10 +105,6 @@ data class BookVO(
     @SerializedName("sunday_review_link")
     @ColumnInfo("sunday_review_link")
     val sundayReviewLink: String?,
-
-    @SerializedName("title")
-    @PrimaryKey
-    val title: String,
 
     @SerializedName("updated_date")
     @ColumnInfo("updated_date")

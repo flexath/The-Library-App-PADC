@@ -13,6 +13,8 @@ class LibraryBooksSmallGridViewHolder(
     private val delegate: LibraryBooksViewHolderDelegate
 ) : ILibraryBooksBaseViewHolder(itemView) {
 
+    private var mBook:BookVO? = null
+
     init {
         setUpListeners()
     }
@@ -20,15 +22,20 @@ class LibraryBooksSmallGridViewHolder(
     private fun setUpListeners() {
 
         itemView.setOnClickListener {
-            delegate.onTapBook("HAPPY PLACE",1)
+            delegate.onTapBook(mBook?.title ?: "",mBook?.listId ?: 0)
         }
 
         itemView.btnOptionBookGrid.setOnClickListener {
-            delegate.onTapOptionButtonOnBook()
+            mBook?.let { book ->
+                delegate.onTapOptionButtonOnBook(book)
+            }
         }
     }
 
     override fun bindData(book: BookVO?) {
+
+        mBook = book
+
         Glide.with(itemView.context)
             .load(book?.bookImage)
             .into(itemView.ivCoverSmallGrid)

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.flexath.thelibrary.R
 import com.flexath.thelibrary.activities.AddToShelvesActivity
 import com.flexath.thelibrary.activities.BookDetailActivity
@@ -18,6 +19,7 @@ import com.flexath.thelibrary.mvp.presenters.YourBooksLibraryPresenterImpl
 import com.flexath.thelibrary.mvp.views.YourBooksLibraryView
 import com.flexath.thelibrary.views.viewpods.LibraryBooksViewPod
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.bottom_dialog_book_filter.*
 import kotlinx.android.synthetic.main.bottom_dialog_book_list_option.*
@@ -53,9 +55,8 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
         setUpViewPodInstances()
         setUpListeners()
 
-        mPresenter.onUiReady(this)
-
         setUpTabLayout()
+        mPresenter.onUiReady(this)
     }
 
     private fun setUpTabLayout() {
@@ -66,8 +67,12 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
                 }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+                mLibraryBooksViewPod.setNewData(mBookList)
+            }
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+                mLibraryBooksViewPod.setNewData(mBookList)
+            }
         })
     }
 
@@ -163,23 +168,44 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
         startActivity(BookDetailActivity.newIntent(requireActivity(),bookName,listId,""))
     }
 
-    override fun onTapOptionButtonOnBook() {
+    override fun onTapOptionButtonOnBook(book: BookVO) {
         val dialog = BottomSheetDialog(requireActivity())
         dialog.setContentView(R.layout.bottom_dialog_book_option)
         dialog.show()
+
+        Glide.with(requireActivity())
+            .load(book.bookImage)
+            .into(dialog.ivCoverBottomSheetHome)
+
+        dialog.tvTitleBottomSheet.text = book.title
+        dialog.tvWriterBottomSheet.text = book.author
+
 
         dialog.btnDownloadBottomSheetHome.setOnClickListener {
             Toast.makeText(requireActivity(),"Downloading",Toast.LENGTH_SHORT).show()
         }
 
         dialog.btnDeleteBottomSheetHome.setOnClickListener {
-            Toast.makeText(requireActivity(),"Deleted from your library",Toast.LENGTH_SHORT).show()
+            val alertDialog = MaterialAlertDialogBuilder(requireActivity(),R.style.RoundedAlertDialog)
+                .setTitle("Delete Book !")
+                .setMessage("Are you sure ?")
+                .setPositiveButton("Yes") { alertDialog , _ ->
+                    mPresenter.deleteBookByTitle(book.title)
+                    Toast.makeText(requireActivity(),"Book's removed",Toast.LENGTH_SHORT).show()
+                    dialog.dismiss()
+                    alertDialog.dismiss()
+                }
+                .setNegativeButton("Cancel") { alertDialog , _ ->
+                    alertDialog.dismiss()
+                }.create()
+
+            alertDialog.show()
         }
 
         dialog.btnAddToLibraryBottomSheetHome.visibility = View.GONE
 
         dialog.btnAddToShelvesBottomSheetHome.setOnClickListener {
-            startActivity(AddToShelvesActivity.newIntent(requireActivity()))
+            startActivity(AddToShelvesActivity.newIntent(requireActivity(),book.title))
             dialog.dismiss()
         }
 

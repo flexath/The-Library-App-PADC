@@ -76,4 +76,12 @@ object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
         return mLibraryDatabase?.libraryDao()?.getAllBooksFromLibrary()
     }
 
+    override fun deleteBookByTitle(title: String) {
+        mLibraryDatabase?.libraryDao()?.deleteBookByTitle(title)
+    }
+
+    override fun getBookByTitle(title: String): LiveData<BookVO?>? {
+        return mLibraryDatabase?.libraryDao()?.getBookByTitle(title)
+    }
+
 }

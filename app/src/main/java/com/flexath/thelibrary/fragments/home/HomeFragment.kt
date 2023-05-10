@@ -2,7 +2,6 @@ package com.flexath.thelibrary.fragments.home
 
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
+import com.bumptech.glide.Glide
 import com.flexath.thelibrary.R
+import com.flexath.thelibrary.activities.AddToShelvesActivity
 import com.flexath.thelibrary.activities.BookDetailActivity
 import com.flexath.thelibrary.activities.BookListActivity
 import com.flexath.thelibrary.adapters.home.BookBannerHomeViewPagerAdapter
@@ -231,12 +232,23 @@ class HomeFragment : Fragment(), HomeView {
         dialog.setContentView(R.layout.bottom_dialog_book_option)
         dialog.show()
 
+        Glide.with(requireActivity())
+            .load(book?.bookImage)
+            .into(dialog.ivCoverBottomSheetHome)
+
+        dialog.tvTitleBottomSheet.text = book?.title
+        dialog.tvWriterBottomSheet.text = book?.author
+
         dialog.btnAddToLibraryBottomSheetHome.setOnClickListener {
             mPresenter.insertBookIntoLibrary(book)
             dialog.dismiss()
         }
 
         dialog.btnDeleteBottomSheetHome.visibility = View.GONE
+
+        dialog.btnAddToShelvesBottomSheetHome.setOnClickListener {
+            startActivity(AddToShelvesActivity.newIntent(requireActivity(),book?.title ?: ""))
+        }
     }
 
     override fun showError(error: String) {

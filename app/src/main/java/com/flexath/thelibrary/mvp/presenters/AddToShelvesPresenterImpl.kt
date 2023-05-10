@@ -16,14 +16,22 @@ class AddToShelvesPresenterImpl : ViewModel() , AddToShelvesPresenter {
         mView = view
     }
 
+    override fun onUiReadyForAddToShelves(owner: LifecycleOwner, title: String) {
+        mLibraryModel.getShelfList()?.observe(owner) {
+            mView?.showShelfList(it ?: listOf())
+        }
+
+        mLibraryModel.getBookByTitle(title)?.observe(owner) {
+            mView?.showBook(it)
+        }
+    }
+
     override fun updateShelf(shelf: ShelfVO) {
         mLibraryModel.updateShelf(shelf)
     }
 
     override fun onUiReady(owner: LifecycleOwner) {
-        mLibraryModel.getShelfList()?.observe(owner) {
-            mView?.showShelfList(it ?: listOf())
-        }
+
     }
 
     override fun onTapCheckBox(shelfId: Int,checked:Boolean) {

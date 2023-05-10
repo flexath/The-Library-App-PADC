@@ -14,6 +14,7 @@
         app:cardCornerRadius="@dimen/margin_medium">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCoverBottomSheetHome"
             android:layout_width="80dp"
             android:layout_height="110dp"
             android:scaleType="centerCrop"

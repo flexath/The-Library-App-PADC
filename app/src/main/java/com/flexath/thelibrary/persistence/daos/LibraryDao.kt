@@ -52,4 +52,10 @@ interface LibraryDao {
 
     @Query("SELECT * FROM library_table")
     fun getAllBooksFromLibrary():LiveData<List<BookVO>>
+
+    @Query("DELETE FROM library_table WHERE title = :title")
+    fun deleteBookByTitle(title:String)
+
+    @Query("SELECT * FROM library_table WHERE title = :title")
+    fun getBookByTitle(title:String):LiveData<BookVO?>
 }

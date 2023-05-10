@@ -12,6 +12,9 @@ class LibraryBooksLargeGridViewHolder(
     itemView: View,
     private val delegate: LibraryBooksViewHolderDelegate
 ) : ILibraryBooksBaseViewHolder(itemView) {
+
+    private var mBook:BookVO? = null
+
     init {
         setUpListeners()
     }
@@ -22,11 +25,16 @@ class LibraryBooksLargeGridViewHolder(
         }
 
         itemView.btnOptionBookList.setOnClickListener {
-            delegate.onTapOptionButtonOnBook()
+            mBook?.let { book ->
+                delegate.onTapOptionButtonOnBook(book)
+            }
         }
     }
 
     override fun bindData(book: BookVO?) {
+
+        mBook = book
+
         Glide.with(itemView.context)
             .load(book?.bookImage)
             .into(itemView.ivCoverBookList)

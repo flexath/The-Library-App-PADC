@@ -2,14 +2,12 @@ package com.flexath.thelibrary.activities
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.flexath.thelibrary.R
 import com.flexath.thelibrary.data.vos.ShelfVO
@@ -40,7 +38,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
     // General
     private var shelfId:Int = 0
     private var mBookCount = 0
-    private var mBookList:List<BookVO> = listOf()
+    private var mBookList:MutableList<BookVO> = mutableListOf()
     private var mIsChecked:Boolean = false
 
     companion object {
@@ -71,7 +69,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
 
     private fun setUpViewPodInstances() {
         mViewPod = vpShelfDetail as LibraryBooksViewPod
-        mViewPod.setShelfDetailDelegate(3,this)
+        mViewPod.setDelegate(1,this)
     }
 
     private fun setUpListeners() {
@@ -197,7 +195,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
     override fun showShelfDetail(shelfVO: ShelfVO?) {
 
         mBookCount = shelfVO?.bookCount ?: 0
-        mBookList = shelfVO?.bookList ?: listOf()
+        mBookList = shelfVO?.bookList ?: mutableListOf()
 
         tvShelfNameShelfDetail.text = shelfVO?.shelfName ?: ""
 
@@ -224,7 +222,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
         startActivity(BookDetailActivity.newIntent(this,bookName,listId,"ShelfDetailActivity"))
     }
 
-    override fun onTapOptionButtonOnBook() {
+    override fun onTapOptionButtonOnBook(book:BookVO) {
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(R.layout.bottom_dialog_book_option)
         dialog.show()

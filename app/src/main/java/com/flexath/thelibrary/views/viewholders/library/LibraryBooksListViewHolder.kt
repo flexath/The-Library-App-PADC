@@ -11,6 +11,8 @@ class LibraryBooksListViewHolder(
     private val delegate: LibraryBooksViewHolderDelegate
 ) : ILibraryBooksBaseViewHolder(itemView) {
 
+    private var mBook:BookVO? = null
+
     init {
         setUpListeners()
         itemView.ivDownloadDoneListLibrary.visibility = View.VISIBLE
@@ -23,11 +25,15 @@ class LibraryBooksListViewHolder(
         }
 
         itemView.btnOptionListLibrary.setOnClickListener {
-            delegate.onTapOptionButtonOnBook()
+            mBook?.let { book ->
+                delegate.onTapOptionButtonOnBook(book)
+            }
         }
     }
 
     override fun bindData(book: BookVO?) {
+
+        mBook = book
 
         Glide.with(itemView.context)
             .load(book?.bookImage)

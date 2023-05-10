@@ -36,4 +36,8 @@ interface LibraryModel {
     fun insertBookIntoLibrary(bookVO: BookVO?)
 
     fun getAllBooksFromLibrary() : LiveData<List<BookVO>>?
+
+    fun deleteBookByTitle(title:String)
+
+    fun getBookByTitle(title:String) : LiveData<BookVO?>?
 }

@@ -54,7 +54,6 @@ class LibraryBooksAdapter(private val spanCount: Int,private val delegate: Libra
     @SuppressLint("NotifyDataSetChanged")
     fun setData(bookList: List<BookVO>?) {
         mBookList = bookList ?: listOf()
-        Log.i("Doner",mBookList.toString())
         notifyDataSetChanged()
     }
 }

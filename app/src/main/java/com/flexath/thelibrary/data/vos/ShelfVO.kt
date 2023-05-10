@@ -5,11 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.TypeConverters
 import com.flexath.thelibrary.data.vos.overview.BookVO
-import com.flexath.thelibrary.persistence.typeconverters.BookVOTypeConverter
+import com.flexath.thelibrary.persistence.typeconverters.MutableBookVOTypeConverter
 
 @Entity(tableName = "shelf_table")
 @TypeConverters(
-    BookVOTypeConverter::class
+    MutableBookVOTypeConverter::class
 )
 data class ShelfVO(
     @PrimaryKey(autoGenerate = true)
@@ -22,7 +22,7 @@ data class ShelfVO(
     var bookCount:Int? = 0,
 
     @ColumnInfo("book_list")
-    var bookList:List<BookVO>? = listOf(),
+    var bookList: MutableList<BookVO>? = mutableListOf(),
 
     @ColumnInfo("checked")
     var isChecked:Boolean? = false
