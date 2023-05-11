@@ -43,6 +43,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
     private var mBookList:MutableList<BookVO> = mutableListOf()
     private var mIsChecked:Boolean = false
     private var mShelfName:String = ""
+    private var mListNameList:MutableList<String> = mutableListOf()
 
     companion object {
         private const val EXTRA_SHELF_ID = "Shelf Id"
@@ -62,6 +63,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
         setUpListeners()
 
         shelfId = intent?.extras?.getInt(EXTRA_SHELF_ID) ?: 0
+
         mPresenter.onUiReadyForShelfDetail(this,shelfId)
     }
 
@@ -73,6 +75,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
     private fun setUpViewPodInstances() {
         mViewPod = vpShelfDetail as LibraryBooksViewPod
         mViewPod.setDelegate(1,this)
+        mViewPod.setDelegateForChip(mPresenter)
     }
 
     private fun setUpListeners() {
@@ -90,6 +93,10 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
 
         btnSortByLibrary.setOnClickListener {
             mPresenter.onTapSortButton()
+        }
+
+        btnClearChip.setOnClickListener {
+            mPresenter.onTapCrossButton()
         }
     }
 
@@ -179,6 +186,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
         dialog.rbRecentlyOpened.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 tvSortingMethod.text = "Recent"
+                mViewPod.setNewData(mBookList)
                 dialog.dismiss()
             }
         }
@@ -186,6 +194,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
         dialog.rbTitle.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 tvSortingMethod.text = "Title"
+                mViewPod.setNewData(mPresenter.sortByTitle())
                 dialog.dismiss()
             }
         }
@@ -193,6 +202,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
         dialog.rbAuthor.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 tvSortingMethod.text = "Author"
+                mViewPod.setNewData(mPresenter.sortByAuthor())
                 dialog.dismiss()
             }
         }
@@ -215,10 +225,30 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
         shelfVO?.bookList?.let {
             mViewPod.setNewData(it)
         }
+
+        for(book in mBookList) {
+            mListNameList.add(book.listName ?: "")
+        }
+        mViewPod.setChipData(mListNameList)
     }
 
     override fun navigateBackToPreviousScreen() {
         finish()
+    }
+
+    override fun onTapCrossButton() {
+        mViewPod.setNewData(mBookList)
+        mViewPod.clearChipPress(true)
+    }
+
+    override fun onTapChip(listName: String) {
+        val books = mutableListOf<BookVO>()
+        for(book in mBookList) {
+            if(listName == book.listName) {
+                books.add(book)
+            }
+        }
+        mViewPod.setNewData(books)
     }
 
     override fun showError(error: String) {

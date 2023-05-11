@@ -13,12 +13,15 @@ class ShelfDetailPresenterImpl : ViewModel() , ShelfDetailPresenter {
     private var mView:ShelfDetailView? = null
     private val mLibraryModel: LibraryModel = LibraryModelImpl
 
+    private var mBookList:List<BookVO> = listOf()
+
     override fun initView(view: ShelfDetailView) {
         mView = view
     }
 
     override fun onUiReadyForShelfDetail(owner: LifecycleOwner, shelfId: Int) {
         mLibraryModel.getShelfById(shelfId = shelfId)?.observe(owner) {
+            mBookList = it.bookList ?: listOf()
             mView?.showShelfDetail(shelfVO = it)
         }
     }
@@ -33,6 +36,18 @@ class ShelfDetailPresenterImpl : ViewModel() , ShelfDetailPresenter {
 
     override fun removeBook(title: String) {
         mLibraryModel.deleteBookByTitle(title)
+    }
+
+    override fun sortByTitle(): List<BookVO> {
+        return mBookList.sortedBy { book ->
+            book.title
+        }
+    }
+
+    override fun sortByAuthor(): List<BookVO> {
+        return mBookList.sortedBy { book ->
+            book.author
+        }
     }
 
     override fun onTapBackButton() {
@@ -51,7 +66,15 @@ class ShelfDetailPresenterImpl : ViewModel() , ShelfDetailPresenter {
         mView?.showBottomSheetDialogForSorting()
     }
 
+    override fun onTapCrossButton() {
+        mView?.onTapCrossButton()
+    }
+
     override fun onUiReady(owner: LifecycleOwner) {
 
+    }
+
+    override fun onTapChip(listName: String) {
+        mView?.onTapChip(listName)
     }
 }
