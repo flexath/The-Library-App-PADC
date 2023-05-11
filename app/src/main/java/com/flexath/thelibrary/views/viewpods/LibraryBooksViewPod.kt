@@ -9,6 +9,7 @@ import com.flexath.thelibrary.adapters.library.LibraryBooksAdapter
 import com.flexath.thelibrary.adapters.library.ListNameAdapter
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.library.LibraryBooksViewHolderDelegate
+import com.flexath.thelibrary.delegates.library.ListNameChipDelegate
 import kotlinx.android.synthetic.main.viewpod_books_library.view.*
 
 class LibraryBooksViewPod @JvmOverloads constructor(
@@ -16,14 +17,10 @@ class LibraryBooksViewPod @JvmOverloads constructor(
 ) : NestedScrollView(context, attrs) {
 
     private lateinit var mDelegate:LibraryBooksViewHolderDelegate
+    private lateinit var mChipDelegate:ListNameChipDelegate
 
     private lateinit var mLibraryBooksAdapter:LibraryBooksAdapter
     private lateinit var mListNameAdapter:ListNameAdapter
-
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        setUpRecyclerViewForChipList()
-    }
 
     fun setDelegate(spanCount: Int,delegate:LibraryBooksViewHolderDelegate) {
         mDelegate = delegate
@@ -41,13 +38,18 @@ class LibraryBooksViewPod @JvmOverloads constructor(
         }
     }
 
+    fun setDelegateForChip(delegate: ListNameChipDelegate) {
+        mChipDelegate = delegate
+        setUpRecyclerViewForChipList()
+    }
+
     private fun setUpRecyclerViewForBooks(spanCount:Int) {
         mLibraryBooksAdapter = LibraryBooksAdapter(spanCount,mDelegate)
         rvFilterBooksLibrary.adapter = mLibraryBooksAdapter
     }
 
     private fun setUpRecyclerViewForChipList() {
-        mListNameAdapter = ListNameAdapter()
+        mListNameAdapter = ListNameAdapter(mChipDelegate)
         rvChipList.adapter = mListNameAdapter
         rvChipList.layoutManager = LinearLayoutManager(context,LinearLayoutManager.HORIZONTAL,false)
     }
@@ -58,5 +60,9 @@ class LibraryBooksViewPod @JvmOverloads constructor(
 
     fun setChipData(chipList: MutableList<String>) {
         mListNameAdapter.setData(chipList)
+    }
+
+    fun clearChipPress(isClear:Boolean) {
+        mListNameAdapter.clearChipPress(isClear)
     }
 }

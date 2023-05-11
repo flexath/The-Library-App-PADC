@@ -127,4 +127,8 @@ object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
         }
             .subscribeOn(Schedulers.io())
     }
+
+    override fun getBookListByListName(listName: String): LiveData<List<BookVO>>? {
+        return mLibraryDatabase?.libraryDao()?.getBookListByListName(listName)
+    }
 }

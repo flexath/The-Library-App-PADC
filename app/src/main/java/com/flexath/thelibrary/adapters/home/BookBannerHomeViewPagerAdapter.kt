@@ -26,6 +26,7 @@ class BookBannerHomeViewPagerAdapter(private var type:Int,private val delegate:B
     }
 
     override fun onBindViewHolder(holder: IBookBannerViewPagerViewHolder, position: Int) {
+
         when (type) {
             0 -> (holder as EBookBannerViewPagerViewHolder).bindData(mBookList[position])
             1 -> (holder as AudioBookBannerViewPagerViewHolder).bindData(mBookList[position])

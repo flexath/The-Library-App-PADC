@@ -68,6 +68,8 @@ class HomeFragment : Fragment(), HomeView {
         setUpViewPodInstances()
         setUpListeners()
 
+        isVisibleBanner()
+
         mPresenter.onUiReady(this)
     }
 
@@ -107,11 +109,26 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     private fun isVisibleBanner() {
-        if(mBannerAdapter?.itemCount!! == 0) {
-            viewPagerEBookBannerHome.visibility = View.GONE
-        } else {
-            viewPagerEBookBannerHome.visibility = View.VISIBLE
-        }
+
+        mBannerAdapter?.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+            override fun onChanged() {
+                val itemCount = mBannerAdapter?.itemCount
+                if(itemCount == 0) {
+                    viewPagerEBookBannerHome.visibility = View.GONE
+                } else {
+                    viewPagerEBookBannerHome.visibility = View.VISIBLE
+                }
+            }
+
+            override fun onItemRangeChanged(positionStart: Int, itemCount: Int) {
+                val updatedItemCount = mBannerAdapter?.itemCount
+                if(updatedItemCount == 0) {
+                    viewPagerEBookBannerHome.visibility = View.GONE
+                } else {
+                    viewPagerEBookBannerHome.visibility = View.VISIBLE
+                }
+            }
+        })
     }
 
     private fun setUpBannerViewPagerPadding() {

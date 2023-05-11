@@ -12,25 +12,29 @@ class YourBooksLibraryPresenterImpl : ViewModel(), YourBooksLibraryPresenter {
     private var mView: YourBooksLibraryView? = null
     private val mLibraryModel: LibraryModel = LibraryModelImpl
 
-    private var mBookListByTitle:List<BookVO> = listOf()
-    private var mBookListByAuthor:List<BookVO> = listOf()
     private var mBookList:List<BookVO> = listOf()
 
     override fun initView(view: YourBooksLibraryView) {
         mView = view
     }
 
+    override fun onUiReadyForListName(owner: LifecycleOwner, listName: String) {
+        mLibraryModel.getBookListByListName(listName)?.observe(owner) {
+            mView?.showBookListByListName(it ?: listOf())
+        }
+    }
+
     override fun deleteBookByTitle(title: String) {
         mLibraryModel.deleteBookByTitle(title)
     }
 
-    override fun sortByTitle() : List<BookVO>? {
+    override fun sortByTitle() : List<BookVO> {
         return mBookList.sortedBy { book ->
             book.title
         }
     }
 
-    override fun sortByAuthor() : List<BookVO>? {
+    override fun sortByAuthor() : List<BookVO> {
         return mBookList.sortedBy { book ->
             book.author
         }
@@ -44,10 +48,18 @@ class YourBooksLibraryPresenterImpl : ViewModel(), YourBooksLibraryPresenter {
         mView?.showBottomSheetDialogForSorting()
     }
 
+    override fun onTapCrossButton() {
+        mView?.onTapCrossButton()
+    }
+
     override fun onUiReady(owner: LifecycleOwner) {
         mLibraryModel.getAllBooksFromLibrary()?.observe(owner) {
             mBookList = it
             mView?.showBooksInLibrary(it ?: listOf())
         }
+    }
+
+    override fun onTapChip(listName: String) {
+        mView?.onTapChip(listName)
     }
 }

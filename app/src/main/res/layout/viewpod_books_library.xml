@@ -10,21 +10,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvChipList"
+        <LinearLayout
+            android:id="@+id/llChipButtons"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:touchscreenBlocksFocus="true"
             android:layout_marginStart="@dimen/margin_large"
             android:orientation="horizontal"
-            tools:itemCount="1"
-            tools:listitem="@layout/view_holder_chip_list" />
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btnClearChip"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="@dimen/margin_10dp"
+                android:layout_gravity="center_vertical"
+                app:srcCompat="@drawable/cross"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvChipList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                tools:itemCount="1"
+                tools:listitem="@layout/view_holder_chip_list" />
+
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/btnSortByLibrary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rvChipList"
+            android:layout_below="@+id/llChipButtons"
             android:layout_alignParentStart="true"
             android:layout_marginStart="@dimen/margin_xlarge"
             android:layout_marginTop="@dimen/margin_medium_3"
@@ -60,7 +75,7 @@
             android:id="@+id/btnFilterBooks"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/rvChipList"
+            android:layout_below="@id/llChipButtons"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="@dimen/margin_medium_3"
             android:layout_marginEnd="@dimen/margin_large"

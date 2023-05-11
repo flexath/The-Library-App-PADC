@@ -45,4 +45,6 @@ interface LibraryModel {
     fun searchBookFromGoogle(
         query:String
     ) : Observable<List<BookVO>>
+
+    fun getBookListByListName(listName:String):LiveData<List<BookVO>>?
 }

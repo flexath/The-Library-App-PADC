@@ -41,8 +41,6 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
     // Generals
     private var mBookList:List<BookVO> = listOf()
     private var mListNameList:MutableList<String> = mutableListOf()
-    private var mBookListByTitle:List<BookVO> = listOf()
-    private var mBookListByAuthor:List<BookVO> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -87,6 +85,7 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
     private fun setUpViewPodInstances() {
         mLibraryBooksViewPod = vpBooksLibrary as LibraryBooksViewPod
         mLibraryBooksViewPod.setDelegate(1,this)
+        mLibraryBooksViewPod.setDelegateForChip(mPresenter)
     }
 
     private fun setUpListeners() {
@@ -96,6 +95,10 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
 
         btnSortByLibrary.setOnClickListener {
             mPresenter.onTapSortButton()
+        }
+
+        btnClearChip.setOnClickListener {
+            mPresenter.onTapCrossButton()
         }
 
     }
@@ -108,6 +111,10 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
             mListNameList.add(book.listName ?: "")
         }
         mLibraryBooksViewPod.setChipData(mListNameList)
+    }
+
+    override fun showBookListByListName(bookList: List<BookVO>?) {
+        mLibraryBooksViewPod.setNewData(bookList)
     }
 
     override fun showBottomSheetDialogForFiltering() {
@@ -157,10 +164,6 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
         dialog.rbTitle.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 tvSortingMethod.text = "Title"
-
-
-                Log.i("Booker",mPresenter.sortByTitle().toString())
-
                 mLibraryBooksViewPod.setNewData(mPresenter.sortByTitle())
                 dialog.dismiss()
             }
@@ -169,15 +172,19 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
         dialog.rbAuthor.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 tvSortingMethod.text = "Author"
-
-                for(book in mPresenter.sortByAuthor()!!) {
-                    Log.i("BookerAuthor",book.author.toString())
-                }
-
                 mLibraryBooksViewPod.setNewData(mPresenter.sortByAuthor())
                 dialog.dismiss()
             }
         }
+    }
+
+    override fun onTapChip(listName: String) {
+        mPresenter.onUiReadyForListName(this,listName)
+    }
+
+    override fun onTapCrossButton() {
+        mLibraryBooksViewPod.setNewData(mBookList)
+        mLibraryBooksViewPod.clearChipPress(true)
     }
 
     override fun showError(error: String) {

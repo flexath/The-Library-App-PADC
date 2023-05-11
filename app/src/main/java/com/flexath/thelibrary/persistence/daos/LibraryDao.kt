@@ -65,4 +65,7 @@ interface LibraryDao {
 
     @Query("SELECT * FROM library_table")
     fun getGoogleBookList():LiveData<List<BookVO>>
+
+    @Query("SELECT * FROM library_table WHERE list_name = :listName")
+    fun getBookListByListName(listName:String):LiveData<List<BookVO>>
 }
