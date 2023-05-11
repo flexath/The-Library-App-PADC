@@ -11,5 +11,6 @@ interface HomeView : IBaseView {
 
     fun navigateToBookDetailScreen(bookName:String,listId:Int)
     fun navigateToBookListScreen(listName:String,listId: Int)
-    fun onTapOptionButtonOnBook(book: BookVO?)
+
+    fun onTapOptionButtonOnBook(book: BookVO?,listId: Int,listName: String)
 }

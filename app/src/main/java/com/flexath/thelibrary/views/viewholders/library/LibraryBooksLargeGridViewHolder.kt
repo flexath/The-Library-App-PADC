@@ -2,11 +2,9 @@ package com.flexath.thelibrary.views.viewholders.library
 
 import android.view.View
 import com.bumptech.glide.Glide
-import com.flexath.thelibrary.data.vos.IBookVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.library.LibraryBooksViewHolderDelegate
 import kotlinx.android.synthetic.main.view_holder_book_list.view.*
-import kotlinx.android.synthetic.main.view_holder_list_library.view.*
 
 class LibraryBooksLargeGridViewHolder(
     itemView: View,
@@ -21,7 +19,7 @@ class LibraryBooksLargeGridViewHolder(
 
     private fun setUpListeners() {
         itemView.setOnClickListener {
-            delegate.onTapBook("HAPPY PLACE", 1)
+            delegate.onTapBook(mBook?.title ?: "", mBook?.listId ?: 0)
         }
 
         itemView.btnOptionBookList.setOnClickListener {

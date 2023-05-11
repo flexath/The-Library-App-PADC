@@ -20,7 +20,7 @@ class EBookHomeAdapter(private val delegate: BookHomeViewHolderDelegate) : Recyc
 
     override fun onBindViewHolder(holder: EBookHomeViewHolder, position: Int) {
         mCategory?.books?.get(position)?.let {
-            holder.bindData(it,mCategory?.listId ?: 0)
+            holder.bindData(it,mCategory?.listId ?: 0,mCategory?.listName ?: "")
         }
     }
 

@@ -30,7 +30,10 @@ class BookDetailPresenterImpl : ViewModel(), BookDetailPresenter {
                     mView?.getBookFromBookList(bookDetail)
                 }
             }
-
+        } else {
+            mLibraryModel.getAllBooksFromLibrary()?.observe(owner) {
+                mView?.getAllBooksFromLibrary(it)
+            }
         }
     }
 

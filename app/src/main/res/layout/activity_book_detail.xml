@@ -45,7 +45,7 @@
             android:layout_marginEnd="@dimen/margin_medium_2"
             android:layout_toEndOf="@+id/mcCoverBookDetail"
             android:maxLines="2"
-            android:text="A Brief History Of Time"
+            tools:text="A Brief History Of Time"
             android:textColor="@color/black"
             android:textSize="@dimen/text_heading_1x"
             android:textStyle="bold" />
@@ -59,7 +59,7 @@
             android:layout_marginTop="@dimen/margin_medium"
             android:layout_toEndOf="@+id/mcCoverBookDetail"
             android:maxLines="2"
-            android:text="Stephen Hawking"
+            tools:text="Stephen Hawking"
             android:textColor="@color/colorPrimaryLight"
             android:textSize="@dimen/text_regular_2x" />
 
@@ -213,7 +213,7 @@
             android:layout_marginTop="@dimen/margin_large"
             android:layout_marginEnd="@dimen/margin_medium_3"
             android:maxLines="4"
-            android:text="A Brief History of Time: From the Big Bang to Black Holes is a book on theoretical cosmology by English physicist Stephen Hawking. It was first published in 1988. Hawking wrote the book for readers who had no prior knowledge of physics."
+            tools:text="A Brief History of Time: From the Big Bang to Black Holes is a book on theoretical cosmology by English physicist Stephen Hawking. It was first published in 1988. Hawking wrote the book for readers who had no prior knowledge of physics."
             android:textAlignment="viewStart"
             android:textColor="@color/colorPrimaryLight"
             android:textSize="@dimen/text_regular_2x"

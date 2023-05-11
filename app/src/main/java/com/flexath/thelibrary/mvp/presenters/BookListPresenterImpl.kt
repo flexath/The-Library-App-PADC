@@ -38,7 +38,7 @@ class BookListPresenterImpl : ViewModel() , BookListPresenter {
         mView?.navigateToBookDetailScreen(bookName,listId)
     }
 
-    override fun onTapOptionButtonOnBook(book: BookVO?) {
+    override fun onTapOptionButtonOnBook(book: BookVO?, mListId: Int, mListName: String) {
         mView?.onTapOptionButtonOnBook()
     }
 

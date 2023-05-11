@@ -21,7 +21,7 @@ class LibraryBooksListViewHolder(
 
     private fun setUpListeners() {
         itemView.setOnClickListener {
-            delegate.onTapBook("HAPPY PLACE", 1)
+            delegate.onTapBook(mBook?.title ?: "", mBook?.listId ?: 0)
         }
 
         itemView.btnOptionListLibrary.setOnClickListener {

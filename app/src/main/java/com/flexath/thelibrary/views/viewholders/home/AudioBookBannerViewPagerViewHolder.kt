@@ -25,7 +25,7 @@ class AudioBookBannerViewPagerViewHolder(
         }
 
         itemView.btnOptionBannerHome.setOnClickListener {
-            delegate.onTapOptionButtonFromBanner(mBook)
+            delegate.onTapOptionButtonFromBanner(mBook,0,"")
         }
     }
 

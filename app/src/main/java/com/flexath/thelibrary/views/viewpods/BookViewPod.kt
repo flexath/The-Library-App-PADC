@@ -16,10 +16,6 @@ class BookViewPod @JvmOverloads constructor(
     private lateinit var mEBookAdapter:EBookHomeAdapter
     private lateinit var mDelegate:BookHomeViewHolderDelegate
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-    }
-
     fun setUpBookViewPod(delegate: BookHomeViewHolderDelegate) {
         this.mDelegate = delegate
         setUpRecyclerView()

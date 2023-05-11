@@ -4,5 +4,5 @@ import com.flexath.thelibrary.data.vos.overview.BookVO
 
 interface BookHomeViewHolderDelegate {
     fun onTapBook(bookName:String,listId:Int)
-    fun onTapOptionButtonOnBook(book: BookVO?)
+    fun onTapOptionButtonOnBook(book: BookVO?, listId: Int, listName: String)
 }

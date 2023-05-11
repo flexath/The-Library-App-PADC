@@ -24,6 +24,7 @@
                 android:layout_width="@dimen/width_ebook_banner"
                 android:layout_height="@dimen/height_ebook_banner"
                 android:layout_marginTop="@dimen/margin_xxlarge"
+                android:visibility="visible"
                 android:layout_gravity="center_horizontal"
                 android:elevation="@dimen/margin_medium" />
 

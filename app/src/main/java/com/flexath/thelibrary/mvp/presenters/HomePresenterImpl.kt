@@ -53,12 +53,12 @@ class HomePresenterImpl : ViewModel(), HomePresenter  {
         mView?.navigateToBookDetailScreen(bookName,listId)
     }
 
-    override fun onTapOptionButtonFromBanner(book: BookVO?) {
-        mView?.onTapOptionButtonOnBook(book)
+    override fun onTapOptionButtonFromBanner(book: BookVO?,listId: Int,listName: String) {
+        mView?.onTapOptionButtonOnBook(book,listId,listName)
     }
 
-    override fun onTapOptionButtonOnBook(book: BookVO?) {
-        mView?.onTapOptionButtonOnBook(book)
+    override fun onTapOptionButtonOnBook(book: BookVO?, listId: Int, listName: String) {
+        mView?.onTapOptionButtonOnBook(book, listId, listName)
     }
 
     override fun onTapGoToBookListScreen(listName:String, listInt: Int) {

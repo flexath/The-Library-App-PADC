@@ -3,6 +3,7 @@ package com.flexath.thelibrary.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -55,6 +56,8 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
         val listId = intent?.extras?.getInt(EXTRA_LIST_ID,0) ?: 0
         val previousPlace = intent?.extras?.getString(EXTRA_PREVIOUS_PLACE,"") ?: ""
 
+        Log.i("ListIDD",listId.toString())
+
         mPresenter.onUiReadyForBookDetail(this,mBookName,listId,previousPlace)
     }
 
@@ -95,6 +98,22 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
         tvTitleBookDetail.text = bookDetail.title
         tvWriterBookDetail.text = bookDetail.author
         tvBookInfoBookDetail.text = bookDetail.description
+    }
+
+    override fun getAllBooksFromLibrary(bookList: List<BookVO>) {
+        for(book in bookList) {
+            if(mBookName == book.title) {
+
+                Glide.with(this)
+                    .load(book.bookImage)
+                    .into(ivCoverBookDetail)
+
+                tvTitleBookDetail.text = book.title
+                tvWriterBookDetail.text = book.author
+                tvBookInfoBookDetail.text = book.description
+                break
+            }
+        }
     }
 
     private fun bindData(book: BookVO) {

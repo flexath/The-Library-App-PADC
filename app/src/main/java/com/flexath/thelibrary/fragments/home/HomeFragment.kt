@@ -2,6 +2,7 @@ package com.flexath.thelibrary.fragments.home
 
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,7 +38,6 @@ class HomeFragment : Fragment(), HomeView {
 
     //Adapters
     private var mBannerAdapter: BookBannerHomeViewPagerAdapter? = null
-//    private lateinit var mTabLayoutViewPagerAdapter: TabLayoutViewPagerAdapter
 
     // Presenters
     private lateinit var mPresenter: HomePresenter
@@ -106,6 +106,14 @@ class HomeFragment : Fragment(), HomeView {
         viewPagerEBookBannerHome.adapter = mBannerAdapter
     }
 
+    private fun isVisibleBanner() {
+        if(mBannerAdapter?.itemCount!! == 0) {
+            viewPagerEBookBannerHome.visibility = View.GONE
+        } else {
+            viewPagerEBookBannerHome.visibility = View.VISIBLE
+        }
+    }
+
     private fun setUpBannerViewPagerPadding() {
         // Copy from ChatGPT
         viewPagerEBookBannerHome?.apply {
@@ -146,8 +154,12 @@ class HomeFragment : Fragment(), HomeView {
                 }
             }
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
         })
 
         btnForwardFirstHome.setOnClickListener {
@@ -206,6 +218,7 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     override fun navigateToBookDetailScreen(bookName: String, listId: Int) {
+
         startActivity(
             BookDetailActivity.newIntent(
                 requireContext(),
@@ -217,6 +230,7 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     override fun navigateToBookListScreen(listName: String, listId: Int) {
+
         startActivity(
             BookListActivity.newIntent(
                 requireActivity(),
@@ -227,7 +241,8 @@ class HomeFragment : Fragment(), HomeView {
         )
     }
 
-    override fun onTapOptionButtonOnBook(book: BookVO?) {
+    override fun onTapOptionButtonOnBook(book: BookVO?,listId: Int,listName: String) {
+
         val dialog = BottomSheetDialog(requireActivity())
         dialog.setContentView(R.layout.bottom_dialog_book_option)
         dialog.show()
@@ -240,6 +255,8 @@ class HomeFragment : Fragment(), HomeView {
         dialog.tvWriterBottomSheet.text = book?.author
 
         dialog.btnAddToLibraryBottomSheetHome.setOnClickListener {
+            book?.listId = listId
+            book?.listName = listName
             mPresenter.insertBookIntoLibrary(book)
             dialog.dismiss()
         }

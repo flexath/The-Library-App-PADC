@@ -11,6 +11,7 @@ class EBookHomeViewHolder(itemView: View,private val delegate: BookHomeViewHolde
 
     private var mBook:BookVO? = null
     private var mListId:Int = 0
+    private var mListName:String = ""
 
     init {
         setUpListeners()
@@ -24,14 +25,17 @@ class EBookHomeViewHolder(itemView: View,private val delegate: BookHomeViewHolde
         }
 
         itemView.btnOptionHome.setOnClickListener {
-            mBook?.let { it1 -> delegate.onTapOptionButtonOnBook(it1) }
+            mBook?.let { book ->
+                delegate.onTapOptionButtonOnBook(book,mListId,mListName)
+            }
         }
     }
 
-    fun bindData(bookVO: BookVO,listId:Int) {
+    fun bindData(bookVO: BookVO, listId: Int, listName: String) {
 
         mBook = bookVO
         mListId = listId
+        mListName = listName
 
         Glide.with(itemView.context)
             .load(bookVO.bookImage)

@@ -1,8 +1,6 @@
 package com.flexath.thelibrary.views.viewholders.home
 
-import android.util.Log
 import android.view.View
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.home.BannerHomeViewHolderDelegate
@@ -22,7 +20,7 @@ class EBookBannerViewPagerViewHolder(itemView: View,private val delegate: Banner
         }
 
         itemView.btnOptionBannerHome.setOnClickListener {
-            mBook?.let { it1 -> delegate.onTapOptionButtonFromBanner(it1) }
+            mBook?.let { it1 -> delegate.onTapOptionButtonFromBanner(it1,0,"") }
         }
     }
 
