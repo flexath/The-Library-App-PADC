@@ -1,5 +1,6 @@
 package com.flexath.thelibrary.network
 
+import com.flexath.thelibrary.network.responses.BookGoogleResponse
 import com.flexath.thelibrary.network.responses.BookListResponse
 import com.flexath.thelibrary.network.responses.BookOverviewResponse
 import com.flexath.thelibrary.utils.*
@@ -19,4 +20,9 @@ interface TheLibraryApi {
         @Query(PARAM_API_KEY) api_key:String = LIBRARY_API_KEY,
         @Query(PARAM_LIST) list:String
     ) : Observable<BookListResponse>
+
+    @GET(API_GET_GOOGLE_BOOK_LIST)
+    fun getGoogleBookList(
+        @Query(PARAM_GOOGLE) q:String
+    ) : Observable<BookGoogleResponse>
 }

@@ -4,6 +4,7 @@ import android.content.Context
 import com.flexath.thelibrary.network.TheLibraryApi
 import com.flexath.thelibrary.persistence.LibraryDatabase
 import com.flexath.thelibrary.utils.BASE_URL
+import com.flexath.thelibrary.utils.GOOGLE_BASE_URL
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -14,6 +15,7 @@ import java.util.concurrent.TimeUnit
 abstract class LibraryBaseModel {
 
     protected var mLibraryApi: TheLibraryApi
+    protected var mLibraryApiTwo: TheLibraryApi
     protected var mLibraryDatabase: LibraryDatabase? = null
 
     init {
@@ -27,14 +29,22 @@ abstract class LibraryBaseModel {
             .addInterceptor(loggingInterceptor)
             .build()
 
-        val retrofit = Retrofit.Builder()
+        val retrofitOne = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(mOkHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
 
-        mLibraryApi = retrofit.create(TheLibraryApi::class.java)
+        val retrofitTwo = Retrofit.Builder()
+            .baseUrl(GOOGLE_BASE_URL)
+            .client(mOkHttpClient)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .build()
+
+        mLibraryApi = retrofitOne.create(TheLibraryApi::class.java)
+        mLibraryApiTwo = retrofitTwo.create(TheLibraryApi::class.java)
     }
 
     fun initDatabase(context: Context) {

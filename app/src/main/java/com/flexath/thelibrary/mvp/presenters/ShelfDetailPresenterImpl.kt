@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.flexath.thelibrary.data.models.LibraryModel
 import com.flexath.thelibrary.data.models.LibraryModelImpl
 import com.flexath.thelibrary.data.vos.ShelfVO
+import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.mvp.views.ShelfDetailView
 
 class ShelfDetailPresenterImpl : ViewModel() , ShelfDetailPresenter {
@@ -28,6 +29,10 @@ class ShelfDetailPresenterImpl : ViewModel() , ShelfDetailPresenter {
 
     override fun updateShelf(shelf: ShelfVO) {
         mLibraryModel.updateShelf(shelf)
+    }
+
+    override fun removeBook(title: String) {
+        mLibraryModel.deleteBookByTitle(title)
     }
 
     override fun onTapBackButton() {

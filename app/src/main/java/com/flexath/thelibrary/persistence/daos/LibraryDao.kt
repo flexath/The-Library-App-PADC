@@ -3,6 +3,7 @@ package com.flexath.thelibrary.persistence.daos
 import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.flexath.thelibrary.data.vos.ShelfVO
+import com.flexath.thelibrary.data.vos.google.GoogleBookVO
 import com.flexath.thelibrary.data.vos.list.BookDetailVO
 import com.flexath.thelibrary.data.vos.list.BookListResultVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
@@ -58,4 +59,10 @@ interface LibraryDao {
 
     @Query("SELECT * FROM library_table WHERE title = :title")
     fun getBookByTitle(title:String):LiveData<BookVO?>
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertGoogleBookList(bookList:List<BookVO>)
+
+    @Query("SELECT * FROM library_table")
+    fun getGoogleBookList():LiveData<List<BookVO>>
 }

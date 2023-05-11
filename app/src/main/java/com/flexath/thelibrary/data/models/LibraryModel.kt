@@ -5,6 +5,7 @@ import com.flexath.thelibrary.data.vos.ShelfVO
 import com.flexath.thelibrary.data.vos.list.BookListResultVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.data.vos.overview.CategoryVO
+import io.reactivex.rxjava3.core.Observable
 
 interface LibraryModel {
 
@@ -40,4 +41,8 @@ interface LibraryModel {
     fun deleteBookByTitle(title:String)
 
     fun getBookByTitle(title:String) : LiveData<BookVO?>?
+
+    fun searchBookFromGoogle(
+        query:String
+    ) : Observable<List<BookVO>>
 }

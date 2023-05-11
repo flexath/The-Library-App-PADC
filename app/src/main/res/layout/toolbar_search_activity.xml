@@ -14,7 +14,7 @@
         app:srcCompat="@drawable/ic_baseline_arrow_back_ios_secondary_24dp" />
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/etSearchActivity"
+        android:id="@+id/etSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/CustomEditTextStyle"

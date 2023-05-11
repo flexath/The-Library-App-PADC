@@ -17,6 +17,7 @@ import com.flexath.thelibrary.mvp.presenters.AddToShelvesPresenter
 import com.flexath.thelibrary.mvp.presenters.AddToShelvesPresenterImpl
 import com.flexath.thelibrary.mvp.views.AddToShelvesView
 import kotlinx.android.synthetic.main.activity_add_to_shelves.*
+import kotlinx.android.synthetic.main.toolbar_add_to_shelves.*
 
 class AddToShelvesActivity : AppCompatActivity() , AddToShelvesView {
 
@@ -49,6 +50,7 @@ class AddToShelvesActivity : AppCompatActivity() , AddToShelvesView {
 
         setUpPresenter()
         setUpRecyclerView()
+        setUpListeners()
 
         mPresenter.onUiReadyForAddToShelves(this,mBookTitle)
     }
@@ -70,6 +72,12 @@ class AddToShelvesActivity : AppCompatActivity() , AddToShelvesView {
         mAdapter.notifyDataSetChanged()
     }
 
+    private fun setUpListeners() {
+        btnCloseAddToShelves.setOnClickListener {
+            mPresenter.onTapCloseButton()
+        }
+    }
+
     override fun showShelfList(shelfList: List<ShelfVO>) {
         mShelfList = shelfList as MutableList<ShelfVO>
 
@@ -83,6 +91,10 @@ class AddToShelvesActivity : AppCompatActivity() , AddToShelvesView {
 
     override fun showBook(book: BookVO?) {
         mBook = book
+    }
+
+    override fun closeAddToShelvesActivity() {
+        finish()
     }
 
     override fun onClickCheckBox(shelfId: Int,checked:Boolean) {

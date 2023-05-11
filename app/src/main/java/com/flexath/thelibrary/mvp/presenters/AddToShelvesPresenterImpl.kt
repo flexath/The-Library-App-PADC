@@ -26,6 +26,10 @@ class AddToShelvesPresenterImpl : ViewModel() , AddToShelvesPresenter {
         }
     }
 
+    override fun onTapCloseButton() {
+        mView?.closeAddToShelvesActivity()
+    }
+
     override fun updateShelf(shelf: ShelfVO) {
         mLibraryModel.updateShelf(shelf)
     }

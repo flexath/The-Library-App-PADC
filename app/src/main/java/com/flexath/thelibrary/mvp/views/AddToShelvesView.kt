@@ -8,5 +8,7 @@ interface AddToShelvesView : IBaseView {
     fun showShelfList(shelfList:List<ShelfVO>)
     fun showBook(book:BookVO?)
 
+    fun closeAddToShelvesActivity()
+
     fun onClickCheckBox(shelfId:Int,checked:Boolean)
 }

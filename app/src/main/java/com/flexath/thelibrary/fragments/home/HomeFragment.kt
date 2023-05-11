@@ -248,6 +248,7 @@ class HomeFragment : Fragment(), HomeView {
 
         dialog.btnAddToShelvesBottomSheetHome.setOnClickListener {
             startActivity(AddToShelvesActivity.newIntent(requireActivity(),book?.title ?: ""))
+            dialog.dismiss()
         }
     }
 

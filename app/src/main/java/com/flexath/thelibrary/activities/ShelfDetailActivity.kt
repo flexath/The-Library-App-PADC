@@ -9,6 +9,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.flexath.thelibrary.R
 import com.flexath.thelibrary.data.vos.ShelfVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
@@ -22,6 +23,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.activity_new_shelf.*
 import kotlinx.android.synthetic.main.activity_shelf_detail.*
 import kotlinx.android.synthetic.main.bottom_dialog_book_filter.*
+import kotlinx.android.synthetic.main.bottom_dialog_book_option.*
 import kotlinx.android.synthetic.main.bottom_dialog_book_sort.*
 import kotlinx.android.synthetic.main.bottom_dialog_shelf_detail.*
 import kotlinx.android.synthetic.main.toolbar_shelf_detail.*
@@ -40,6 +42,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
     private var mBookCount = 0
     private var mBookList:MutableList<BookVO> = mutableListOf()
     private var mIsChecked:Boolean = false
+    private var mShelfName:String = ""
 
     companion object {
         private const val EXTRA_SHELF_ID = "Shelf Id"
@@ -145,6 +148,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
         dialog.rbList.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 mViewPod.setDelegate(1,this)
+                mViewPod.setNewData(mBookList)
                 dialog.dismiss()
             }
         }
@@ -152,6 +156,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
         dialog.rbLargeGrid.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 mViewPod.setDelegate(2,this)
+                mViewPod.setNewData(mBookList)
                 dialog.dismiss()
             }
         }
@@ -159,6 +164,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
         dialog.rbSmallGrid.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 mViewPod.setDelegate(3,this)
+                mViewPod.setNewData(mBookList)
                 dialog.dismiss()
             }
         }
@@ -196,6 +202,7 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
 
         mBookCount = shelfVO?.bookCount ?: 0
         mBookList = shelfVO?.bookList ?: mutableListOf()
+        mShelfName = shelfVO?.shelfName ?: ""
 
         tvShelfNameShelfDetail.text = shelfVO?.shelfName ?: ""
 
@@ -226,5 +233,40 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
         val dialog = BottomSheetDialog(this)
         dialog.setContentView(R.layout.bottom_dialog_book_option)
         dialog.show()
+
+        dialog.btnAddToShelvesBottomSheetHome.visibility = View.GONE
+
+        Glide.with(this)
+            .load(book.bookImage)
+            .into(dialog.ivCoverBottomSheetHome)
+
+        dialog.tvTitleBottomSheet.text = book.title
+        dialog.tvWriterBottomSheet.text = book.author
+
+        dialog.btnRemoveFromShelvesBottomSheetHome.setOnClickListener {
+            val alertDialog = MaterialAlertDialogBuilder(this,R.style.RoundedAlertDialog)
+                .setTitle("Delete Book !")
+                .setMessage("Are you sure ?")
+                .setPositiveButton("Yes"){ alertDialog, _ ->
+                    mBookList.remove(book)
+                    mViewPod.setNewData(mBookList)
+
+                    mBookCount = mBookList.size
+                    tvBookCountShelfDetail.text = mBookCount.toString()
+
+                    val shelf = ShelfVO(shelfId,mShelfName,mBookCount,mBookList,mIsChecked)
+                    mPresenter.updateShelf(shelf)
+
+                    dialog.dismiss()
+                    alertDialog.dismiss()
+                }
+                .setNegativeButton("Cancel"){ alertDialog , _ ->
+                    dialog.dismiss()
+                    alertDialog.dismiss()
+                }
+                .create()
+
+            alertDialog.show()
+        }
     }
 }

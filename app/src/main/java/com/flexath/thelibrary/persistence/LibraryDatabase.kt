@@ -5,12 +5,13 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.flexath.thelibrary.data.vos.ShelfVO
+import com.flexath.thelibrary.data.vos.google.GoogleBookVO
 import com.flexath.thelibrary.data.vos.list.BookListResultVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.data.vos.overview.CategoryVO
 import com.flexath.thelibrary.persistence.daos.LibraryDao
 
-@Database([CategoryVO::class,BookListResultVO::class,ShelfVO::class,BookVO::class], version = 1 , exportSchema = false)
+@Database([CategoryVO::class,BookListResultVO::class,ShelfVO::class,BookVO::class,GoogleBookVO::class], version = 2 , exportSchema = false)
 abstract class LibraryDatabase : RoomDatabase() {
 
     abstract fun libraryDao():LibraryDao

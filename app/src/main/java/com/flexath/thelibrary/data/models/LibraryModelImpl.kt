@@ -6,6 +6,7 @@ import com.flexath.thelibrary.data.vos.list.BookListResultVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.data.vos.overview.CategoryVO
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
 object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
@@ -84,4 +85,46 @@ object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
         return mLibraryDatabase?.libraryDao()?.getBookByTitle(title)
     }
 
+    override fun searchBookFromGoogle(query: String): Observable<List<BookVO>> {
+        val googleBookList = mLibraryApiTwo.getGoogleBookList(query).map {
+            it.items ?: listOf()
+        }
+
+        return googleBookList.map { googleBooks ->
+            googleBooks.map { googleBook ->
+                BookVO(
+                    title = googleBook.volumeInfo?.title ?: "",
+                    author = googleBook.volumeInfo?.authors?.get(0) ?: "",
+                    ageGroup = null,
+                    amazonProductUrl = null,
+                    articleChapterLink = null,
+                    bookImage = null,
+                    bookImageHeight = null,
+                    bookImageWidth = null,
+                    bookReviewLink = null,
+                    contributor = null,
+                    contributorNote = null,
+                    createdDate = null,
+                    description = null,
+                    firstChapterLink = null,
+                    primaryIsbn10 = null,
+                    primaryIsbn13 = null,
+                    publisher = null,
+                    rank = null,
+                    rankLastWeek = null,
+                    sundayReviewLink = null,
+                    updatedDate = null,
+                    weeksOnList = null,
+                    listId = null,
+                    listName = null,
+                    bookUri = null,
+                    buyLinks = null,
+                    price = null
+                )
+            }
+        }.onErrorResumeNext{
+            Observable.just(listOf())
+        }
+            .subscribeOn(Schedulers.io())
+    }
 }

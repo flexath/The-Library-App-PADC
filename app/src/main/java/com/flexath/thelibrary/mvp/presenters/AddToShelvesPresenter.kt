@@ -9,5 +9,8 @@ interface AddToShelvesPresenter : IBasePresenter,AddToShelvesDelegate {
 
     fun initView(view: AddToShelvesView)
     fun onUiReadyForAddToShelves(owner: LifecycleOwner,title:String)
+
+    fun onTapCloseButton()
+
     fun updateShelf(shelf:ShelfVO)
 }
