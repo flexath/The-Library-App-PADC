@@ -65,6 +65,7 @@
         android:visibility="gone"
         app:cornerRadius="30dp"
         app:elevation="@dimen/margin_medium"
-        app:icon="@drawable/ic_baseline_edit_white_24dp" />
+        app:icon="@drawable/ic_baseline_edit_white_24dp"
+        tools:ignore="RtlSymmetry" />
 
 </RelativeLayout>

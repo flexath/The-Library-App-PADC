@@ -46,4 +46,6 @@
     <string name="delete_shelf_lbl">Delete shelf</string>
     <string name="rename_shelf_lbl">Rename shelf</string>
     <string name="remove_from_your_shelf_lbl">Delete from your shelf</string>
+    <string name="ebook_lbl">EBook</string>
+    <string name="sample_lbl">Sample</string>
 </resources>

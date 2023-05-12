@@ -7,4 +7,6 @@ interface NewShelfPresenter : IBasePresenter {
 
     fun initView(view: NewShelfView)
     fun insertShelf(shelf:ShelfVO)
+
+    fun onTapBackButton()
 }

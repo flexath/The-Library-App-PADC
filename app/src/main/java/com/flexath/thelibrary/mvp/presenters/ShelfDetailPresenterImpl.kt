@@ -13,7 +13,7 @@ class ShelfDetailPresenterImpl : ViewModel() , ShelfDetailPresenter {
     private var mView:ShelfDetailView? = null
     private val mLibraryModel: LibraryModel = LibraryModelImpl
 
-    private var mBookList:List<BookVO> = listOf()
+    private var mBookList:List<BookVO>? = listOf()
 
     override fun initView(view: ShelfDetailView) {
         mView = view
@@ -21,7 +21,7 @@ class ShelfDetailPresenterImpl : ViewModel() , ShelfDetailPresenter {
 
     override fun onUiReadyForShelfDetail(owner: LifecycleOwner, shelfId: Int) {
         mLibraryModel.getShelfById(shelfId = shelfId)?.observe(owner) {
-            mBookList = it.bookList ?: listOf()
+            mBookList = it?.bookList ?: listOf()
             mView?.showShelfDetail(shelfVO = it)
         }
     }
@@ -38,14 +38,14 @@ class ShelfDetailPresenterImpl : ViewModel() , ShelfDetailPresenter {
         mLibraryModel.deleteBookByTitle(title)
     }
 
-    override fun sortByTitle(): List<BookVO> {
-        return mBookList.sortedBy { book ->
+    override fun sortByTitle(): List<BookVO>? {
+        return mBookList?.sortedBy { book ->
             book.title
         }
     }
 
-    override fun sortByAuthor(): List<BookVO> {
-        return mBookList.sortedBy { book ->
+    override fun sortByAuthor(): List<BookVO>? {
+        return mBookList?.sortedBy { book ->
             book.author
         }
     }

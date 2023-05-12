@@ -15,8 +15,8 @@ interface ShelfDetailPresenter : IBasePresenter , ListNameChipDelegate {
     fun updateShelf(shelf:ShelfVO)
     fun removeBook(title: String)
 
-    fun sortByTitle() : List<BookVO>
-    fun sortByAuthor() : List<BookVO>
+    fun sortByTitle() : List<BookVO>?
+    fun sortByAuthor() : List<BookVO>?
 
     fun onTapBackButton()
     fun onTapOptionButton()

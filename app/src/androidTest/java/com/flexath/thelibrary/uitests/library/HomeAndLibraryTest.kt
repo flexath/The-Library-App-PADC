@@ -288,12 +288,7 @@ class HomeAndLibraryTest {
         onView(withId(R.id.rbList)).perform(click())
 
         // Verify recyclerview in viewpod
-        onView(
-            allOf(
-                withId(R.id.rvFilterBooksLibrary),
-                isDescendantOfA(withId(R.id.vpBooksLibrary))
-            )
-        )
+        onView(allOf(withId(R.id.rvFilterBooksLibrary), isDescendantOfA(withId(R.id.vpBooksLibrary))))
             .check(matches(isDisplayed()))
 
         // Verify Title and Author by List Filtering

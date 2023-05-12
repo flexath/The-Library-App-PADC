@@ -9,15 +9,19 @@ import com.flexath.thelibrary.mvp.views.NewShelfView
 
 class NewShelfPresenterImpl : ViewModel() , NewShelfPresenter {
 
-//    private var mView:NewShelfView? = null
+    private var mView:NewShelfView? = null
     private val mLibraryModel: LibraryModel = LibraryModelImpl
 
     override fun initView(view: NewShelfView) {
-//        mView = view
+        mView = view
     }
 
     override fun insertShelf(shelf: ShelfVO) {
         mLibraryModel.insertShelf(shelf)
+    }
+
+    override fun onTapBackButton() {
+        mView?.navigateBackToPreviousScreen()
     }
 
     override fun onUiReady(owner: LifecycleOwner) {

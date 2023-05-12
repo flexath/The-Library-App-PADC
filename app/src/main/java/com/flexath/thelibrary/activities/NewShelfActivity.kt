@@ -2,22 +2,21 @@ package com.flexath.thelibrary.activities
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.flexath.thelibrary.R
 import com.flexath.thelibrary.data.vos.ShelfVO
 import com.flexath.thelibrary.mvp.presenters.NewShelfPresenter
 import com.flexath.thelibrary.mvp.presenters.NewShelfPresenterImpl
+import com.flexath.thelibrary.mvp.views.NewShelfView
 import kotlinx.android.synthetic.main.activity_new_shelf.*
+import kotlinx.android.synthetic.main.toolbar_new_shelf.*
 
-class NewShelfActivity : AppCompatActivity() {
+class NewShelfActivity : AppCompatActivity(),NewShelfView {
 
     private lateinit var mPresenter:NewShelfPresenter
 
@@ -33,10 +32,20 @@ class NewShelfActivity : AppCompatActivity() {
 
         setUpPresenter()
         setUpEditTextCharacterCount()
+        setUpListeners()
     }
 
     private fun setUpPresenter() {
         mPresenter = ViewModelProvider(this)[NewShelfPresenterImpl::class.java]
+        mPresenter.initView(this)
+    }
+
+    private fun setUpListeners() {
+        btnBackNewShelf.setOnClickListener {
+            val s = ShelfVO(shelfName = etNewShelf.text.toString())
+            mPresenter.insertShelf(s)
+            mPresenter.onTapBackButton()
+        }
     }
 
     private fun setUpEditTextCharacterCount() {
@@ -62,5 +71,13 @@ class NewShelfActivity : AppCompatActivity() {
                 false
             }
         }
+    }
+
+    override fun navigateBackToPreviousScreen() {
+        finish()
+    }
+
+    override fun showError(error: String) {
+
     }
 }

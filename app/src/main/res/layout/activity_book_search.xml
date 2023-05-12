@@ -55,6 +55,7 @@
             android:id="@+id/rvSearch"
             android:layout_below="@+id/tvResultFromGooglePlay"
             android:layout_width="match_parent"
+            tools:listitem="@layout/view_holder_list_library"
             android:layout_marginTop="@dimen/margin_medium_2"
             android:layout_marginStart="@dimen/margin_10dp"
             android:layout_marginEnd="@dimen/margin_card_medium_2"

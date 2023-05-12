@@ -39,7 +39,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvNumberOfBookShelvesList"
         android:layout_width="wrap_content"
-        android:text="1 book"
+        android:text="0 book"
         android:layout_below="@+id/tvTitleShelvesList"
         android:layout_toEndOf="@+id/mcvCoverShelvesList"
         android:layout_marginTop="@dimen/margin_small"
