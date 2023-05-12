@@ -287,6 +287,6 @@ class HomeFragment : Fragment(), HomeView {
     }
 
     override fun showError(error: String) {
-        Toast.makeText(requireActivity(), error, Toast.LENGTH_SHORT).show()
+//        Toast.makeText(requireActivity(), error, Toast.LENGTH_SHORT).show()
     }
 }

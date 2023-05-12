@@ -89,7 +89,7 @@
             android:layout_marginStart="@dimen/margin_card_medium_2"
             android:layout_marginTop="@dimen/margin_medium_3"
             android:layout_marginEnd="@dimen/margin_card_medium_2"
-            tools:listitem="@layout/view_holder_grid_library" />
+            tools:listitem="@layout/view_holder_list_library" />
 
     </RelativeLayout>
 

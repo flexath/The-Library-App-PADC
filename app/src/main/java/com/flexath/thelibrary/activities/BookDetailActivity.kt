@@ -18,6 +18,7 @@ import com.flexath.thelibrary.mvp.presenters.BookDetailPresenter
 import com.flexath.thelibrary.mvp.presenters.BookDetailPresenterImpl
 import com.flexath.thelibrary.mvp.views.BookDetailView
 import kotlinx.android.synthetic.main.activity_book_detail.*
+import kotlinx.android.synthetic.main.toolbar_book_detail.*
 
 class BookDetailActivity : AppCompatActivity() , BookDetailView {
 
@@ -80,6 +81,10 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
         btnForwardRatingBookDetail.setOnClickListener {
             mPresenter.onTapRatingAndReviewButton()
         }
+
+        btnBackBookDetail.setOnClickListener {
+            mPresenter.onTapBackButton()
+        }
     }
 
     override fun getCategoryByName(category: CategoryVO) {
@@ -133,6 +138,10 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
 
     override fun navigateToAboutEBookScreen() {
         startActivity(AboutEBookActivity.newIntent(this))
+    }
+
+    override fun navigateBackToHome() {
+        finish()
     }
 
     override fun showError(error: String) {

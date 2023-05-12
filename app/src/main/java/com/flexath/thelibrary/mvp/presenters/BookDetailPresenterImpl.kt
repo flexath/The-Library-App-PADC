@@ -41,6 +41,10 @@ class BookDetailPresenterImpl : ViewModel(), BookDetailPresenter {
         mLibraryModel.insertBookIntoLibrary(book)
     }
 
+    override fun onTapBackButton() {
+        mView?.navigateBackToHome()
+    }
+
     override fun onTapAboutEBookButton() {
         mView?.navigateToAboutEBookScreen()
     }

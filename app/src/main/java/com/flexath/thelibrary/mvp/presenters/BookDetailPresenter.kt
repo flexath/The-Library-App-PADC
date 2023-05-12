@@ -11,6 +11,7 @@ interface BookDetailPresenter : IBasePresenter {
 
     fun insertBookIntoLibrary(book:BookVO?)
 
+    fun onTapBackButton()
     fun onTapAboutEBookButton()
     fun onTapRatingAndReviewButton()
 }

@@ -13,4 +13,5 @@ interface BookDetailView : IBaseView {
 
     fun navigateToRatingAndReviewScreen()
     fun navigateToAboutEBookScreen()
+    fun navigateBackToHome()
 }
