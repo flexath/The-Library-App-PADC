@@ -80,6 +80,9 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
 
     private fun setUpListeners() {
         btnBackShelfDetail.setOnClickListener {
+            val etShelfName = etShelfNameShelfDetail.text.toString()
+            val shelf = ShelfVO(shelfId,etShelfName,mBookCount,mBookList,mIsChecked)
+            mPresenter.updateShelf(shelf)
             mPresenter.onTapBackButton()
         }
 
@@ -156,7 +159,6 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
             if(isChecked) {
                 mViewPod.setDelegate(1,this)
                 mViewPod.setNewData(mBookList)
-                dialog.dismiss()
             }
         }
 
@@ -164,7 +166,6 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
             if(isChecked) {
                 mViewPod.setDelegate(2,this)
                 mViewPod.setNewData(mBookList)
-                dialog.dismiss()
             }
         }
 
@@ -172,7 +173,6 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
             if(isChecked) {
                 mViewPod.setDelegate(3,this)
                 mViewPod.setNewData(mBookList)
-                dialog.dismiss()
             }
         }
     }
@@ -187,7 +187,6 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
             if(isChecked) {
                 tvSortingMethod.text = "Recent"
                 mViewPod.setNewData(mBookList)
-                dialog.dismiss()
             }
         }
 
@@ -195,7 +194,6 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
             if(isChecked) {
                 tvSortingMethod.text = "Title"
                 mViewPod.setNewData(mPresenter.sortByTitle())
-                dialog.dismiss()
             }
         }
 
@@ -203,7 +201,6 @@ class ShelfDetailActivity : AppCompatActivity() , ShelfDetailView , LibraryBooks
             if(isChecked) {
                 tvSortingMethod.text = "Author"
                 mViewPod.setNewData(mPresenter.sortByAuthor())
-                dialog.dismiss()
             }
         }
     }

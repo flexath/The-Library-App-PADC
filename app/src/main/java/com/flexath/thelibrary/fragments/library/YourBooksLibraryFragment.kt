@@ -2,7 +2,6 @@ package com.flexath.thelibrary.fragments.library
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -120,13 +119,11 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
     override fun showBottomSheetDialogForFiltering() {
         val dialog = BottomSheetDialog(requireActivity())
         dialog.setContentView(R.layout.bottom_dialog_book_filter)
-        dialog.show()
 
         dialog.rbList.setOnCheckedChangeListener { _, isChecked ->
             if(isChecked) {
                 mLibraryBooksViewPod.setDelegate(1,this)
                 mLibraryBooksViewPod.setNewData(mBookList)
-                dialog.dismiss()
             }
         }
 
@@ -134,7 +131,6 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
             if(isChecked) {
                 mLibraryBooksViewPod.setDelegate(2,this)
                 mLibraryBooksViewPod.setNewData(mBookList)
-                dialog.dismiss()
             }
         }
 
@@ -142,10 +138,12 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
             if(isChecked) {
                 mLibraryBooksViewPod.setDelegate(3,this)
                 mLibraryBooksViewPod.setNewData(mBookList)
-                dialog.dismiss()
             }
         }
+
+        dialog.show()
     }
+
 
     @SuppressLint("SetTextI18n")
     override fun showBottomSheetDialogForSorting() {
@@ -157,7 +155,6 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
             if(isChecked) {
                 tvSortingMethod.text = "Recent"
                 mLibraryBooksViewPod.setNewData(mBookList)
-                dialog.dismiss()
             }
         }
 
@@ -165,7 +162,6 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
             if(isChecked) {
                 tvSortingMethod.text = "Title"
                 mLibraryBooksViewPod.setNewData(mPresenter.sortByTitle())
-                dialog.dismiss()
             }
         }
 
@@ -173,7 +169,6 @@ class YourBooksLibraryFragment(private val fragment: Fragment) : Fragment() , Yo
             if(isChecked) {
                 tvSortingMethod.text = "Author"
                 mLibraryBooksViewPod.setNewData(mPresenter.sortByAuthor())
-                dialog.dismiss()
             }
         }
     }

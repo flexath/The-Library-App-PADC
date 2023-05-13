@@ -1,6 +1,7 @@
 package com.flexath.thelibrary.data.models
 
 import androidx.lifecycle.LiveData
+import com.flexath.thelibrary.data.vos.SearchBookVO
 import com.flexath.thelibrary.data.vos.ShelfVO
 import com.flexath.thelibrary.data.vos.list.BookListResultVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
@@ -95,6 +96,7 @@ object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
                 BookVO(
                     title = googleBook.volumeInfo?.title ?: "",
                     author = googleBook.volumeInfo?.authors?.get(0) ?: "",
+                    description = googleBook.volumeInfo?.description ?: "",
                     ageGroup = null,
                     amazonProductUrl = null,
                     articleChapterLink = null,
@@ -105,7 +107,6 @@ object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
                     contributor = null,
                     contributorNote = null,
                     createdDate = null,
-                    description = null,
                     firstChapterLink = null,
                     primaryIsbn10 = null,
                     primaryIsbn13 = null,
@@ -130,5 +131,21 @@ object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
 
     override fun getBookListByListName(listName: String): LiveData<List<BookVO>>? {
         return mLibraryDatabase?.libraryDao()?.getBookListByListName(listName)
+    }
+
+    override fun getSearchBookList(): LiveData<List<SearchBookVO>>? {
+        return mLibraryDatabase?.libraryDao()?.getSearchBookList()
+    }
+
+    override fun getBookFromSearchTable(title: String): LiveData<SearchBookVO?>? {
+        return mLibraryDatabase?.libraryDao()?.getBookFromSearchTable(title)
+    }
+
+    override fun deleteSearchBookList() {
+        mLibraryDatabase?.libraryDao()?.deleteSearchBookList()
+    }
+
+    override fun insertBookIntoSearchTable(book: SearchBookVO?) {
+        mLibraryDatabase?.libraryDao()?.insertBookIntoSearchTable(book)
     }
 }

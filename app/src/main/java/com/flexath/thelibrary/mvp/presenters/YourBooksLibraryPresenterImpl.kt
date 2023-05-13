@@ -6,6 +6,7 @@ import com.flexath.thelibrary.data.models.LibraryModel
 import com.flexath.thelibrary.data.models.LibraryModelImpl
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.mvp.views.YourBooksLibraryView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class YourBooksLibraryPresenterImpl : ViewModel(), YourBooksLibraryPresenter {
 

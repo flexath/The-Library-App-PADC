@@ -30,8 +30,7 @@
         android:layout_below="@+id/vHorizontalLine"
         android:layout_marginStart="@dimen/margin_medium_2"
         android:layout_marginTop="@dimen/margin_medium_3"
-        android:layout_marginEnd="@dimen/margin_medium_3"
-        android:orientation="vertical">
+        android:layout_marginEnd="@dimen/margin_medium_3">
 
         <RadioButton
             android:id="@+id/rbList"
@@ -39,6 +38,7 @@
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/margin_medium_2"
             android:text="@string/list_lbl"
+            android:checked="true"
             android:textColor="@color/colorSecondary"
             android:textSize="@dimen/text_regular_2x"
             android:textStyle="bold" />
@@ -50,6 +50,7 @@
             android:paddingHorizontal="@dimen/margin_medium_2"
             android:text="@string/large_grid_lbl"
             android:textColor="@color/colorSecondary"
+            android:checked="false"
             android:textSize="@dimen/text_regular_2x"
             android:textStyle="bold" />
 
@@ -60,6 +61,7 @@
             android:paddingHorizontal="@dimen/margin_medium_2"
             android:text="@string/small_grid_lbl"
             android:textColor="@color/colorSecondary"
+            android:checked="false"
             android:textSize="@dimen/text_regular_2x"
             android:textStyle="bold" />
 

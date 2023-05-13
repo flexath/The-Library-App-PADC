@@ -1,6 +1,7 @@
 package com.flexath.thelibrary.data.models
 
 import androidx.lifecycle.LiveData
+import com.flexath.thelibrary.data.vos.SearchBookVO
 import com.flexath.thelibrary.data.vos.ShelfVO
 import com.flexath.thelibrary.data.vos.list.BookListResultVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
@@ -47,4 +48,12 @@ interface LibraryModel {
     ) : Observable<List<BookVO>>
 
     fun getBookListByListName(listName:String):LiveData<List<BookVO>>?
+
+    fun getSearchBookList():LiveData<List<SearchBookVO>>?
+
+    fun getBookFromSearchTable(title:String):LiveData<SearchBookVO?>?
+
+    fun deleteSearchBookList()
+
+    fun insertBookIntoSearchTable(book:SearchBookVO?)
 }

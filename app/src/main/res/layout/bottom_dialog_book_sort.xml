@@ -38,6 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/margin_medium_2"
+            android:checked="true"
             android:text="@string/recently_opened_lbl"
             android:textColor="@color/colorSecondary"
             android:textSize="@dimen/text_regular_2x"

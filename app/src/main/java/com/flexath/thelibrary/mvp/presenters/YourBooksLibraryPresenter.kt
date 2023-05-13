@@ -4,6 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.library.ListNameChipDelegate
 import com.flexath.thelibrary.mvp.views.YourBooksLibraryView
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 interface YourBooksLibraryPresenter : IBasePresenter , ListNameChipDelegate {
 

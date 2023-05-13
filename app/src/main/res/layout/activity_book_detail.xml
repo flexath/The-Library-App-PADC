@@ -31,7 +31,7 @@
                 android:layout_height="160dp"
                 android:elevation="@dimen/margin_medium"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/dummy_ebook_banner" />
+                app:srcCompat="@drawable/img_holder" />
 
         </com.google.android.material.card.MaterialCardView>
 

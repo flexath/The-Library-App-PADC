@@ -18,21 +18,33 @@ class BookDetailPresenterImpl : ViewModel(), BookDetailPresenter {
 
     override fun onUiReadyForBookDetail(owner: LifecycleOwner, listName: String, listId: Int, previousPlace:String) {
 
-        if(previousPlace == "HomeFragment") {
-            mLibraryModel.getCategoryByListId(listId = listId)?.observe(owner) {
-                it?.let { category ->
-                    mView?.getCategoryByName(category)
+        when (previousPlace) {
+            "HomeFragment" -> {
+                mLibraryModel.getCategoryByListId(listId = listId)?.observe(owner) {
+                    it?.let { category ->
+                        mView?.getCategoryByName(category)
+                    }
                 }
             }
-        } else if (previousPlace == "BookListActivity") {
-            mLibraryModel.getBookFromBookListById(listId)?.observe(owner) {
-                it.bookDetails?.get(0)?.let { bookDetail ->
-                    mView?.getBookFromBookList(bookDetail)
+
+            "BookListActivity" -> {
+                mLibraryModel.getBookFromBookListById(listId)?.observe(owner) {
+                    it.bookDetails?.get(0)?.let { bookDetail ->
+                        mView?.getBookFromBookList(bookDetail)
+                    }
                 }
             }
-        } else {
-            mLibraryModel.getAllBooksFromLibrary()?.observe(owner) {
-                mView?.getAllBooksFromLibrary(it)
+
+            "BookSearchActivity" -> {
+                mLibraryModel.getSearchBookList()?.observe(owner) {
+                    mView?.showSearchBook(it)
+                }
+            }
+
+            else -> {
+                mLibraryModel.getAllBooksFromLibrary()?.observe(owner) {
+                    mView?.getAllBooksFromLibrary(it)
+                }
             }
         }
     }

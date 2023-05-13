@@ -2,13 +2,16 @@ package com.flexath.thelibrary.uitests.shelf
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ApplicationProvider
+import androidx.test.espresso.*
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.UiController
-import androidx.test.espresso.ViewAction
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.idling.CountingIdlingResource
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.activityScenarioRule
@@ -19,25 +22,43 @@ import com.flexath.thelibrary.uitests.utils.first
 import com.flexath.thelibrary.views.viewholders.library.LibraryBooksListViewHolder
 import com.flexath.thelibrary.views.viewholders.library.ListNameViewHolder
 import com.flexath.thelibrary.views.viewholders.library.ShelvesListViewHolder
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.toolbar_new_shelf.*
+import kotlinx.android.synthetic.main.toolbar_shelf_detail.*
 import org.hamcrest.CoreMatchers.allOf
 import org.hamcrest.Matcher
-import org.junit.Rule
-import org.junit.Test
+import org.junit.*
 import org.junit.runner.RunWith
+import org.junit.runners.MethodSorters
 
 @RunWith(AndroidJUnit4ClassRunner::class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class ShelvesTest {
 
     companion object {
         const val TEST_SHELF_NAME = "Android Development"
+        const val TEST_NEW_SHELF_NAME = "ios Development"
     }
 
     @get:Rule
     var activityScenarioRule = activityScenarioRule<MainActivity>()
 
+    // From ChatGPT
+    @Before
+    fun setUp() {
+        // Register the DialogIdlingResource with Espresso
+        IdlingRegistry.getInstance().register(DialogIdlingResource.getIdlingResource())
+    }
+
+    // From ChatGPT
+    @After
+    fun tearDown() {
+        // Unregister the DialogIdlingResource
+        IdlingRegistry.getInstance().unregister(DialogIdlingResource.getIdlingResource())
+    }
+
     @Test
-    fun onTapCreateShelfButton_goToNewShelfActivity() {
+    fun a_onTapCreateShelfButton_goToNewShelfActivity() {
 
         onView(withId(R.id.nvgLibrary)).perform(click())
 
@@ -71,7 +92,7 @@ class ShelvesTest {
     }
 
     @Test
-    fun onTapBookOption_goToAddToShelves() {
+    fun b_onTapBookOption_goToAddToShelves() {
 
         onView(withId(R.id.nvgLibrary)).perform(click())
 
@@ -169,7 +190,7 @@ class ShelvesTest {
     }
 
     @Test
-    fun onTapShelf_goToShelfDetail() {
+    fun c_onTapShelf_goToShelfDetail() {
         // Go to Shelf Detail
         onView(withId(R.id.nvgLibrary)).perform(click())
 
@@ -206,14 +227,15 @@ class ShelvesTest {
         // CLick on List Filter button
         onView(withId(R.id.rbLargeGrid)).perform(click())
 
+        onView(isRoot()).perform(click())
+
         // Verify recyclerview in viewpod
         onView(
             allOf(
                 withId(R.id.rvFilterBooksLibrary),
                 isDescendantOfA(withId(R.id.vpShelfDetail))
             )
-        )
-            .check(matches(isDisplayed()))
+        ).check(matches(isDisplayed()))
 
         Thread.sleep(500L)
 
@@ -230,14 +252,15 @@ class ShelvesTest {
         // CLick on List Filter button
         onView(withId(R.id.rbSmallGrid)).perform(click())
 
+        onView(isRoot()).perform(click())
+
         // Verify recyclerview in viewpod
         onView(
             allOf(
                 withId(R.id.rvFilterBooksLibrary),
                 isDescendantOfA(withId(R.id.vpShelfDetail))
             )
-        )
-            .check(matches(isDisplayed()))
+        ).check(matches(isDisplayed()))
 
         // Verify Title and Author by List Filtering
         onView(first<View>(withId(R.id.tvTitleLibrarySmallGrid)))
@@ -252,8 +275,25 @@ class ShelvesTest {
         // CLick on List Filter button
         onView(withId(R.id.rbList)).perform(click())
 
+        onView(isRoot()).perform(click())
+
+    }
+
+    @Test
+    fun d_goToShelfDetail_changeAndDeleteShelfName() {
+
+        // Go to Shelf Detail
+        onView(withId(R.id.nvgLibrary)).perform(click())
+
+        onView(withId(R.id.rvChipList))
+            .perform(ViewActions.swipeLeft())
+
         Thread.sleep(500L)
 
+        onView(withId(R.id.rvShelvesList))
+            .perform(RecyclerViewActions.actionOnItemAtPosition<ShelvesListViewHolder>(0, click()))
+
+        Thread.sleep(500L)
 
         // Click on option button
         onView(withId(R.id.btnOptionShelfDetail)).perform(click())
@@ -265,6 +305,62 @@ class ShelvesTest {
 
         onView(withId(R.id.etShelfNameShelfDetail))
             .check(matches(isDisplayed()))
+
+        onView(withId(R.id.etShelfNameShelfDetail))
+            .perform(ViewActions.clearText())
+
+        onView(withId(R.id.etShelfNameShelfDetail))
+            .perform(typeText(TEST_NEW_SHELF_NAME),ViewActions.closeSoftKeyboard())
+
+        onView(withId(R.id.etShelfNameShelfDetail))
+            .check(matches(withText(TEST_NEW_SHELF_NAME)))
+
+        onView(withId(R.id.btnBackShelfDetail)).perform(click())
+
+
+
+        Thread.sleep(500L)
+
+        onView(withId(R.id.rvShelvesList))
+            .perform(RecyclerViewActions.actionOnItemAtPosition<ShelvesListViewHolder>(0, click()))
+
+        Thread.sleep(500L)
+
+        // Click on option button
+        onView(withId(R.id.btnOptionShelfDetail)).perform(click())
+
+        onView(withId(R.id.btnDeleteShelfBottomSheet)).perform(click())
+
+        // From ChatGPT
+        onView(withText("Yes"))
+            .perform(click())
+    }
+
+    // From ChatGPT
+    fun testAlertDialog() {
+        // Create the AlertDialog
+        val alertDialog = MaterialAlertDialogBuilder(ApplicationProvider.getApplicationContext(), R.style.RoundedAlertDialog)
+            .setTitle("Delete Shelf!")
+            .setMessage("Are you sure?")
+            .setPositiveButton("Yes") { _, _ ->
+                // Positive button click logic
+            }
+            .setNegativeButton("Cancel") { _, _ ->
+                // Negative button click logic
+            }
+            .create()
+
+        // Show the AlertDialog
+        alertDialog.show()
+
+        // Increment the DialogIdlingResource to indicate that a dialog is shown
+        DialogIdlingResource.increment()
+
+        // Wait for the dialog to appear and become idle
+        Espresso.onView(ViewMatchers.withText("Delete Shelf!")).check(ViewAssertions.matches(ViewMatchers.isDisplayed()))
+
+        // Decrement the DialogIdlingResource to indicate that the dialog is idle
+        DialogIdlingResource.decrement()
     }
 }
 
@@ -289,3 +385,25 @@ class MyViewAction {
         }
     }
 }
+
+// From ChatGPT
+object DialogIdlingResource {
+    private const val RESOURCE = "DIALOG"
+
+    private val idlingResource = CountingIdlingResource(RESOURCE)
+
+    fun increment() {
+        idlingResource.increment()
+    }
+
+    fun decrement() {
+        if (!idlingResource.isIdleNow) {
+            idlingResource.decrement()
+        }
+    }
+
+    fun getIdlingResource(): CountingIdlingResource {
+        return idlingResource
+    }
+}
+

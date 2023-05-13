@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.flexath.thelibrary.R
 import com.flexath.thelibrary.adapters.home.BookRatingAndReviewAdapter
+import com.flexath.thelibrary.data.vos.SearchBookVO
 import com.flexath.thelibrary.data.vos.list.BookDetailVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.data.vos.overview.CategoryVO
@@ -142,6 +143,17 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
 
     override fun navigateBackToHome() {
         finish()
+    }
+
+    override fun showSearchBook(bookList: List<SearchBookVO>) {
+        for(book in bookList) {
+            if(mBookName == book.title) {
+                tvTitleBookDetail.text = book.title
+                tvWriterBookDetail.text = book.author
+                tvBookInfoBookDetail.text = book.description
+                break
+            }
+        }
     }
 
     override fun showError(error: String) {

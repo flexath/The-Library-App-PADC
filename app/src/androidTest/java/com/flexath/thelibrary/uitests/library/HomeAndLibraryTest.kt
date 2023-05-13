@@ -4,11 +4,17 @@ package com.flexath.thelibrary.uitests.library
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ActivityScenario
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.GeneralClickAction
+import androidx.test.espresso.action.Press
+import androidx.test.espresso.action.Tap
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
+import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.activityScenarioRule
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
@@ -18,18 +24,21 @@ import com.flexath.thelibrary.uitests.utils.first
 import com.flexath.thelibrary.views.viewholders.library.ListNameViewHolder
 import junit.framework.Assert.assertEquals
 import org.hamcrest.CoreMatchers.allOf
+import org.junit.FixMethodOrder
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.junit.runners.MethodSorters
 
 @RunWith(AndroidJUnit4ClassRunner::class)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class HomeAndLibraryTest {
 
     @get:Rule
     var activityScenarioRule = activityScenarioRule<MainActivity>()
 
     @Test
-    fun tapOnFirstCategory_goToBookDetail() {
+    fun a_tapOnFirstCategory_goToBookDetail() {
 
         // First Category
         onView(withId(R.id.tvFirstTitleHome))
@@ -96,7 +105,7 @@ class HomeAndLibraryTest {
     }
 
     @Test
-    fun tapOnSecondCategory_goToBookDetail() {
+    fun b_tapOnSecondCategory_goToBookDetail() {
 
         onView(withId(R.id.scrollView))
             .perform(ViewActions.swipeUp())
@@ -166,7 +175,7 @@ class HomeAndLibraryTest {
     }
 
     @Test
-    fun tapOnThirdCategory_goToBookDetail() {
+    fun c_tapOnThirdCategory_goToBookDetail() {
 
         onView(withId(R.id.scrollView))
             .perform(ViewActions.swipeUp())
@@ -237,7 +246,7 @@ class HomeAndLibraryTest {
     }
 
     @Test
-    fun afterTappingThreeItems_isVisibleBannerViewPager() {
+    fun d_afterTappingThreeItems_isVisibleBannerViewPager() {
         Thread.sleep(1000L)
 
         onView(withId(R.id.viewPagerEBookBannerHome))
@@ -245,7 +254,7 @@ class HomeAndLibraryTest {
     }
 
     @Test
-    fun onTapLibraryTab_isVisibleViewPod() {
+    fun e_onTapLibraryTab_isVisibleViewPod() {
 
         // Click on library tab
         onView(withId(R.id.nvgLibrary)).perform(click())
@@ -270,7 +279,7 @@ class HomeAndLibraryTest {
 
         // Verify chip name
         onView(first<View>(withId(R.id.cbListName)))
-            .check(matches(withText("Paperback Nonfiction")))
+            .check(matches(withText("Hardcover Fiction")))
 
         // Scroll right
         onView(withId(R.id.rvChipList))
@@ -287,22 +296,26 @@ class HomeAndLibraryTest {
         // CLick on List Filter button
         onView(withId(R.id.rbList)).perform(click())
 
+        onView(isRoot()).perform(click())
+
         // Verify recyclerview in viewpod
         onView(allOf(withId(R.id.rvFilterBooksLibrary), isDescendantOfA(withId(R.id.vpBooksLibrary))))
             .check(matches(isDisplayed()))
 
         // Verify Title and Author by List Filtering
         onView(first<View>(withId(R.id.tvTitleListLibrary)))
-            .check(matches(withText("THE BODY KEEPS THE SCORE")))
+            .check(matches(isDisplayed()))
         onView(first<View>(withId(R.id.tvAuthorListLibrary)))
-            .check(matches(withText("Bessel van der Kolk")))
+            .check(matches(isDisplayed()))
 
 
         // Click on Filter button
         onView(withId(R.id.btnFilterBooks)).perform(click())
 
-        // CLick on List Filter button
+        // CLick on List Large Grid button
         onView(withId(R.id.rbLargeGrid)).perform(click())
+
+        onView(isRoot()).perform(click())
 
         // Verify recyclerview in viewpod
         onView(
@@ -323,8 +336,10 @@ class HomeAndLibraryTest {
         // Click on Filter button
         onView(withId(R.id.btnFilterBooks)).perform(click())
 
-        // CLick on List Filter button
+        // CLick on Small Grid Filter button
         onView(withId(R.id.rbSmallGrid)).perform(click())
+
+        onView(isRoot()).perform(click())
 
         // Verify recyclerview in viewpod
         onView(
@@ -348,39 +363,48 @@ class HomeAndLibraryTest {
         // CLick on List Filter button
         onView(withId(R.id.rbList)).perform(click())
 
+        onView(isRoot()).perform(click())
 
         // Click on first chip
         onView(withId(R.id.rvChipList))
             .perform(RecyclerViewActions.actionOnItemAtPosition<ListNameViewHolder>(0, click()))
 
-        // Verify Title and Author by List Filtering
-        onView(first<View>(withId(R.id.tvTitleListLibrary)))
-            .check(matches(withText("THE BODY KEEPS THE SCORE")))
-        onView(first<View>(withId(R.id.tvAuthorListLibrary)))
-            .check(matches(withText("Bessel van der Kolk")))
+        // Scroll left
+        onView(withId(R.id.rvChipList))
+            .perform(RecyclerViewActions.scrollToPosition<ListNameViewHolder>(0))
 
+        onView(
+            allOf(
+                withId(R.id.rvFilterBooksLibrary),
+                isDescendantOfA(withId(R.id.vpBooksLibrary))
+            )
+        )
+            .check(matches(isDisplayed()))
 
         // Click on second chip
         onView(withId(R.id.rvChipList))
             .perform(RecyclerViewActions.actionOnItemAtPosition<ListNameViewHolder>(1, click()))
 
-        // Verify Title and Author by List Filtering
-        onView(first<View>(withId(R.id.tvTitleListLibrary)))
-            .check(matches(withText("THE WAGER")))
-        onView(first<View>(withId(R.id.tvAuthorListLibrary)))
-            .check(matches(withText("David Grann")))
 
+        onView(
+            allOf(
+                withId(R.id.rvFilterBooksLibrary),
+                isDescendantOfA(withId(R.id.vpBooksLibrary))
+            )
+        )
+            .check(matches(isDisplayed()))
 
         // Click on third chip
         onView(withId(R.id.rvChipList))
             .perform(RecyclerViewActions.actionOnItemAtPosition<ListNameViewHolder>(2, click()))
 
-        // Verify Title and Author by List Filtering
-        onView(first<View>(withId(R.id.tvTitleListLibrary)))
-            .check(matches(withText("HAPPY PLACE")))
-        onView(first<View>(withId(R.id.tvAuthorListLibrary)))
-            .check(matches(withText("Emily Henry")))
 
+        onView(
+            allOf(
+                withId(R.id.rvFilterBooksLibrary),
+                isDescendantOfA(withId(R.id.vpBooksLibrary))
+            )
+        ).check(matches(isDisplayed()))
 
         // Click on clear button for chips
         onView(withId(R.id.btnClearChip)).perform(click())

@@ -11,6 +11,8 @@ import com.flexath.thelibrary.R
 import com.flexath.thelibrary.adapters.home.BookSearchAdapter
 import com.flexath.thelibrary.data.models.LibraryModel
 import com.flexath.thelibrary.data.models.LibraryModelImpl
+import com.flexath.thelibrary.data.vos.SearchBookVO
+import com.flexath.thelibrary.delegates.home.BookSearchViewHolderDelegate
 import com.google.android.material.tabs.TabLayout
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -19,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_book_search.*
 import kotlinx.android.synthetic.main.toolbar_search_activity.*
 import java.util.concurrent.TimeUnit
 
-class BookSearchActivity : AppCompatActivity() {
+class BookSearchActivity : AppCompatActivity(),BookSearchViewHolderDelegate {
 
     // Adapters
     private lateinit var mAdapter:BookSearchAdapter
@@ -40,10 +42,9 @@ class BookSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_search)
 
-        val inputMethodManager =
-            getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        etSearch.requestFocus()
-        inputMethodManager.showSoftInput(etSearch, InputMethodManager.SHOW_IMPLICIT)
+//        val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        etSearch.requestFocus()
+//        inputMethodManager.showSoftInput(etSearch, InputMethodManager.SHOW_IMPLICIT)
 
         setUpTabLayoutWithViewPager()
         setUpRecyclerView()
@@ -62,10 +63,7 @@ class BookSearchActivity : AppCompatActivity() {
 
     private fun setUpListeners() {
         tabLayoutSearch.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-
-            }
-
+            override fun onTabSelected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
@@ -79,14 +77,26 @@ class BookSearchActivity : AppCompatActivity() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ bookList ->
                 mAdapter.setData(bookList)
+                mModel.deleteSearchBookList()
+                for(book in bookList) {
+                    val title = book.title
+                    val author = book.author
+                    val description = book.description
+                    val searchBook = SearchBookVO(title,author,description)
+                    mModel.insertBookIntoSearchTable(searchBook)
+                }
             },{
                 Toast.makeText(this,it.localizedMessage, Toast.LENGTH_SHORT).show()
             })
     }
 
     private fun setUpRecyclerView() {
-        mAdapter = BookSearchAdapter()
+        mAdapter = BookSearchAdapter(this)
         rvSearch.adapter = mAdapter
         rvSearch.layoutManager = LinearLayoutManager(this)
+    }
+
+    override fun onTapBook(bookName:String) {
+        startActivity(BookDetailActivity.newIntent(this,bookName,-1,"BookSearchActivity"))
     }
 }
