@@ -19,7 +19,9 @@ class BookSearchAdapter(private val delegate: BookSearchViewHolderDelegate) : Re
     }
 
     override fun onBindViewHolder(holder: BookSearchViewHolder, position: Int) {
-        holder.bindData(mBookList[position])
+        if(mBookList.isNotEmpty()) {
+            holder.bindNewData(mBookList[position])
+        }
     }
 
     override fun getItemCount(): Int {

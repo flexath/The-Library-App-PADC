@@ -15,5 +15,8 @@ data class SearchBookVO(
     var author:String?,
 
     @ColumnInfo("description")
-    var description: String?
+    var description: String?,
+
+    @ColumnInfo("image")
+    var image: String?,
 )

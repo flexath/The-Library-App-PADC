@@ -146,11 +146,52 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
     }
 
     override fun showSearchBook(bookList: List<SearchBookVO>) {
+
+        bookList.map {
+            BookVO(
+                title = it.title,
+                author = it.author ?: "",
+                description = it.description ?: "",
+                ageGroup = null,
+                amazonProductUrl = null,
+                articleChapterLink = null,
+                bookImage = null,
+                bookImageHeight = null,
+                bookImageWidth = null,
+                bookReviewLink = null,
+                contributor = null,
+                contributorNote = null,
+                createdDate = null,
+                firstChapterLink = null,
+                primaryIsbn10 = null,
+                primaryIsbn13 = null,
+                publisher = null,
+                rank = null,
+                rankLastWeek = null,
+                sundayReviewLink = null,
+                updatedDate = null,
+                weeksOnList = null,
+                listId = null,
+                listName = null,
+                bookUri = null,
+                buyLinks = null,
+                price = null
+            )
+        }.map { book ->
+            if(mBookName == book.title) {
+                mPresenter.insertBookIntoLibrary(book)
+            }
+        }
+
         for(book in bookList) {
             if(mBookName == book.title) {
                 tvTitleBookDetail.text = book.title
                 tvWriterBookDetail.text = book.author
                 tvBookInfoBookDetail.text = book.description
+
+                Glide.with(this)
+                    .load(book.image)
+                    .into(ivCoverBookDetail)
                 break
             }
         }

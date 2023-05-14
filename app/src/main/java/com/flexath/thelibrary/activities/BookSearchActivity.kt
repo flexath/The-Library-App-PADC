@@ -3,7 +3,6 @@ package com.flexath.thelibrary.activities
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +11,7 @@ import com.flexath.thelibrary.adapters.home.BookSearchAdapter
 import com.flexath.thelibrary.data.models.LibraryModel
 import com.flexath.thelibrary.data.models.LibraryModelImpl
 import com.flexath.thelibrary.data.vos.SearchBookVO
+import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.home.BookSearchViewHolderDelegate
 import com.google.android.material.tabs.TabLayout
 import com.jakewharton.rxbinding4.widget.textChanges
@@ -31,6 +31,7 @@ class BookSearchActivity : AppCompatActivity(),BookSearchViewHolderDelegate {
 
     // Generals
     private val mTabTitleList = listOf("Ebooks","Audiobooks")
+    private var mBookList:List<BookVO> = listOf()
 
     companion object {
         fun newIntent(context: Context): Intent {
@@ -63,7 +64,9 @@ class BookSearchActivity : AppCompatActivity(),BookSearchViewHolderDelegate {
 
     private fun setUpListeners() {
         tabLayoutSearch.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
-            override fun onTabSelected(tab: TabLayout.Tab?) {}
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                mAdapter.setData(mBookList)
+            }
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabReselected(tab: TabLayout.Tab?) {}
         })
@@ -76,13 +79,15 @@ class BookSearchActivity : AppCompatActivity(),BookSearchViewHolderDelegate {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ bookList ->
+                mBookList = bookList
                 mAdapter.setData(bookList)
                 mModel.deleteSearchBookList()
                 for(book in bookList) {
                     val title = book.title
                     val author = book.author
                     val description = book.description
-                    val searchBook = SearchBookVO(title,author,description)
+                    val image = book.bookImage
+                    val searchBook = SearchBookVO(title,author,description,image)
                     mModel.insertBookIntoSearchTable(searchBook)
                 }
             },{

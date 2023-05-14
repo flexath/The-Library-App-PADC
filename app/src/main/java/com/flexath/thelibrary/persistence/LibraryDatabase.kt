@@ -12,7 +12,7 @@ import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.data.vos.overview.CategoryVO
 import com.flexath.thelibrary.persistence.daos.LibraryDao
 
-@Database([CategoryVO::class,BookListResultVO::class,ShelfVO::class,BookVO::class,GoogleBookVO::class,SearchBookVO::class], version = 3 , exportSchema = false)
+@Database([CategoryVO::class,BookListResultVO::class,ShelfVO::class,BookVO::class,GoogleBookVO::class,SearchBookVO::class], version = 1 , exportSchema = false)
 abstract class LibraryDatabase : RoomDatabase() {
 
     abstract fun libraryDao():LibraryDao

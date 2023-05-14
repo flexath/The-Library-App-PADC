@@ -245,6 +245,11 @@ class ShelvesTest {
         onView(first<View>(withId(R.id.tvAuthorBookList)))
             .check(matches(isDisplayed()))
 
+        onView(first<View>(withId(R.id.tvTitleBookList)))
+            .check(matches(withText("HAPPY PLACE")))
+
+        onView(first<View>(withId(R.id.tvAuthorBookList)))
+            .check(matches(withText("Emily Henry")))
 
         // Click on Filter button
         onView(withId(R.id.btnFilterBooks)).perform(click())
@@ -267,6 +272,12 @@ class ShelvesTest {
             .check(matches(isDisplayed()))
         onView(first<View>(withId(R.id.tvAuthorLibrarySmallGrid)))
             .check(matches(isDisplayed()))
+
+        onView(first<View>(withId(R.id.tvTitleLibrarySmallGrid)))
+            .check(matches(withText("HAPPY PLACE")))
+
+        onView(first<View>(withId(R.id.tvAuthorLibrarySmallGrid)))
+            .check(matches(withText("Emily Henry")))
 
 
         // Click on Filter button

@@ -100,7 +100,7 @@ object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
                     ageGroup = null,
                     amazonProductUrl = null,
                     articleChapterLink = null,
-                    bookImage = null,
+                    bookImage = googleBook.volumeInfo?.imageLinks?.thumbnail,
                     bookImageHeight = null,
                     bookImageWidth = null,
                     bookReviewLink = null,
@@ -118,7 +118,7 @@ object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
                     weeksOnList = null,
                     listId = null,
                     listName = null,
-                    bookUri = null,
+                    bookUri = googleBook.volumeInfo?.imageLinks?.smallThumbnail,
                     buyLinks = null,
                     price = null
                 )

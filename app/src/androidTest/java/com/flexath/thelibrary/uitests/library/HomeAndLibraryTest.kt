@@ -276,6 +276,13 @@ class HomeAndLibraryTest {
         onView(first<View>(withId(R.id.tvAuthorListLibrary)))
             .check(matches(isDisplayed()))
 
+        // Verify Title and Author by List Filtering
+        onView(first<View>(withId(R.id.tvTitleListLibrary)))
+            .check(matches(withText("HAPPY PLACE")))
+
+        onView(first<View>(withId(R.id.tvAuthorListLibrary)))
+            .check(matches(withText("Emily Henry")))
+
 
         // Verify chip name
         onView(first<View>(withId(R.id.cbListName)))
@@ -308,6 +315,13 @@ class HomeAndLibraryTest {
         onView(first<View>(withId(R.id.tvAuthorListLibrary)))
             .check(matches(isDisplayed()))
 
+        // Verify Title and Author by List Filtering
+        onView(first<View>(withId(R.id.tvTitleListLibrary)))
+            .check(matches(withText("HAPPY PLACE")))
+
+        onView(first<View>(withId(R.id.tvAuthorListLibrary)))
+            .check(matches(withText("Emily Henry")))
+
 
         // Click on Filter button
         onView(withId(R.id.btnFilterBooks)).perform(click())
@@ -332,6 +346,13 @@ class HomeAndLibraryTest {
         onView(first<View>(withId(R.id.tvAuthorBookList)))
             .check(matches(isDisplayed()))
 
+        // Verify Title and Author by List Filtering
+        onView(first<View>(withId(R.id.tvTitleBookList)))
+            .check(matches(withText("HAPPY PLACE")))
+
+        onView(first<View>(withId(R.id.tvAuthorBookList)))
+            .check(matches(withText("Emily Henry")))
+
 
         // Click on Filter button
         onView(withId(R.id.btnFilterBooks)).perform(click())
@@ -355,6 +376,13 @@ class HomeAndLibraryTest {
             .check(matches(isDisplayed()))
         onView(first<View>(withId(R.id.tvAuthorLibrarySmallGrid)))
             .check(matches(isDisplayed()))
+
+        // Verify Title and Author by List Filtering
+        onView(first<View>(withId(R.id.tvTitleLibrarySmallGrid)))
+            .check(matches(withText("HAPPY PLACE")))
+
+        onView(first<View>(withId(R.id.tvAuthorLibrarySmallGrid)))
+            .check(matches(withText("Emily Henry")))
 
 
         // Click on Filter button
