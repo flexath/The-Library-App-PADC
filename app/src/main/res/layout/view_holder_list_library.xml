@@ -19,6 +19,7 @@
             android:layout_width="60dp"
             android:layout_height="90dp"
             android:scaleType="centerCrop"
+            android:elevation="@dimen/margin_medium"
             app:srcCompat="@drawable/img_holder" />
 
     </com.google.android.material.card.MaterialCardView>

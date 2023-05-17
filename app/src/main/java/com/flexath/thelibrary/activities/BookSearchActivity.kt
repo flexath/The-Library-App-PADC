@@ -13,6 +13,7 @@ import com.flexath.thelibrary.data.models.LibraryModelImpl
 import com.flexath.thelibrary.data.vos.SearchBookVO
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.home.BookSearchViewHolderDelegate
+import com.flexath.thelibrary.delegates.library.LibraryBooksViewHolderDelegate
 import com.google.android.material.tabs.TabLayout
 import com.jakewharton.rxbinding4.widget.textChanges
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.activity_book_search.*
 import kotlinx.android.synthetic.main.toolbar_search_activity.*
 import java.util.concurrent.TimeUnit
 
-class BookSearchActivity : AppCompatActivity(),BookSearchViewHolderDelegate {
+class BookSearchActivity : AppCompatActivity(), LibraryBooksViewHolderDelegate {
 
     // Adapters
     private lateinit var mAdapter:BookSearchAdapter
@@ -101,7 +102,11 @@ class BookSearchActivity : AppCompatActivity(),BookSearchViewHolderDelegate {
         rvSearch.layoutManager = LinearLayoutManager(this)
     }
 
-    override fun onTapBook(bookName:String) {
-        startActivity(BookDetailActivity.newIntent(this,bookName,-1,"BookSearchActivity"))
+    override fun onTapBook(bookName: String, listId: Int) {
+        startActivity(BookDetailActivity.newIntent(this,bookName,listId,"BookSearchActivity"))
+    }
+
+    override fun onTapOptionButtonOnBook(book: BookVO) {
+
     }
 }

@@ -4,6 +4,7 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Glide.init
+import com.flexath.thelibrary.R
 import com.flexath.thelibrary.data.vos.ShelfVO
 import com.flexath.thelibrary.delegates.library.YourShelvesLibraryViewHolderDelegate
 import kotlinx.android.synthetic.main.activity_shelf_detail.view.*
@@ -33,6 +34,8 @@ class ShelvesListViewHolder(itemView: View,private val delegate: YourShelvesLibr
         if(shelf.bookList?.size!! > 0) {
             Glide.with(itemView.context)
                 .load(shelf.bookList?.get(shelf.bookList!!.lastIndex)?.bookImage)
+                .error(R.drawable.browser)
+                .placeholder(R.drawable.img_holder)
                 .into(itemView.ivCoverShelvesList)
         }
 

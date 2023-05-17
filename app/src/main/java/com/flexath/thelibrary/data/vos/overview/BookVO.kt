@@ -36,7 +36,7 @@ data class BookVO(
 
     @SerializedName("book_image")
     @ColumnInfo("book_image")
-    val bookImage: String?,
+    var bookImage: String?,
 
     @SerializedName("book_image_height")
     @ColumnInfo("book_image_height")

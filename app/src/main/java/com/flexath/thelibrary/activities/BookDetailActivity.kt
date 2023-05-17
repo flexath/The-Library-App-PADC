@@ -94,6 +94,7 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
                 bindData(book)
                 book.listId = category.listId
                 book.listName = category.listName ?: ""
+                book.bookImage = book.bookImage?.replace("http://", "https://")
                 mPresenter.insertBookIntoLibrary(book)
                 break
             }
@@ -155,7 +156,7 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
                 ageGroup = null,
                 amazonProductUrl = null,
                 articleChapterLink = null,
-                bookImage = null,
+                bookImage = it.image?.replace("http://", "https://"),
                 bookImageHeight = null,
                 bookImageWidth = null,
                 bookReviewLink = null,
@@ -179,6 +180,7 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
             )
         }.map { book ->
             if(mBookName == book.title) {
+                Log.i("Imageath",book.bookImage.toString())
                 mPresenter.insertBookIntoLibrary(book)
             }
         }

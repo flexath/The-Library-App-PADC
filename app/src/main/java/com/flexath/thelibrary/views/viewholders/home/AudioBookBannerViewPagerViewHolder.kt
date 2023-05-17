@@ -2,6 +2,7 @@ package com.flexath.thelibrary.views.viewholders.home
 
 import android.view.View
 import com.bumptech.glide.Glide
+import com.flexath.thelibrary.R
 import com.flexath.thelibrary.data.vos.overview.BookVO
 import com.flexath.thelibrary.delegates.home.BannerHomeViewHolderDelegate
 import kotlinx.android.synthetic.main.view_holder_audiobook_banner_home.view.*
@@ -34,6 +35,8 @@ class AudioBookBannerViewPagerViewHolder(
 
         Glide.with(itemView.context)
             .load(book?.bookImage)
+            .error(R.drawable.browser)
+            .placeholder(R.drawable.img_holder)
             .into(itemView.ivEbookBannerHomeAudio)
     }
 
