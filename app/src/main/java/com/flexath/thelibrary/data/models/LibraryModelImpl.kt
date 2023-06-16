@@ -1,5 +1,6 @@
 package com.flexath.thelibrary.data.models
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import com.flexath.thelibrary.data.vos.SearchBookVO
 import com.flexath.thelibrary.data.vos.ShelfVO
@@ -25,6 +26,7 @@ object LibraryModelImpl : LibraryBaseModel(), LibraryModel {
         return mLibraryDatabase?.libraryDao()?.getCategories()
     }
 
+    @SuppressLint("CheckResult")
     override fun getBookList(
         listName: String,
         onFailure: (String) -> Unit

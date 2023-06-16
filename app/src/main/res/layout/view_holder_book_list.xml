@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/dummy_ebook_banner" />
+            app:srcCompat="@drawable/book_placeholder" />
 
     </com.google.android.material.card.MaterialCardView>
 

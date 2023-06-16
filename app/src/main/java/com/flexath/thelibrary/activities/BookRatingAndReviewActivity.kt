@@ -7,16 +7,19 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.flexath.thelibrary.R
 import com.flexath.thelibrary.adapters.home.BookRatingAndReviewAdapter
-import kotlinx.android.synthetic.main.activity_book_detail.*
-import kotlinx.android.synthetic.main.activity_book_rating_and_review.*
+import kotlinx.android.synthetic.main.activity_book_rating_and_review.rvRatingAndReviewScreen
+import kotlinx.android.synthetic.main.activity_book_rating_and_review.tvTitleRatingAndReview
 
 class BookRatingAndReviewActivity : AppCompatActivity() {
 
     private lateinit var mAdapter:BookRatingAndReviewAdapter
 
     companion object {
-        fun newIntent(context: Context): Intent {
-            return Intent(context, BookRatingAndReviewActivity::class.java)
+        private const val EXTRA_TITLE = "Book Title"
+        fun newIntent(context: Context,title:String): Intent {
+            val intent = Intent(context, BookRatingAndReviewActivity::class.java)
+            intent.putExtra(EXTRA_TITLE,title)
+            return intent
         }
     }
 
@@ -24,6 +27,7 @@ class BookRatingAndReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_rating_and_review)
 
+        tvTitleRatingAndReview.text = intent?.extras?.getString(EXTRA_TITLE,"No Title")
         setUpReviewRecyclerView()
     }
 

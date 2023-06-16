@@ -1,5 +1,6 @@
 package com.flexath.thelibrary.activities
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -63,6 +64,7 @@ class BookSearchActivity : AppCompatActivity(), LibraryBooksViewHolderDelegate {
         }
     }
 
+    @SuppressLint("CheckResult")
     private fun setUpListeners() {
         tabLayoutSearch.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {

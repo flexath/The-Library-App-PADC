@@ -31,6 +31,8 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
 
     // General
     private lateinit var mBookName:String
+    private var mTitle:String = ""
+    private var mDescription:String = ""
 
     companion object {
         private const val EXTRA_BOOK_NAME = "Book Name"
@@ -113,6 +115,8 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
 
                 Glide.with(this)
                     .load(book.bookImage)
+                    .error(R.drawable.browser)
+                    .placeholder(R.drawable.img_holder)
                     .into(ivCoverBookDetail)
 
                 tvTitleBookDetail.text = book.title
@@ -126,20 +130,25 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
     private fun bindData(book: BookVO) {
         Glide.with(this)
             .load(book.bookImage)
+            .error(R.drawable.browser)
+            .placeholder(R.drawable.img_holder)
             .into(ivCoverBookDetail)
 
         tvTitleBookDetail.text = book.title
         tvWriterBookDetail.text = book.author
         tvBookInfoBookDetail.text = book.description
 
+        mTitle = book.title
+        mDescription = book.description ?: ""
+
     }
 
     override fun navigateToRatingAndReviewScreen() {
-        startActivity(BookRatingAndReviewActivity.newIntent(this))
+        startActivity(BookRatingAndReviewActivity.newIntent(this,mTitle))
     }
 
     override fun navigateToAboutEBookScreen() {
-        startActivity(AboutEBookActivity.newIntent(this))
+        startActivity(AboutEBookActivity.newIntent(this,mTitle,mDescription))
     }
 
     override fun navigateBackToHome() {
@@ -180,7 +189,6 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
             )
         }.map { book ->
             if(mBookName == book.title) {
-                Log.i("Imageath",book.bookImage.toString())
                 mPresenter.insertBookIntoLibrary(book)
             }
         }
@@ -191,8 +199,15 @@ class BookDetailActivity : AppCompatActivity() , BookDetailView {
                 tvWriterBookDetail.text = book.author
                 tvBookInfoBookDetail.text = book.description
 
+                mTitle = book.title
+                mDescription = book.description ?: ""
+
+                val newCover = book.image?.replace("http://", "https://")
+
                 Glide.with(this)
-                    .load(book.image)
+                    .load(newCover)
+                    .error(R.drawable.browser)
+                    .placeholder(R.drawable.img_holder)
                     .into(ivCoverBookDetail)
                 break
             }

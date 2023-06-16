@@ -10,9 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
+        <RelativeLayout
             android:id="@+id/actionBarRatingAndReview"
-            layout="@layout/toolbar_rating_and_review" />
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btnBackRatingAndReview"
+                android:layout_width="wrap_content"
+                app:srcCompat="@drawable/ic_baseline_arrow_back_ios_secondary_24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_medium_3"
+                android:layout_height="wrap_content"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitleRatingAndReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_regular_3x"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                tools:text="More Like Fingersmiths"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
 
         <include
             android:id="@+id/vpRatingAndReviewScreen"
